@@ -1,8 +1,19 @@
+# ------------------------------------------------------
+# ---------------------- Imports -----------------------
+# ------------------------------------------------------
+
 from libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, Group, Match, Screen
 from libqtile.config import EzKey as Key
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
+
+
+
+
+# ------------------------------------------------------
+# ------------------ Global Variables ------------------
+# ------------------------------------------------------
 
 mod = "mod4"
 terminal = guess_terminal()
@@ -15,59 +26,199 @@ terminal = guess_terminal()
 
 keys = [
     # Switch between windows (Move Focus)
-    Key("M-h", lazy.layout.left(), desc="Move focus to left"),
-    Key("M-<Left>", lazy.layout.left(), desc="Move focus to left"),
-    Key("M-l", lazy.layout.right(), desc="Move focus to right"),
-    Key("M-<Right>", lazy.layout.right(), desc="Move focus to right"),
-    Key("M-j", lazy.layout.down(), desc="Move focus down"),
-    Key("M-<Down>", lazy.layout.down(), desc="Move focus down"),
-    Key("M-k", lazy.layout.up(), desc="Move focus up"),
-    Key("M-<Up>", lazy.layout.up(), desc="Move focus up"),
-    Key("M-S-<space>", lazy.layout.next(), desc="Move window focus to other window"),
+    Key(
+        "M-h", 
+        lazy.layout.left(), 
+        desc="Move focus to left"
+    ),
+    Key(
+        "M-<Left>", 
+        lazy.layout.left(), 
+        desc="Move focus to left"
+    ),
+    Key(
+        "M-l", 
+        lazy.layout.right(), 
+        desc="Move focus to right"
+    ),
+    Key(
+        "M-<Right>", 
+        lazy.layout.right(), 
+        desc="Move focus to right"
+    ),
+    Key(
+        "M-j", 
+        lazy.layout.down(), 
+        desc="Move focus down"
+    ),
+    Key(
+        "M-<Down>", 
+        lazy.layout.down(), 
+        desc="Move focus down"
+    ),
+    Key(
+        "M-k", 
+        lazy.layout.up(), 
+        desc="Move focus up"
+    ),
+    Key(
+        "M-<Up>", 
+        lazy.layout.up(), 
+        desc="Move focus up"
+    ),
+    Key(
+        "M-S-<space>", 
+        lazy.layout.next(), 
+        desc="Move window focus to other window"
+    ),
 
     # Move windows between left/right columns or move up/down in current stack.
-    Key("M-S-h", lazy.layout.shuffle_left(), desc="Move window to the left"),
-    Key("M-S-<Left>", lazy.layout.shuffle_left(), desc="Move window to the left"),
-    Key("M-S-l", lazy.layout.shuffle_right(), desc="Move window to the right"),
-    Key("M-S-<Right>", lazy.layout.shuffle_right(), desc="Move window to the right"),
-    Key("M-S-j", lazy.layout.shuffle_down(), desc="Move window down"),
-    Key("M-S-<Down>", lazy.layout.shuffle_down(), desc="Move window down"),
-    Key("M-S-k", lazy.layout.shuffle_up(), desc="Move window up"),
-    Key("M-S-<Up>", lazy.layout.shuffle_up(), desc="Move window up"),
+    Key(
+        "M-S-h", 
+        lazy.layout.shuffle_left(), 
+        desc="Move window to the left"
+    ),
+    Key(
+        "M-S-<Left>", 
+        lazy.layout.shuffle_left(), 
+        desc="Move window to the left"
+    ),
+    Key(
+        "M-S-l", 
+        lazy.layout.shuffle_right(), 
+        desc="Move window to the right"
+    ),
+    Key(
+        "M-S-<Right>", 
+        lazy.layout.shuffle_right(), 
+        desc="Move window to the right"
+    ),
+    Key(
+        "M-S-j", 
+        lazy.layout.shuffle_down(), 
+        desc="Move window down"
+    ),
+    Key(
+        "M-S-<Down>", 
+        lazy.layout.shuffle_down(), 
+        desc="Move window down"
+    ),
+    Key(
+        "M-S-k", 
+        lazy.layout.shuffle_up(), 
+        desc="Move window up"
+    ),
+    Key(
+        "M-S-<Up>", 
+        lazy.layout.shuffle_up(), 
+        desc="Move window up"
+    ),
 
     # Grow windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
-    Key("A-C-h", lazy.layout.grow_left(), desc="Grow window to the left"),
-    Key("A-C-<Left>", lazy.layout.grow_left(), desc="Grow window to the left"),
-    Key("A-C-l", lazy.layout.grow_right(), desc="Grow window to the right"),
-    Key("A-C-<Right>", lazy.layout.grow_right(), desc="Grow window to the right"),
-    Key("A-C-j", lazy.layout.grow_down(), desc="Grow window down"),
-    Key("A-C-<Down>", lazy.layout.grow_down(), desc="Grow window down"),
-    Key("A-C-k", lazy.layout.grow_up(), desc="Grow window up"),
-    Key("A-C-<Up>", lazy.layout.grow_up(), desc="Grow window up"),
-    Key("A-C-<Return>", lazy.layout.normalize(), desc="Reset all window sizes"),
+    Key(
+        "A-C-h", 
+        lazy.layout.grow_left(), 
+        desc="Grow window to the left"
+    ),
+    Key(
+        "A-C-<Left>", 
+        lazy.layout.grow_left(), 
+        desc="Grow window to the left"
+    ),
+    Key(
+        "A-C-l", 
+        lazy.layout.grow_right(), 
+        desc="Grow window to the right"
+    ),
+    Key(
+        "A-C-<Right>", 
+        lazy.layout.grow_right(), 
+        desc="Grow window to the right"
+    ),
+    Key(
+        "A-C-j", 
+        lazy.layout.grow_down(), 
+        desc="Grow window down"
+    ),
+    Key(
+        "A-C-<Down>", 
+        lazy.layout.grow_down(), 
+        desc="Grow window down"
+    ),
+    Key(
+        "A-C-k", 
+        lazy.layout.grow_up(), 
+        desc="Grow window up"
+    ),
+    Key(
+        "A-C-<Up>", 
+        lazy.layout.grow_up(), 
+        desc="Grow window up"
+    ),
+    Key(
+        "A-C-<Return>", 
+        lazy.layout.normalize(), 
+        desc="Reset all window sizes"
+    ),
     
 
-    Key("M-S-<Return>",lazy.layout.toggle_split(),desc="Toggle between split and unsplit sides of stack",),
+    Key(
+        "M-S-<Return>",
+        lazy.layout.toggle_split(),
+        desc="Toggle between split and unsplit sides of stack"
+    ),
 
     # Launching Applications
-    Key("M-<Return>", lazy.spawn(terminal), desc="Launch terminal"),
-    Key("M-A-b", lazy.spawn("firefox"), desc="Launch Firefox"),
-    Key("M-A-c", lazy.spawn("code"), desc="Launch VsCode"),
+    Key(
+        "M-<Return>", 
+        lazy.spawn(terminal), 
+        desc="Launch terminal"
+    ),
+    Key(
+        "M-A-b", 
+        lazy.spawn("firefox"), 
+        desc="Launch Firefox"
+    ),
+    Key(
+        "M-A-c", 
+        lazy.spawn("code"), 
+        desc="Launch VsCode"
+    ),
     
     
     # Toggle between different layouts
-    Key("M-<space>", lazy.next_layout(), desc="Toggle between layouts"),
+    Key(
+        "M-<space>", 
+        lazy.next_layout(), 
+        desc="Toggle between layouts"
+    ),
     
     # Kill window
-    Key("M-q", lazy.window.kill(), desc="Kill focused window"),
+    Key(
+        "M-q", 
+        lazy.window.kill(), 
+        desc="Kill focused window"
+    ),
     
     # Reload/Shutdown Qtile
-    Key("M-A-r", lazy.reload_config(), desc="Reload the config"),
-    Key("M-A-q", lazy.shutdown(), desc="Shutdown Qtile"),
+    Key(
+        "M-A-r", 
+        lazy.reload_config(), 
+        desc="Reload the config"
+    ),
+    Key(
+        "M-A-q", 
+        lazy.shutdown(), 
+        desc="Shutdown Qtile"
+    ),
     
     # Spawn 
-    Key("M-r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    Key(
+        "M-r", 
+        lazy.spawncmd(), 
+        desc="Spawn a command using a prompt widget"
+    ),
 ]
 
 
