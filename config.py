@@ -2,6 +2,7 @@
 # ---------------------- Imports -----------------------
 # ------------------------------------------------------
 
+import os
 from libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, Group, Match, Screen
 from libqtile.config import EzKey as Key
@@ -17,6 +18,7 @@ from libqtile.utils import guess_terminal
 
 mod = "mod4"
 terminal = guess_terminal()
+shutdown = os.path.join(os.path.dirname(__file__), "utils/scripts/shutdown.sh")
 
 
 
@@ -199,6 +201,11 @@ keys = [
         "M-A-x", 
         lazy.spawn("dmenu_run -h 40 -c -l 10"), 
         desc="Launch Dmenu"
+    ),
+    Key(
+        "M-S-s", 
+        lazy.spawn(shutdown), 
+        desc="Launch shutdown menu"
     ),
     
     
@@ -421,4 +428,5 @@ wl_input_rules = None
 #
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
-wmname = "LG3D"
+# wmname = "LG3D"
+wmname = "qtile"

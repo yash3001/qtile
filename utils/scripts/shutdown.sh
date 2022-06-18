@@ -8,7 +8,8 @@ then
     
     if [[ ($ans == "yes") ]]
     then
-        killall dwm
+        wm=$(wmctrl -m | awk 'NR==1{print $2, $3, $4, $5}')
+        killall $wm
     fi
 fi
 
