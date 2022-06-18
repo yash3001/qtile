@@ -98,19 +98,22 @@ for i in range(len(groups)):
         [
             # mod4 + index of group = switch to group
             Key(
-                "M-" + str(ind),
-                lazy.group[groups[i].name].toscreen(),
+                "M-" + str(ind), 
+                lazy.group[groups[i].name].toscreen(), 
                 desc="Switch to group {}".format(groups[i].name),
             ),
+
             # mod4 + shift + index of group = switch to & move focused window to group
             Key(
                 "M-S-" + str(ind),
                 lazy.window.togroup(groups[i].name, switch_group=True),
                 desc="Switch to & move focused window to group {}".format(groups[i].name),
             ),
+
             # mod1 + alt + shift + index of group = move focused window to group
             Key(
-                "M-A-S-", str(ind), lazy.window.togroup(groups[i].name),
+                "M-S-A-" + str(ind), 
+                lazy.window.togroup(groups[i].name),
                 desc="move focused window to group {}".format(groups[i].name)
             ),
         ]
