@@ -185,6 +185,21 @@ keys = [
         lazy.spawn("code"), 
         desc="Launch VsCode"
     ),
+    Key(
+        "M-A-d", 
+        lazy.spawn("discord"), 
+        desc="Launch Discord"
+    ),
+    Key(
+        "M-A-s", 
+        lazy.spawn("spotify"), 
+        desc="Launch Spotify"
+    ),
+    Key(
+        "M-A-x", 
+        lazy.spawn("dmenu_run -h 40 -c -l 10"), 
+        desc="Launch Dmenu"
+    ),
     
     
     # Toggle between different layouts
@@ -213,12 +228,14 @@ keys = [
         desc="Shutdown Qtile"
     ),
     
-    # Spawn 
+    # Spawn cmd launcher
     Key(
         "M-r", 
         lazy.spawncmd(), 
         desc="Spawn a command using a prompt widget"
     ),
+
+    # Scripts that i wrote
 ]
 
 
@@ -369,8 +386,7 @@ mouse = [
 # ------------------------ Misc ------------------------
 # ------------------------------------------------------
 
-# dgroups_key_binder = None
-# dgroups_app_rules = []  # type: list
+dgroups_app_rules = []  # type: list
 follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
