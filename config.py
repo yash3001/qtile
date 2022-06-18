@@ -7,6 +7,12 @@ from libqtile.utils import guess_terminal
 mod = "mod4"
 terminal = guess_terminal()
 
+
+
+# ------------------------------------------------------
+# -------------------- Key Bindings --------------------
+# ------------------------------------------------------
+
 keys = [
     # Switch between windows (Move Focus)
     Key("M-h", lazy.layout.left(), desc="Move focus to left"),
@@ -64,29 +70,57 @@ keys = [
     Key("M-r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 ]
 
-groups = [Group(i) for i in "123456789"]
 
-for i in groups:
+
+# ------------------------------------------------------
+# ----------------------- Groups -----------------------
+# ------------------------------------------------------
+
+groups = [
+    Group("1"),
+    Group("2"),
+    Group("3"),
+    Group("4"),
+    Group("5"),
+    Group("6"),
+    Group("7"),
+    Group("8"),
+    Group("9"),
+    Group("10")
+]
+
+for i in range(len(groups)):
+    ind = i+1
+    if ind == 10:
+        ind = 0
+
     keys.extend(
         [
-            # mod1 + letter of group = switch to group
+            # mod4 + index of group = switch to group
             Key(
-                "M-" + i.name,
-                lazy.group[i.name].toscreen(),
-                desc="Switch to group {}".format(i.name),
+                "M-" + str(ind),
+                lazy.group[groups[i].name].toscreen(),
+                desc="Switch to group {}".format(groups[i].name),
             ),
-            # mod1 + shift + letter of group = switch to & move focused window to group
+            # mod4 + shift + index of group = switch to & move focused window to group
             Key(
-                "M-S-" + i.name,
-                lazy.window.togroup(i.name, switch_group=True),
-                desc="Switch to & move focused window to group {}".format(i.name),
+                "M-S-" + str(ind),
+                lazy.window.togroup(groups[i].name, switch_group=True),
+                desc="Switch to & move focused window to group {}".format(groups[i].name),
             ),
-            # Or, use below if you prefer not to switch to that group.
-            # # mod1 + shift + letter of group = move focused window to group
-            # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
-            #     desc="move focused window to group {}".format(i.name)),
+            # mod1 + alt + shift + index of group = move focused window to group
+            Key(
+                "M-A-S-", str(ind), lazy.window.togroup(groups[i].name),
+                desc="move focused window to group {}".format(groups[i].name)
+            ),
         ]
     )
+
+
+
+# ------------------------------------------------------
+# ---------------------- Layouts -----------------------
+# ------------------------------------------------------
 
 layouts = [
     layout.Tile(
@@ -120,6 +154,12 @@ layouts = [
     # layout.VerticalTile(),
     # layout.Zoomy(),
 ]
+
+
+
+# ------------------------------------------------------
+# ---------------------- Widgets -----------------------
+# ------------------------------------------------------
 
 widget_defaults = dict(
     font="sans",
@@ -155,6 +195,12 @@ screens = [
     ),
 ]
 
+
+
+
+# ------------------------------------------------------
+# ------------------- Mouse Bindings -------------------
+# ------------------------------------------------------
 # Drag floating layouts.
 mouse = [
     Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
@@ -162,8 +208,15 @@ mouse = [
     Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
 
-dgroups_key_binder = None
-dgroups_app_rules = []  # type: list
+
+
+
+# ------------------------------------------------------
+# ------------------------ Misc ------------------------
+# ------------------------------------------------------
+
+# dgroups_key_binder = None
+# dgroups_app_rules = []  # type: list
 follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
