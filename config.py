@@ -1,0 +1,201 @@
+from libqtile import bar, layout, widget
+from libqtile.config import Click, Drag, Group, Match, Screen
+from libqtile.config import EzKey as Key
+from libqtile.lazy import lazy
+from libqtile.utils import guess_terminal
+
+mod = "mod4"
+terminal = guess_terminal()
+
+keys = [
+    # Switch between windows (Move Focus)
+    Key("M-h", lazy.layout.left(), desc="Move focus to left"),
+    Key("M-<Left>", lazy.layout.left(), desc="Move focus to left"),
+    Key("M-l", lazy.layout.right(), desc="Move focus to right"),
+    Key("M-<Right>", lazy.layout.right(), desc="Move focus to right"),
+    Key("M-j", lazy.layout.down(), desc="Move focus down"),
+    Key("M-<Down>", lazy.layout.down(), desc="Move focus down"),
+    Key("M-k", lazy.layout.up(), desc="Move focus up"),
+    Key("M-<Up>", lazy.layout.up(), desc="Move focus up"),
+    Key("M-S-<space>", lazy.layout.next(), desc="Move window focus to other window"),
+
+    # Move windows between left/right columns or move up/down in current stack.
+    Key("M-S-h", lazy.layout.shuffle_left(), desc="Move window to the left"),
+    Key("M-S-<Left>", lazy.layout.shuffle_left(), desc="Move window to the left"),
+    Key("M-S-l", lazy.layout.shuffle_right(), desc="Move window to the right"),
+    Key("M-S-<Right>", lazy.layout.shuffle_right(), desc="Move window to the right"),
+    Key("M-S-j", lazy.layout.shuffle_down(), desc="Move window down"),
+    Key("M-S-<Down>", lazy.layout.shuffle_down(), desc="Move window down"),
+    Key("M-S-k", lazy.layout.shuffle_up(), desc="Move window up"),
+    Key("M-S-<Up>", lazy.layout.shuffle_up(), desc="Move window up"),
+
+    # Grow windows. If current window is on the edge of screen and direction
+    # will be to screen edge - window would shrink.
+    Key("A-C-h", lazy.layout.grow_left(), desc="Grow window to the left"),
+    Key("A-C-<Left>", lazy.layout.grow_left(), desc="Grow window to the left"),
+    Key("A-C-l", lazy.layout.grow_right(), desc="Grow window to the right"),
+    Key("A-C-<Right>", lazy.layout.grow_right(), desc="Grow window to the right"),
+    Key("A-C-j", lazy.layout.grow_down(), desc="Grow window down"),
+    Key("A-C-<Down>", lazy.layout.grow_down(), desc="Grow window down"),
+    Key("A-C-k", lazy.layout.grow_up(), desc="Grow window up"),
+    Key("A-C-<Up>", lazy.layout.grow_up(), desc="Grow window up"),
+    Key("A-C-<Return>", lazy.layout.normalize(), desc="Reset all window sizes"),
+    
+
+    Key("M-S-<Return>",lazy.layout.toggle_split(),desc="Toggle between split and unsplit sides of stack",),
+
+    # Launching Applications
+    Key("M-<Return>", lazy.spawn(terminal), desc="Launch terminal"),
+    Key("M-A-b", lazy.spawn("firefox"), desc="Launch Firefox"),
+    Key("M-A-c", lazy.spawn("code"), desc="Launch VsCode"),
+    
+    
+    # Toggle between different layouts
+    Key("M-<space>", lazy.next_layout(), desc="Toggle between layouts"),
+    
+    # Kill window
+    Key("M-q", lazy.window.kill(), desc="Kill focused window"),
+    
+    # Reload/Shutdown Qtile
+    Key("M-A-r", lazy.reload_config(), desc="Reload the config"),
+    Key("M-A-q", lazy.shutdown(), desc="Shutdown Qtile"),
+    
+    # Spawn 
+    Key("M-r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+]
+
+groups = [Group(i) for i in "123456789"]
+
+for i in groups:
+    keys.extend(
+        [
+            # mod1 + letter of group = switch to group
+            Key(
+                "M-" + i.name,
+                lazy.group[i.name].toscreen(),
+                desc="Switch to group {}".format(i.name),
+            ),
+            # mod1 + shift + letter of group = switch to & move focused window to group
+            Key(
+                "M-S-" + i.name,
+                lazy.window.togroup(i.name, switch_group=True),
+                desc="Switch to & move focused window to group {}".format(i.name),
+            ),
+            # Or, use below if you prefer not to switch to that group.
+            # # mod1 + shift + letter of group = move focused window to group
+            # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
+            #     desc="move focused window to group {}".format(i.name)),
+        ]
+    )
+
+layouts = [
+    layout.Tile(
+        add_after_last=False,       # Add new clients after all the others. If this is True, it overrides add_on_top.
+        add_on_top=True,            # Add new clients before all the others, potentially pushing other windows into slave stack.
+        border_focus='#0000ff',     # Border colour(s) for the focused window.
+        border_normal='#000000',    # Border colour(s) for the unfocused window.
+        border_on_single=True,      # Whether to draw border if there is only one window.
+        border_width=1,             # Border width.
+        expand=True,                # Expand the master windows to the full screen width if no slaves are present.
+        margin=[5,5,5,5],           # Margin of the layout (int or list of ints [N E S W])
+        margin_on_single=True,      # Whether to draw margin if there is only one window.
+        master_length=1,            # Amount of windows displayed in the master stack. Surplus windows will be moved to the slave stack.
+        master_match=None,          # A Match object defining which window(s) should be kept masters (single or a list of Match-objects).
+        max_ratio=0.85,             # Maximum width of master windows.
+        mn_ratio=0.15,              # Minimum width of master windows.
+        ratio=0.5,                  # Width-percentage of screen size reserved for master windows.
+        ratio_increment=0.05,       # By which amount to change ratio when cmd_decrease_ratio or cmd_increase_ratio are called.
+        shift_windows=True          # Allow to shift windows within the layout. If False, the layout will be rotated instead.
+    ),
+    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
+    layout.Max(),
+    # Try more layouts by unleashing below layouts.
+    # layout.Stack(num_stacks=2),
+    # layout.Bsp(),
+    # layout.Matrix(),
+    # layout.MonadTall(),
+    # layout.MonadWide(),
+    # layout.RatioTile(),
+    # layout.TreeTab(),
+    # layout.VerticalTile(),
+    # layout.Zoomy(),
+]
+
+widget_defaults = dict(
+    font="sans",
+    fontsize=12,
+    padding=3,
+)
+extension_defaults = widget_defaults.copy()
+
+screens = [
+    Screen(
+        bottom=bar.Bar(
+            [
+                widget.CurrentLayout(),
+                widget.GroupBox(),
+                widget.Prompt(),
+                widget.WindowName(),
+                widget.Chord(
+                    chords_colors={
+                        "launch": ("#ff0000", "#ffffff"),
+                    },
+                    name_transform=lambda name: name.upper(),
+                ),
+                widget.TextBox("default config", name="default"),
+                widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
+                widget.Systray(),
+                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
+                widget.QuickExit(),
+            ],
+            24,
+            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
+            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
+        ),
+    ),
+]
+
+# Drag floating layouts.
+mouse = [
+    Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
+    Drag([mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
+    Click([mod], "Button2", lazy.window.bring_to_front()),
+]
+
+dgroups_key_binder = None
+dgroups_app_rules = []  # type: list
+follow_mouse_focus = True
+bring_front_click = False
+cursor_warp = False
+floating_layout = layout.Floating(
+    float_rules=[
+        # Run the utility of `xprop` to see the wm class and name of an X client.
+        *layout.Floating.default_float_rules,
+        Match(wm_class="confirmreset"),  # gitk
+        Match(wm_class="makebranch"),  # gitk
+        Match(wm_class="maketag"),  # gitk
+        Match(wm_class="ssh-askpass"),  # ssh-askpass
+        Match(title="branchdialog"),  # gitk
+        Match(title="pinentry"),  # GPG key password entry
+    ]
+)
+auto_fullscreen = True
+focus_on_window_activation = "smart"
+reconfigure_screens = True
+
+# If things like steam games want to auto-minimize themselves when losing
+# focus, should we respect this or not?
+auto_minimize = True
+
+# When using the Wayland backend, this can be used to configure input devices.
+wl_input_rules = None
+
+# XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
+# string besides java UI toolkits; you can see several discussions on the
+# mailing lists, GitHub issues, and other WM documentation that suggest setting
+# this string if your java app doesn't work correctly. We may as well just lie
+# and say that we're a working one by default.
+#
+# We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
+# java that happens to be on java's whitelist.
+wmname = "LG3D"
