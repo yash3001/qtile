@@ -30,6 +30,7 @@ volume_mute = os.path.join(os.path.dirname(__file__), "utils/scripts/volume_mute
 clipmenu = os.path.join(os.path.dirname(__file__), "utils/scripts/clipmenu.sh")
 
 
+
 # ------------------------------------------------------
 # -------------------- Key Bindings --------------------
 # ------------------------------------------------------
@@ -433,7 +434,7 @@ layouts = [
 
 widget_defaults = dict(
     font="sans",
-    fontsize=12,
+    fontsize=15,
     padding=3,
 )
 extension_defaults = widget_defaults.copy()
@@ -452,11 +453,11 @@ screens = [
                     },
                     name_transform=lambda name: name.upper(),
                 ),
-                widget.TextBox("default config", name="default"),
-                widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
+                # widget.TextBox("default config", name="default"),
+                # widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
                 widget.Systray(),
                 widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-                widget.QuickExit(),
+                # widget.QuickExit(),
             ],
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
