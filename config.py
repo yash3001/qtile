@@ -273,6 +273,16 @@ keys = [
     ),
 
     # Scripts that i wrote
+    Key(
+        "M-S-p",
+        lazy.spawn(screenshot),
+        desc="Take Fullscreen Screenshot"
+    ),
+    Key(
+        "M-S-C-p",
+        lazy.spawn(rectangular_screenshot),
+        desc="Take Fullscreen Screenshot"
+    ),
 ]
 
 
