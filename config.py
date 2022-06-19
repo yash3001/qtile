@@ -24,6 +24,7 @@ rectangular_screenshot = os.path.join(os.path.dirname(__file__), "utils/scripts/
 volume_up = os.path.join(os.path.dirname(__file__), "utils/scripts/vol_up.sh")
 volume_down = os.path.join(os.path.dirname(__file__), "utils/scripts/vol_down.sh")
 volume_toggle_mute = os.path.join(os.path.dirname(__file__), "utils/scripts/vol_mute.sh")
+clipmenu = os.path.join(os.path.dirname(__file__), "utils/scripts/clipmenu.sh")
 
 
 # ------------------------------------------------------
@@ -205,6 +206,11 @@ keys = [
         "M-S-l", 
         lazy.spawn("i3lock-fancy"), 
         desc="Launch i3lock-fancy"
+    ),
+    Key(
+        "M-A-c", 
+        lazy.spawn(clipmenu), 
+        desc="Launch clipmenu"
     ),
     Key(
         "M-A-x", 
