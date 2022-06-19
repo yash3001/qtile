@@ -18,6 +18,7 @@ from libqtile.utils import guess_terminal
 
 mod = "mod4"
 terminal = guess_terminal()
+
 shutdown = os.path.join(os.path.dirname(__file__), "utils/scripts/shutdown.sh")
 screenshot = os.path.join(os.path.dirname(__file__), "utils/scripts/screenshot.sh")
 rectangular_screenshot = os.path.join(os.path.dirname(__file__), "utils/scripts/rectangular_screenshot.sh")
@@ -121,8 +122,7 @@ keys = [
         desc="Move window up"
     ),
 
-    # Grow windows. If current window is on the edge of screen and direction
-    # will be to screen edge - window would shrink.
+    # Grow windows. If current window is on the edge of screen and direction will be to screen edge - window would shrink.
     Key(
         "A-C-h", 
         lazy.layout.grow_left(), 
@@ -267,17 +267,23 @@ keys = [
 # ------------------------------------------------------
 
 groups = [
-    Group("1"),
+    Group("1", matches=[Match(wm_class=["Firefox"])]),
     Group("2"),
-    Group("3"),
-    Group("4"),
-    Group("5"),
+    Group("3", matches=[Match(wm_class=["Code"])]),
+    Group("4", matches=[Match(wm_class=["org.gnome.Nautilus"])]),
+    Group("5", matches=[Match(wm_class=["discord"])]),
     Group("6"),
     Group("7"),
     Group("8"),
     Group("9"),
     Group("10")
 ]
+
+# allow mod4+1 through mod4+0 to bind to groups;
+# MOD4 + [index(1-0)] : Switch to Group [index(1-0)]
+# MOD4 + Shift + [index(1-0)] : Move focused window to Group [index(1-0)]
+# from libqtile.dgroups import simple_key_binder
+# dgroups_key_binder = simple_key_binder("mod3")
 
 for i in range(len(groups)):
     ind = i+1
