@@ -337,26 +337,45 @@ for i in range(len(groups)):
 # ------------------------------------------------------
 
 layouts = [
-    layout.Tile(
-        add_after_last=False,       # Add new clients after all the others. If this is True, it overrides add_on_top.
-        add_on_top=True,            # Add new clients before all the others, potentially pushing other windows into slave stack.
-        border_focus='#0000ff',     # Border colour(s) for the focused window.
-        border_normal='#000000',    # Border colour(s) for the unfocused window.
-        border_on_single=True,      # Whether to draw border if there is only one window.
-        border_width=1,             # Border width.
-        expand=True,                # Expand the master windows to the full screen width if no slaves are present.
-        margin=[5,5,5,5],           # Margin of the layout (int or list of ints [N E S W])
-        margin_on_single=True,      # Whether to draw margin if there is only one window.
-        master_length=1,            # Amount of windows displayed in the master stack. Surplus windows will be moved to the slave stack.
-        master_match=None,          # A Match object defining which window(s) should be kept masters (single or a list of Match-objects).
-        max_ratio=0.85,             # Maximum width of master windows.
-        mn_ratio=0.15,              # Minimum width of master windows.
-        ratio=0.5,                  # Width-percentage of screen size reserved for master windows.
-        ratio_increment=0.01,       # By which amount to change ratio when cmd_decrease_ratio or cmd_increase_ratio are called.
-        shift_windows=True          # Allow to shift windows within the layout. If False, the layout will be rotated instead.
+    layout.Columns(
+        border_focus='#0000ff',         # Border colour(s) for the focused window.
+        border_focus_stack='#0000ff',   # Border colour(s) for the focused window in stacked columns.
+        border_normal='#000000',        # Border colour(s) for un-focused windows.
+        border_normal_stack='#000000',  # Border colour(s) for un-focused windows in stacked columns.
+        border_on_single=True,          # Draw a border when there is one only window.
+        border_width=1,                 # Border width.
+        fair=False,                     # Add new windows to the column with least windows.
+        grow_amount=10,                 # Amount by which to grow a window/column.
+        insert_position=0,              # Position relative to the current window where new ones are inserted (0 means right above the current window, 1 means right after).
+        margin=[5,5,5,5],               # Margin of the layout (int or list of ints [N E S W]).
+        margin_on_single=[5,5,5,5],     # Margin when only one window. (int or list of ints [N E S W]).
+        num_columns=2,                  # Preferred number of columns.
+        split=True,                     # New columns presentation mode.
+        wrap_focus_columns=True,        # Wrap the screen when moving focus across columns.
+        wrap_focus_rows=True,           # Wrap the screen when moving focus across rows.
+        wrap_focus_stacks=True          # Wrap the screen when moving focus across stacked.
     ),
-    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
+
     layout.Max(),
+
+    layout.Tile(
+        add_after_last=False,           # Add new clients after all the others. If this is True, it overrides add_on_top.
+        add_on_top=True,                # Add new clients before all the others, potentially pushing other windows into slave stack.
+        border_focus='#0000ff',         # Border colour(s) for the focused window.
+        border_normal='#000000',        # Border colour(s) for the unfocused window.
+        border_on_single=True,          # Whether to draw border if there is only one window.
+        border_width=1,                 # Border width.
+        expand=True,                    # Expand the master windows to the full screen width if no slaves are present.
+        margin=[5,5,5,5],               # Margin of the layout (int or list of ints [N E S W])
+        margin_on_single=True,          # Whether to draw margin if there is only one window.
+        master_length=1,                # Amount of windows displayed in the master stack. Surplus windows will be moved to the slave stack.
+        master_match=None,              # A Match object defining which window(s) should be kept masters (single or a list of Match-objects).
+        max_ratio=0.85,                 # Maximum width of master windows.
+        mn_ratio=0.15,                  # Minimum width of master windows.
+        ratio=0.5,                      # Width-percentage of screen size reserved for master windows.
+        ratio_increment=0.01,           # By which amount to change ratio when cmd_decrease_ratio or cmd_increase_ratio are called.
+        shift_windows=True              # Allow to shift windows within the layout. If False, the layout will be rotated instead.
+    ),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
