@@ -19,7 +19,11 @@ from libqtile.utils import guess_terminal
 mod = "mod4"
 terminal = guess_terminal()
 shutdown = os.path.join(os.path.dirname(__file__), "utils/scripts/shutdown.sh")
-
+screenshot = os.path.join(os.path.dirname(__file__), "utils/scripts/screenshot.sh")
+rectangular_screenshot = os.path.join(os.path.dirname(__file__), "utils/scripts/rectangular_screenshot.sh")
+volume_up = os.path.join(os.path.dirname(__file__), "utils/scripts/vol_up.sh")
+volume_down = os.path.join(os.path.dirname(__file__), "utils/scripts/vol_down.sh")
+volume_toggle_mute = os.path.join(os.path.dirname(__file__), "utils/scripts/vol_mute.sh")
 
 
 # ------------------------------------------------------
@@ -196,6 +200,11 @@ keys = [
         "M-A-s", 
         lazy.spawn("spotify"), 
         desc="Launch Spotify"
+    ),
+    Key(
+        "M-S-l", 
+        lazy.spawn("i3lock-fancy"), 
+        desc="Launch i3lock-fancy"
     ),
     Key(
         "M-A-x", 
