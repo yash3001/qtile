@@ -9,6 +9,7 @@ then
     if [[ ($ans == "yes") ]]
     then
         wm=$(wmctrl -m | awk 'NR==1{print $2, $3, $4, $5}')
+        wm=$(sed 's/[ ]*$//' <<<"$wm")
         killall $wm
     fi
 fi
