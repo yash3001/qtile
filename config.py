@@ -322,11 +322,11 @@ keys = [
 # ------------------------------------------------------
 
 groups = [
-    Group("1", matches=[Match(wm_class=["Firefox"])]),
-    Group("2"),
-    Group("3", matches=[Match(wm_class=["Code"])]),
+    Group("1", matches=[Match(wm_class=["Code"])]),
+    Group("2", matches=[Match(wm_class=["firefox"])]),
+    Group("3", matches=[Match(wm_class=["discord"])]),
     Group("4", matches=[Match(wm_class=["org.gnome.Nautilus"])]),
-    Group("5", matches=[Match(wm_class=["discord"])]),
+    Group("5", matches=[Match(wm_class=["Spotify"])]),
     Group("6"),
     Group("7"),
     Group("8"),
@@ -587,7 +587,7 @@ layouts = [
 
 
 # ------------------------------------------------------
-# ---------------------- Widgets -----------------------
+# ---------------------- Top Bar -----------------------
 # ------------------------------------------------------
 
 widget_defaults = dict(
@@ -597,32 +597,37 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
-screens = [
-    Screen(
-        bottom=bar.Bar(
-            [
-                widget.CurrentLayout(),
-                widget.GroupBox(),
-                widget.Prompt(),
-                widget.WindowName(),
-                widget.Chord(
-                    chords_colors={
-                        "launch": ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
-                # widget.TextBox("default config", name="default"),
-                # widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
-                widget.Systray(),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-                # widget.QuickExit(),
-            ],
-            24,
-            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
-            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
-        ),
+widget_list = [
+    widget.CurrentLayout(),
+    widget.GroupBox(),
+    widget.Prompt(),
+    widget.WindowName(),
+    widget.Chord(
+        chords_colors={
+            "launch": ("#ff0000", "#ffffff"),
+        },
+        name_transform=lambda name: name.upper(),
     ),
+    # widget.TextBox("default config", name="default"),
+    # widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
+    widget.Systray(),
+    widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
+    # widget.QuickExit(),
 ]
+
+screeen_list = [
+    Screen(top=bar.Bar(
+        widgets=widget_list,            # A list of widget objects.
+        size=24,                        # The "thickness" of the bar, i.e. the height of a horizontal bar, or the width of a vertical bar.
+        background='#000000',           # Background colour.
+        border_color='#000000',         # Border colour as str or list of str [N E S W].
+        border_width=0,                 # Width of border as int of list of ints [N E S W].
+        margin=0,                       # Space around bar as int or list of ints [N E S W].
+        opacity=1,                      # Bar window opacity.
+    ),),
+]
+
+screens = screeen_list
 
 
 
