@@ -35,137 +35,145 @@ clipmenu = os.path.join(os.path.dirname(__file__), "utils/scripts/clipmenu.sh")
 keys = [
     # Switch between windows (Move Focus)
     Key(
-        "M-h", 
-        lazy.layout.left(), 
+        "M-h",
+        lazy.layout.left(),
         desc="Move focus to left"
     ),
     Key(
-        "M-<Left>", 
-        lazy.layout.left(), 
+        "M-<Left>",
+        lazy.layout.left(),
         desc="Move focus to left"
     ),
     Key(
-        "M-l", 
-        lazy.layout.right(), 
+        "M-l",
+        lazy.layout.right(),
         desc="Move focus to right"
     ),
     Key(
-        "M-<Right>", 
-        lazy.layout.right(), 
+        "M-<Right>",
+        lazy.layout.right(),
         desc="Move focus to right"
     ),
     Key(
-        "M-j", 
-        lazy.layout.down(), 
+        "M-j",
+        lazy.layout.down(),
         desc="Move focus down"
     ),
     Key(
-        "M-<Down>", 
-        lazy.layout.down(), 
+        "M-<Down>",
+        lazy.layout.down(),
         desc="Move focus down"
     ),
     Key(
         "M-k", 
-        lazy.layout.up(), 
+        lazy.layout.up(),
         desc="Move focus up"
     ),
     Key(
-        "M-<Up>", 
-        lazy.layout.up(), 
+        "M-<Up>",
+        lazy.layout.up(),
         desc="Move focus up"
     ),
     Key(
-        "M-S-<space>", 
-        lazy.layout.next(), 
+        "M-S-<space>",
+        lazy.layout.next(),
         desc="Move window focus to other window"
     ),
 
     # Move windows between left/right columns or move up/down in current stack.
     Key(
-        "M-S-h", 
-        lazy.layout.shuffle_left(), 
+        "M-S-h",
+        lazy.layout.shuffle_left(),
         desc="Move window to the left"
     ),
     Key(
-        "M-S-<Left>", 
-        lazy.layout.shuffle_left(), 
+        "M-S-<Left>",
+        lazy.layout.shuffle_left(),
         desc="Move window to the left"
     ),
     Key(
-        "M-S-l", 
-        lazy.layout.shuffle_right(), 
+        "M-S-l",
+        lazy.layout.shuffle_right(),
         desc="Move window to the right"
     ),
     Key(
-        "M-S-<Right>", 
-        lazy.layout.shuffle_right(), 
+        "M-S-<Right>",
+        lazy.layout.shuffle_right(),
         desc="Move window to the right"
     ),
     Key(
-        "M-S-j", 
-        lazy.layout.shuffle_down(), 
+        "M-S-j",
+        lazy.layout.shuffle_down(),
         desc="Move window down"
     ),
     Key(
-        "M-S-<Down>", 
-        lazy.layout.shuffle_down(), 
+        "M-S-<Down>",
+        lazy.layout.shuffle_down(),
         desc="Move window down"
     ),
     Key(
-        "M-S-k", 
-        lazy.layout.shuffle_up(), 
+        "M-S-k",
+        lazy.layout.shuffle_up(),
         desc="Move window up"
     ),
     Key(
-        "M-S-<Up>", 
-        lazy.layout.shuffle_up(), 
+        "M-S-<Up>",
+        lazy.layout.shuffle_up(),
         desc="Move window up"
     ),
 
     # Grow windows. If current window is on the edge of screen and direction will be to screen edge - window would shrink.
     Key(
-        "A-C-h", 
-        lazy.layout.grow_left(), 
+        "A-C-h",
+        lazy.layout.grow_left(),
+        lazy.layout.decrease_ratio(),
         desc="Grow window to the left"
     ),
     Key(
-        "A-C-<Left>", 
-        lazy.layout.grow_left(), 
+        "A-C-<Left>",
+        lazy.layout.grow_left(),
+        lazy.layout.decrease_ratio(),
         desc="Grow window to the left"
     ),
     Key(
-        "A-C-l", 
-        lazy.layout.grow_right(), 
+        "A-C-l",
+        lazy.layout.grow_right(),
+        lazy.layout.increase_ratio(),
         desc="Grow window to the right"
     ),
     Key(
-        "A-C-<Right>", 
-        lazy.layout.grow_right(), 
+        "A-C-<Right>",
+        lazy.layout.grow_right(),
+        lazy.layout.increase_ratio(),
         desc="Grow window to the right"
     ),
     Key(
-        "A-C-j", 
-        lazy.layout.grow_down(), 
+        "A-C-j",
+        lazy.layout.grow_down(),
+        lazy.layout.increase_ratio(),
         desc="Grow window down"
     ),
     Key(
-        "A-C-<Down>", 
-        lazy.layout.grow_down(), 
+        "A-C-<Down>",
+        lazy.layout.grow_down(),
+        lazy.layout.increase_ratio(),
         desc="Grow window down"
     ),
     Key(
-        "A-C-k", 
-        lazy.layout.grow_up(), 
+        "A-C-k",
+        lazy.layout.grow_up(),
+        lazy.layout.decrease_ratio(),
         desc="Grow window up"
     ),
     Key(
-        "A-C-<Up>", 
-        lazy.layout.grow_up(), 
+        "A-C-<Up>",
+        lazy.layout.grow_up(),
+        lazy.layout.decrease_ratio(),
         desc="Grow window up"
     ),
     Key(
-        "A-C-<Return>", 
-        lazy.layout.normalize(), 
+        "A-C-<Return>",
+        lazy.layout.normalize(),
         desc="Reset all window sizes"
     ),
     
@@ -178,56 +186,56 @@ keys = [
 
     # Launching Applications
     Key(
-        "M-<Return>", 
-        lazy.spawn(terminal), 
+        "M-<Return>",
+        lazy.spawn(terminal),
         desc="Launch terminal"
     ),
     Key(
-        "M-A-b", 
-        lazy.spawn("firefox"), 
+        "M-A-b",
+        lazy.spawn("firefox"),
         desc="Launch Firefox"
     ),
     Key(
-        "M-A-c", 
-        lazy.spawn("code"), 
+        "M-A-c",
+        lazy.spawn("code"),
         desc="Launch VsCode"
     ),
     Key(
-        "M-A-d", 
-        lazy.spawn("discord"), 
+        "M-A-d",
+        lazy.spawn("discord"),
         desc="Launch Discord"
     ),
     Key(
-        "M-A-s", 
-        lazy.spawn("spotify"), 
+        "M-A-s",
+        lazy.spawn("spotify"),
         desc="Launch Spotify"
     ),
     Key(
-        "M-S-l", 
-        lazy.spawn("i3lock-fancy"), 
+        "M-S-l",
+        lazy.spawn("i3lock-fancy"),
         desc="Launch i3lock-fancy"
     ),
     Key(
-        "M-A-c", 
-        lazy.spawn(clipmenu), 
+        "M-A-c",
+        lazy.spawn(clipmenu),
         desc="Launch clipmenu"
     ),
     Key(
-        "M-A-x", 
-        lazy.spawn("dmenu_run -h 40 -c -l 10"), 
+        "M-A-x",
+        lazy.spawn("dmenu_run -h 40 -c -l 10"),
         desc="Launch Dmenu"
     ),
     Key(
-        "M-S-s", 
-        lazy.spawn(shutdown), 
+        "M-S-s",
+        lazy.spawn(shutdown),
         desc="Launch shutdown menu"
     ),
     
     
     # Toggle between different layouts
     Key(
-        "M-<space>", 
-        lazy.next_layout(), 
+        "M-<space>",
+        lazy.next_layout(),
         desc="Toggle between layouts"
     ),
 
@@ -240,27 +248,27 @@ keys = [
     
     # Kill window
     Key(
-        "M-q", 
-        lazy.window.kill(), 
+        "M-q",
+        lazy.window.kill(),
         desc="Kill focused window"
     ),
     
     # Reload/Shutdown Qtile
     Key(
-        "M-A-r", 
-        lazy.reload_config(), 
+        "M-A-r",
+        lazy.reload_config(),
         desc="Reload the config"
     ),
     Key(
-        "M-A-q", 
-        lazy.shutdown(), 
+        "M-A-q",
+        lazy.shutdown(),
         desc="Shutdown Qtile"
     ),
     
     # Spawn cmd launcher
     Key(
-        "M-r", 
-        lazy.spawncmd(), 
+        "M-r",
+        lazy.spawncmd(),
         desc="Spawn a command using a prompt widget"
     ),
 
@@ -344,7 +352,7 @@ layouts = [
         max_ratio=0.85,             # Maximum width of master windows.
         mn_ratio=0.15,              # Minimum width of master windows.
         ratio=0.5,                  # Width-percentage of screen size reserved for master windows.
-        ratio_increment=0.05,       # By which amount to change ratio when cmd_decrease_ratio or cmd_increase_ratio are called.
+        ratio_increment=0.01,       # By which amount to change ratio when cmd_decrease_ratio or cmd_increase_ratio are called.
         shift_windows=True          # Allow to shift windows within the layout. If False, the layout will be rotated instead.
     ),
     layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
