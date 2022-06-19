@@ -1,1 +1,1 @@
-brillo -U 5
+brillo -U 1
