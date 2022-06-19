@@ -230,6 +230,13 @@ keys = [
         lazy.next_layout(), 
         desc="Toggle between layouts"
     ),
+
+    # Toggle between recent groups
+    Key(
+        "M-<Tab>",
+        lazy.screen.toggle_group(),
+        desc="Toggle between groups"
+    ),
     
     # Kill window
     Key(
