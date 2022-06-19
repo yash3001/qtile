@@ -414,16 +414,172 @@ layouts = [
         ratio_increment=0.01,           # By which amount to change ratio when cmd_decrease_ratio or cmd_increase_ratio are called.
         shift_windows=True              # Allow to shift windows within the layout. If False, the layout will be rotated instead.
     ),
-    # Try more layouts by unleashing below layouts.
-    # layout.Stack(num_stacks=2),
-    # layout.Bsp(),
-    # layout.Matrix(),
-    # layout.MonadTall(),
-    # layout.MonadWide(),
-    # layout.RatioTile(),
-    # layout.TreeTab(),
-    # layout.VerticalTile(),
-    # layout.Zoomy(),
+
+    # layout.Stack(
+    #     autosplit=False,                # Auto split all new stacks.
+    #     border_focus='#0000ff',         # Border colour(s) for the focused window.
+    #     border_normal='#000000',        # Border colour(s) for un-focused windows.
+    #     border_width=1,                 # Border width.
+    #     fair=False,                     # Add new windows to the stacks in a round robin way.
+    #     margin=0,                       # Margin of the layout (int or list of ints [N E S W]).
+    #     num_stacks=2,                   # Number of stacks.
+    # ),
+
+    # layout.Bsp(
+    #     border_focus='#881111',         # Border colour(s) for the focused window.
+    #     border_normal='#220000',        # Border colour(s) for un-focused windows.
+    #     border_on_single=False,         # Draw border when there is only one window.
+    #     border_width=2,                 # Border width.
+    #     fair=True,                      # New clients are inserted in the shortest branch.
+    #     grow_amount=10,                 # Amount by which to grow a window/column.
+    #     lower_right=True,               # New client occupies lower or right subspace.
+    #     margin=0,                       # Margin of the layout (int or list of ints [N E S W]).
+    #     margin_on_single=None,          # Margin when there is only one window (int or list of ints [N E S W], 'None' to use 'margin' value).
+    #     ratio=1.6,                      # Width/height ratio that defines the partition direction.
+    # ),
+
+    # layout.Matrix(
+    #     border_focus='#0000ff',         # Border colour(s) for the focused window.
+    #     border_normal='#000000',        # Border colour(s) for un-focused windows.
+    #     border_width=1,                 # Border width.
+    #     columns=2,                      # Number of columns.
+    #     margin=0,                       # Margin of the layout (int or list of ints [N E S W]).
+    # ),
+
+    # layout.MonadTall(
+    #     align=0,                        # Which side master plane will be placed (one of MonadTall._left or MonadTall._right).
+    #     border_focus='#ff0000',         # Border colour(s) for the focused window.
+    #     border_normal='#000000',        # Border colour(s) for un-focused windows.
+    #     border_width=2,                 # Border width.
+    #     change_ratio=0.05,              # Resize ratio.
+    #     change_size=20,                 # Resize change in pixels.
+    #     margin=0,                       # Margin of the layout.
+    #     max_ratio=0.75,                 # The percent of the screen-space the master pane should occupy at maximum.
+    #     min_ratio=0.25,                 # The percent of the screen-space the master pane should occupy at minimum.
+    #     min_secondary_size=85,          # Minimum size in pixel for a secondary pane window.
+    #     new_client_position='after_current' # Place new windows: after_current - after the active window. before_current - before the active window, top - at the top of the stack, bottom - at the bottom of the stack.
+    #     ratio=0.5,                      # The percent of the screen-space the master pane should occupy by default.
+    #     single_border_width=None,       # Border width for single window.
+    #     single_margin=None,             # Margin size for single window.
+    # ),
+
+    # layout.MonadWide(
+    #     align=0,                        # Which side master plane will be placed (one of MonadTall._left or MonadTall._right).
+    #     border_focus='#ff0000',         # Border colour(s) for the focused window.
+    #     border_normal='#000000',        # Border colour(s) for un-focused windows.
+    #     border_width=2,                 # Border width.
+    #     change_ratio=0.05,              # Resize ratio.
+    #     change_size=20,                 # Resize change in pixels.
+    #     margin=0,                       # Margin of the layout.
+    #     max_ratio=0.75,                 # The percent of the screen-space the master pane should occupy at maximum.
+    #     min_ratio=0.25,                 # The percent of the screen-space the master pane should occupy at minimum.
+    #     min_secondary_size=85,          # Minimum size in pixel for a secondary pane window.
+    #     new_client_position='after_current', # Place new windows: after_current - after the active window. before_current - before the active window, top - at the top of the stack, bottom - at the bottom of the stack.
+    #     ratio=0.5,                      # The percent of the screen-space the master pane should occupy by default.
+    #     single_border_width=None,       # Border width for single window.
+    #     single_margin=None,             # Margin size for single window.
+    # ),
+
+    # layout.RatioTile(
+    #     border_focus='#0000ff',         # Border colour(s) for the focused window.
+    #     border_normal='#000000',        # Border colour(s) for un-focused windows.
+    #     border_width=1,                 # Border width.
+    #     fancy=False,                    # Use a different method to calculate window sizes.
+    #     margin=0,                       # Margin of the layout (int or list of ints [N E S W]).
+    #     ratio=1.618,                    # Ratio of the tiles.
+    #     ratio_increment=0.1             # Amount to increment per ratio increment.
+    # ),
+
+    # layout.TreeTab(
+    #     active_bg='000080',             # Background color of active tab.
+    #     active_fg='ffffff',             # Foreground color of active tab.
+    #     bg_color='000000',              # Background color of tabs.
+    #     border_width=2,                 # Width of the border.
+    #     font='sans',                    # Font.
+    #     fontshadow=None,                # font shadow color, default is None (no shadow).
+    #     fontsize=14,                    # Font pixel size.
+    #     inactive_bg='606060',           # Background color of inactive tab.
+    #     inactive_fg='ffffff',           # Foreground color of inactive tab.
+    #     level_shift=8,                  # Shift for children tabs.
+    #     margin_left=6,                  # Left margin of tab panel.
+    #     margin_y=6,                     # Vertical margin of tab panel.
+    #     padding_left=6,                 # Left padding for tabs.
+    #     padding_x=6,                    # Left padding for tab label.
+    #     padding_y=2,                    # Top padding for tab label.
+    #     panel_width=150,                # Width of the left panel.
+    #     place_right=False,              # Place the tab panel on the right side.
+    #     previous_on_rm=False,           # Focus previous window on close instead of first.
+    #     section_bottom=6,               # Bottom margin of section.
+    #     section_fg='ffffff',            # Color of section label.
+    #     section_fontsize=11,            # Font pixel size of section label.
+    #     section_left=4,                 # Left margin of section label.
+    #     section_padding=4,              # Bottom of margin section label.
+    #     section_top=4,                  # Top margin of section label.
+    #     sections=['Default'],           # Foreground color of inactive tab.
+    #     urgent_bg='ff0000',             # Background color of urgent tab.
+    #     urgent_fg='ffffff',             # Foreground color of urgent tab.
+    #     vspace=2,                       # Space between tabs.
+    # ),
+
+    # layout.VerticalTile(
+    #     border_focus='#FF0000',         # Border color(s) for the focused window.
+    #     border_normal='#FFFFFF',        # Border color(s) for un-focused windows.
+    #     border_width=1,                 # Border width.
+    #     margin=0,                       # Border margin (int or list of ints [N E S W]).
+    # ),
+
+    # layout.Zoomy(
+    #     columnwidth=150,                # Width of the right column.
+    #     margin=0,                       # Margin of the layout (int or list of ints [N E S W]).
+    #     property_big='1.0',             # Property value to set on normal window (X11 only).
+    #     property_name='ZOOM',           # Property to set on zoomed window (X11 only).
+    #     property_small='0.1',           # Property value to set on zoomed window (X11 only).
+    # ),
+
+    # layout.Floating(
+    #     border_focus='#0000ff',         # Border colour(s) for the focused window.
+    #     border_normal='#000000',        # Border colour(s) for un-focused windows.
+    #     border_width=1,                 # Border width.
+    #     fullscreen_border_width=0,      # Border width for fullscreen.
+    #     max_border_width=0,             # Border width for maximize.
+    # ),
+
+    # layout.MonadThreeCol(
+    #     align=0,                        # Which side master plane will be placed (one of MonadTall._left or MonadTall._right).
+    #     border_focus='#ff0000',         # Border colour(s) for the focused window.
+    #     border_normal='#000000',        # Border colour(s) for un-focused windows.
+    #     border_width=2,                 # Border width.
+    #     change_ratio=0.05,              # Resize ratio.
+    #     change_size=20,                 # Resize change in pixels.
+    #     main_centered=True,             # Place the main pane at the center of the screen.
+    #     margin=0,                       # Margin of the layout.
+    #     max_ratio=0.75,                 # The percent of the screen-space the master pane should occupy at maximum.
+    #     min_ratio=0.25,                 # The percent of the screen-space the master pane should occupy at minimum.
+    #     min_secondary_size=85,          # Minimum size in pixel for a secondary pane window.
+    #     new_client_position='top',      # Place new windows: after_current - after the active window. before_current - before the active window, top - at the top of the stack, bottom - at the bottom of the stack.
+    #     ratio=0.5,                      # The percent of the screen-space the master pane should occupy by default.
+    #     single_border_width=None,       # Border width for single window.
+    #     single_margin=None,             # Margin size for single window.
+    # ),
+
+    # layout.Slice(
+    #     match=None,                     # Match-object describing which window(s) to move to the slice.
+    #     side='left',                    # Position of the slice (left, right, top, bottom).
+    #     width=256,                      # Slice width.
+    # ),
+
+    # layout.Spiral(
+    #     border_focus='#0000ff',         # Border colour(s) for the focused window.
+    #     border_normal='#000000',        # Border colour(s) for un-focused windows.
+    #     border_width=1,                 # Border width.
+    #     clockwise=True,                 # Direction of spiral
+    #     main_pane='left',               # Location of biggest window 'top', 'bottom', 'left', 'right'
+    #     main_pane_ratio=None,           # Ratio for biggest window or 'None' to use same ratio for all windows.
+    #     margin=0,                       # Margin of the layout (int or list of ints [N E S W])
+    #     new_client_position='top',      # Place new windows: 'after_current' - after the active window, 'before_current' - before the active window, 'top' - in the main pane, 'bottom '- at the bottom of the stack. NB windows that are added too low in the stack may be hidden if there is no remaining space in the spiral.
+    #     ratio=0.6180469715698392,       # Ratio of the tiles
+    #     ratio_increment=0.1,            # Amount to increment per ratio increment
+    # ),
 ]
 
 
