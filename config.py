@@ -22,9 +22,11 @@ terminal = guess_terminal()
 shutdown = os.path.join(os.path.dirname(__file__), "utils/scripts/shutdown.sh")
 screenshot = os.path.join(os.path.dirname(__file__), "utils/scripts/screenshot.sh")
 rectangular_screenshot = os.path.join(os.path.dirname(__file__), "utils/scripts/rectangular_screenshot.sh")
-volume_up = os.path.join(os.path.dirname(__file__), "utils/scripts/vol_up.sh")
-volume_down = os.path.join(os.path.dirname(__file__), "utils/scripts/vol_down.sh")
-volume_toggle_mute = os.path.join(os.path.dirname(__file__), "utils/scripts/vol_mute.sh")
+brightness_up = os.path.join(os.path.dirname(__file__), "utils/scripts/brightness_up.sh")
+brightness_down = os.path.join(os.path.dirname(__file__), "utils/scripts/brightness_down.sh")
+volume_up = os.path.join(os.path.dirname(__file__), "utils/scripts/volume_up.sh")
+volume_down = os.path.join(os.path.dirname(__file__), "utils/scripts/volume_down.sh")
+volume_mute = os.path.join(os.path.dirname(__file__), "utils/scripts/volume_mute.sh")
 clipmenu = os.path.join(os.path.dirname(__file__), "utils/scripts/clipmenu.sh")
 
 
@@ -196,7 +198,7 @@ keys = [
         desc="Launch Firefox"
     ),
     Key(
-        "M-A-c",
+        "M-A-v",
         lazy.spawn("code"),
         desc="Launch VsCode"
     ),
@@ -282,6 +284,31 @@ keys = [
         "M-S-C-p",
         lazy.spawn(rectangular_screenshot),
         desc="Take Fullscreen Screenshot"
+    ),
+    Key(
+        "<XF86MonBrightnessUp>",
+        lazy.spawn(brightness_up),
+        desc="Increase Brightness"
+    ),
+    Key(
+        "<XF86MonBrightnessDown>",
+        lazy.spawn(brightness_down),
+        desc="Decrease Brightness"
+    ),
+    Key(
+        "<XF86AudioRaiseVolume>",
+        lazy.spawn(volume_up),
+        desc="Increase Volume"
+    ),
+    Key(
+        "<XF86AudioLowerVolume>",
+        lazy.spawn(volume_down),
+        desc="Decrease Volume"
+    ),
+    Key(
+        "<XF86AudioMute>",
+        lazy.spawn(volume_mute),
+        desc="Toogle Mute Volume"
     ),
 ]
 
