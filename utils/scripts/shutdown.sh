@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/zsh
 
 choice=$(echo -e "logout\nshutdown\nrestart" | dmenu -c -h 40 -l 3)
 

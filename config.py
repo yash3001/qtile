@@ -3,7 +3,8 @@
 # ------------------------------------------------------
 
 import os
-from libqtile import bar, layout, widget
+import subprocess
+from libqtile import bar, layout, widget, hook
 from libqtile.config import Click, Drag, Group, Match, Screen
 from libqtile.config import EzKey as Key
 from libqtile.lazy import lazy
@@ -28,6 +29,7 @@ volume_up = os.path.join(os.path.dirname(__file__), "utils/scripts/volume_up.sh"
 volume_down = os.path.join(os.path.dirname(__file__), "utils/scripts/volume_down.sh")
 volume_mute = os.path.join(os.path.dirname(__file__), "utils/scripts/volume_mute.sh")
 clipmenu = os.path.join(os.path.dirname(__file__), "utils/scripts/clipmenu.sh")
+autostart = os.path.join(os.path.dirname(__file__), "utils/scripts/autostart.sh")
 
 
 
@@ -668,6 +670,11 @@ auto_minimize = True
 
 # When using the Wayland backend, this can be used to configure input devices.
 wl_input_rules = None
+
+@hook.subscribe.startup_once
+def start_once():
+    subprocess.call(autostart)
+
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the
