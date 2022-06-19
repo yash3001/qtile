@@ -626,7 +626,6 @@ screens = [
 
 
 
-
 # ------------------------------------------------------
 # ------------------- Mouse Bindings -------------------
 # ------------------------------------------------------
@@ -637,6 +636,15 @@ mouse = [
     Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
 
+
+
+# ------------------------------------------------------
+# ----------------------- Hooks ------------------------
+# ------------------------------------------------------
+
+@hook.subscribe.startup_once
+def start_once():
+    subprocess.call(autostart)
 
 
 
@@ -670,11 +678,6 @@ auto_minimize = True
 
 # When using the Wayland backend, this can be used to configure input devices.
 wl_input_rules = None
-
-@hook.subscribe.startup_once
-def start_once():
-    subprocess.call(autostart)
-
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the
