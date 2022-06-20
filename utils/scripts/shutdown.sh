@@ -1,12 +1,12 @@
 #!/usr/bin/zsh
 
-choice=$(echo -e "logout\nshutdown\nrestart" | dmenu -c -h 40 -l 3)
+choice=$(echo -e "Logout\nShutdown\nRestart" | dmenu -c -h 40 -l 3)
 
-if [[ ($choice == "logout") ]]
+if [[ ($choice == "Logout") ]]
 then
-    ans=$(echo -e "no\nyes" | dmenu -c -h 40 -p "Do you want to logout")
+    ans=$(echo -e "No\nYes" | dmenu -c -h 40 -p "Do you want to logout")
     
-    if [[ ($ans == "yes") ]]
+    if [[ ($ans == "Yes") ]]
     then
         wm=$(wmctrl -m | awk 'NR==1{print $2, $3, $4, $5}')
         wm=$(sed 's/[ ]*$//' <<<"$wm")
@@ -14,21 +14,21 @@ then
     fi
 fi
 
-if [[ ($choice == "shutdown") ]]
+if [[ ($choice == "Shutdown") ]]
 then
-    ans=$(echo -e "no\nyes" | dmenu -c -h 40 -p "Do you want to shutdown")
+    ans=$(echo -e "No\nYes" | dmenu -c -h 40 -p "Do you want to shutdown")
     
-    if [[ ($ans == "yes") ]]
+    if [[ ($ans == "Yes") ]]
     then
         poweroff
     fi
 fi
 
-if [[ ($choice == "restart") ]]
+if [[ ($choice == "Restart") ]]
 then
-    ans=$(echo -e "no\nyes" | dmenu -c -h 40 -p "Do you want to reboot")
+    ans=$(echo -e "No\nYes" | dmenu -c -h 40 -p "Do you want to reboot")
     
-    if [[ ($ans == "yes") ]]
+    if [[ ($ans == "Yes") ]]
     then
         reboot
     fi

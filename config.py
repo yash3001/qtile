@@ -9,6 +9,7 @@ from libqtile.config import Click, Drag, Group, Match, Screen
 from libqtile.config import EzKey as Key
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
+from libqtile.backend.x11 import xkeysyms
 
 
 
@@ -391,9 +392,9 @@ layouts = [
         margin_on_single=[5,5,5,5],     # Margin when only one window. (int or list of ints [N E S W]).
         num_columns=2,                  # Preferred number of columns.
         split=True,                     # New columns presentation mode.
-        wrap_focus_columns=True,        # Wrap the screen when moving focus across columns.
-        wrap_focus_rows=True,           # Wrap the screen when moving focus across rows.
-        wrap_focus_stacks=True          # Wrap the screen when moving focus across stacked.
+        wrap_focus_columns=False,        # Wrap the screen when moving focus across columns.
+        wrap_focus_rows=False,           # Wrap the screen when moving focus across rows.
+        wrap_focus_stacks=False          # Wrap the screen when moving focus across stacked.
     ),
 
     layout.Max(),
@@ -608,11 +609,11 @@ widget_list = [
         },
         name_transform=lambda name: name.upper(),
     ),
-    # widget.TextBox("default config", name="default"),
-    # widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
+    widget.TextBox("default config", name="default"),
+    widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
     widget.Systray(),
     widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-    # widget.QuickExit(),
+    widget.QuickExit(),
 ]
 
 screeen_list = [
