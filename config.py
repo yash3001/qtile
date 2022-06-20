@@ -2,6 +2,7 @@
 # ---------------------- Imports -----------------------
 # ------------------------------------------------------
 
+from faulthandler import disable
 import os
 import subprocess
 from libqtile import bar, layout, widget, hook
@@ -10,6 +11,7 @@ from libqtile.config import EzKey as Key
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from libqtile.backend.x11 import xkeysyms
+from qtile_extras import widget as extra_widget
 
 
 
@@ -323,16 +325,16 @@ keys = [
 # ------------------------------------------------------
 
 groups = [
-    Group("1", matches=[Match(wm_class=["Code"])]),
-    Group("2", matches=[Match(wm_class=["firefox"])]),
-    Group("3", matches=[Match(wm_class=["discord"])]),
-    Group("4", matches=[Match(wm_class=["org.gnome.Nautilus"])]),
-    Group("5", matches=[Match(wm_class=["Spotify"])]),
-    Group("6"),
-    Group("7"),
-    Group("8"),
-    Group("9"),
-    Group("10")
+    Group("1", label="", matches=[Match(wm_class=["Code"])]),
+    Group("2", label="", matches=[Match(wm_class=["firefox"])]),
+    Group("3", label="", matches=[Match(wm_class=["discord"])]),
+    Group("4", label="", matches=[Match(wm_class=["org.gnome.Nautilus"])]),
+    Group("5", label="", matches=[Match(wm_class=["Spotify"])]),
+    Group("6", label=""),
+    Group("7", label=""),
+    Group("8", label=""),
+    Group("9", label=""),
+    Group("10", label="")
 ]
 
 # allow mod4+1 through mod4+0 to bind to groups;
@@ -599,26 +601,44 @@ widget_defaults = dict(
 extension_defaults = widget_defaults.copy()
 
 widget_list = [
-    widget.CurrentLayout(),
+    widget.TextBox(" "),
     widget.GroupBox(
+        active='ffffff',                # Active group font colour.
         background=None,                # Widget background color
-        border='000000',                # group box border color
-        borderwidth=3,                  # Current group border width
-        center_aligned=True,            # center-aligned group box
-        fmt='{}',                       # How to format the text
-        font='sans',                    # Default font
-        fontshadow=None,                # font shadow color, default is None(no shadow)
-        fontsize=15,                    # Font size. Calculated if None.
-        foreground='ffffff',            # Foreground colour
+        block_highlight_text_color=None,# Selected group font colour.
+        borderwidth=3,                  # Current group border width.
+        center_aligned=True,            # center-aligned group box.
+        disable_drag=True,              # Disable dragging and dropping of group names on widget.
+        fmt='{}',                       # How to format the text.
+        font='sans',                    # Default font.
+        fontshadow=None,                # font shadow color, default is None(no shadow).
+        fontsize=20,                    # Font size. Calculated if None.
+        foreground='ffffff',            # Foreground color.
+        hide_unused=False,              # Hide groups that have no windows and that are not displayed on any screen.
+        highlight_color=['000000', '282828'], # Active group highlight color when using 'line' highlight method.
+        highlight_method="text",        # Method of highlighting ('border', 'block', 'text', or 'line') Uses *_border color settings.
+        inactive='404040',              # Inactive group font colour
+        invert_mouse_wheel=False,       # Whether to invert mouse wheel group movement
         margin=3,                       # Margin inside the box
-        margin_x=3,                     # X Margin. Overrides 'margin' if set
-        margin_y=3,                     # Y Margin. Overrides 'margin' if set
+        margin_x=None,                  # X Margin. Overrides 'margin' if set
+        margin_y=None,                  # Y Margin. Overrides 'margin' if set
         markup=True,                    # Whether or not to use pango markup
         max_chars=0,                    # Maximum number of characters to display in widget.
         mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        other_current_screen_border='404040', # Border or line colour for group on other screen when focused.
+        other_screen_border='404040',   # Border or line colour for group on other screen when unfocused.
         padding=3,                      # Padding. Calculated if None.
-        padding_x=3,                    # X Padding. Overrides 'padding' if set
-        padding_y=3,                    # Y Padding. Overrides 'padding' if set
+        padding_x=None,                 # X Padding. Overrides 'padding' if set.
+        padding_y=None,                 # Y Padding. Overrides 'padding' if set.
+        rounded=True,                   # To round or not to round box borders
+        spacing=None,                   # Spacing between groups(if set to None, will be equal to margin_x)
+        this_current_screen_border='215578', # Border or line colour for group on this screen when focused.
+        this_screen_border='215578',    # Border or line colour for group on this screen when unfocused.
+        urgent_alert_method='border',   # Method for alerting you of WM urgent hints (one of 'border', 'text', 'block', or 'line')
+        urgent_border='FF0000',         # Urgent border or line color
+        urgent_text='FF0000',           # Urgent group font color
+        use_mouse_wheel=True,           # Whether to use mouse wheel events
+        visible_groups=None,            # Groups that will be visible. If set to None or [], all groups will be visible.Visible groups are identified by name not by their displayed label.
     ),
     widget.Prompt(),
     widget.WindowName(),
@@ -628,8 +648,36 @@ widget_list = [
         },
         name_transform=lambda name: name.upper(),
     ),
-    widget.TextBox("default config", name="default"),
-    widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
+    extra_widget.ALSAWidget(
+        background=None,                # Widget background color
+        bar_colour_high='999900',       # Colour of bar if high range
+        bar_colour_loud='990000',       # Colour of bar in loud range
+        bar_colour_mute='999999',	    # Colour of bar if muted
+        bar_colour_normal='009900',     # Colour of bar in normal range
+        bar_width=75,                   # Width of display bar
+        decorations=[],                 # Decorations for widgets
+        device='Master',                # Name of ALSA device
+        font='sans',                 	# Default font
+        fontsize=15,                 	# Font size
+        foreground='ffffff',            # Font colour
+        hide_interval=5, 	            # Timeout before bar is hidden after update
+        limit_high=90,                  # Max percentage for high range
+        limit_loud=100, 	            # Max percentage for loud range
+        limit_normal=70, 	            # Max percentage for normal range
+        margin=3,                       # Margin inside the box
+        margin_x=3,                     # X Margin. Overrides 'margin' if set
+        margin_y=3,                    	# Y Margin. Overrides 'margin' if set
+        mode='both',                    # Display mode: 'icon', 'bar', 'both'.
+        mouse_callbacks={}, 	        # Dict of mouse button press callback functions. Accepts functions and ``lazy`` calls.
+        padding=3,                      # Padding inside the box
+        padding_x=3,                    # X Padding. Overrides 'padding' if set
+        padding_y=3,                    # Y Padding. Overrides 'padding' if set
+        step=5,                         # Amount to increase volume by
+        text_format='{volume}%',        # String format
+        theme_path="/usr/share/icons/Paper/24x24/panel", # Path to theme icons.
+        update_interval=0,              # Interval to update widget (e.g. if changes made in other apps).
+
+    ),
     widget.Systray(),
     widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
     widget.QuickExit(),
