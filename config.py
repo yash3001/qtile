@@ -392,9 +392,9 @@ layouts = [
         margin_on_single=[5,5,5,5],     # Margin when only one window. (int or list of ints [N E S W]).
         num_columns=2,                  # Preferred number of columns.
         split=True,                     # New columns presentation mode.
-        wrap_focus_columns=False,        # Wrap the screen when moving focus across columns.
-        wrap_focus_rows=False,           # Wrap the screen when moving focus across rows.
-        wrap_focus_stacks=False          # Wrap the screen when moving focus across stacked.
+        wrap_focus_columns=False,       # Wrap the screen when moving focus across columns.
+        wrap_focus_rows=False,          # Wrap the screen when moving focus across rows.
+        wrap_focus_stacks=False         # Wrap the screen when moving focus across stacked.
     ),
 
     layout.Max(),
@@ -600,7 +600,26 @@ extension_defaults = widget_defaults.copy()
 
 widget_list = [
     widget.CurrentLayout(),
-    widget.GroupBox(),
+    widget.GroupBox(
+        background=None,                # Widget background color
+        border='000000',                # group box border color
+        borderwidth=3,                  # Current group border width
+        center_aligned=True,            # center-aligned group box
+        fmt='{}',                       # How to format the text
+        font='sans',                    # Default font
+        fontshadow=None,                # font shadow color, default is None(no shadow)
+        fontsize=15,                    # Font size. Calculated if None.
+        foreground='ffffff',            # Foreground colour
+        margin=3,                       # Margin inside the box
+        margin_x=3,                     # X Margin. Overrides 'margin' if set
+        margin_y=3,                     # Y Margin. Overrides 'margin' if set
+        markup=True,                    # Whether or not to use pango markup
+        max_chars=0,                    # Maximum number of characters to display in widget.
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        padding=3,                      # Padding. Calculated if None.
+        padding_x=3,                    # X Padding. Overrides 'padding' if set
+        padding_y=3,                    # Y Padding. Overrides 'padding' if set
+    ),
     widget.Prompt(),
     widget.WindowName(),
     widget.Chord(
