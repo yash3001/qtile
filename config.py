@@ -325,15 +325,15 @@ keys = [
 # ------------------------------------------------------
 
 groups = [
-    Group("1", label="", matches=[Match(wm_class=["Code"])]),
+    Group("1", label="", matches=[Match(wm_class=["Code"])]),
     Group("2", label="", matches=[Match(wm_class=["firefox"])]),
-    Group("3", label="", matches=[Match(wm_class=["discord"])]),
-    Group("4", label="", matches=[Match(wm_class=["org.gnome.Nautilus"])]),
-    Group("5", label="", matches=[Match(wm_class=["Spotify"])]),
-    Group("6", label=""),
-    Group("7", label=""),
-    Group("8", label=""),
-    Group("9", label=""),
+    Group("3", label="", matches=[Match(wm_class=["discord"])]),
+    Group("4", label="", matches=[Match(wm_class=["org.gnome.Nautilus"])]),
+    Group("5", label="", matches=[Match(wm_class=["Spotify"])]),
+    Group("6", label=""),
+    Group("7", label=""),
+    Group("8", label=""),
+    Group("9", label=""),
     Group("10", label="")
 ]
 
@@ -606,13 +606,6 @@ colors = {
     'grey': ['#7F8C8D', '#95A5A6']
 }
 
-widget_defaults = dict(
-    font="sans",
-    fontsize=15,
-    padding=3,
-)
-extension_defaults = widget_defaults.copy()
-
 widget_list = [
 
     widget.TextBox(
@@ -653,7 +646,7 @@ widget_list = [
         font='inconsolata',             # Text font.
         fontshadow=None,                # Font shadow color, default is None(no shadow).
         fontsize=24,                    # Font pixel size. Calculated if None.
-        foreground='000000',            # Foreground colour.
+        foreground='#000000',           # Foreground colour.
         markup=True,                    # Whether or not to use pango markup.
         max_chars=0,                    # Maximum number of characters to display in widget.
         mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
@@ -675,22 +668,37 @@ widget_list = [
         padding=0,                      # Padding left and right. Calculated if None.
     ),
 
+    widget.WindowCount(
+        background=None,                # Widget background color
+        fmt='{}',                       # How to format the text
+        font='cascadia code',           # Text font
+        fontshadow=None,                # font shadow color, default is None(no shadow)
+        fontsize=18,                    # Font pixel size. Calculated if None.
+        foreground='#000000',           # Foreground colour.
+        markup=True,                    # Whether or not to use pango markup
+        max_chars=0,                    # Maximum number of characters to display in widget.
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        padding=None,                   # Padding left and right. Calculated if None.
+        show_zero=False,                # Show window count when no windows
+        text_format='{num}',            # Format for message
+    ),
+
     widget.GroupBox(
-        active='404040',                # Active group font colour.
+        active='cacaca',                # Active group font colour.
         background=colors["blue"][1],   # Widget background color
         block_highlight_text_color=None,# Selected group font colour.
         borderwidth=3,                  # Current group border width.
         center_aligned=True,            # center-aligned group box.
         disable_drag=True,              # Disable dragging and dropping of group names on widget.
         fmt='{}',                       # How to format the text.
-        font='inconsolata',                    # Default font.
+        font='fire code',                # Default font.
         fontshadow=None,                # font shadow color, default is None(no shadow).
-        fontsize=24,                    # Font size. Calculated if None.
+        fontsize=26,                    # Font size. Calculated if None.
         foreground='ffffff',            # Foreground color.
         hide_unused=False,              # Hide groups that have no windows and that are not displayed on any screen.
         highlight_color=['000000', '282828'], # Active group highlight color when using 'line' highlight method.
         highlight_method="text",        # Method of highlighting ('border', 'block', 'text', or 'line') Uses *_border color settings.
-        inactive='404040',              # Inactive group font colour
+        inactive='000000',              # Inactive group font colour
         invert_mouse_wheel=False,       # Whether to invert mouse wheel group movement
         margin=3,                       # Margin inside the box
         margin_x=None,                  # X Margin. Overrides 'margin' if set
@@ -719,7 +727,7 @@ widget_list = [
         # width=None,                     # Width of the textbox.
         background=None,                # Widget background color.
         fmt='{}',                       # How to format the text.
-        font='inconsolata',             # Text font.
+        font='meslolgs',             # Text font.
         fontshadow=None,                # Font shadow color, default is None(no shadow).
         fontsize=24,                    # Font pixel size. Calculated if None.
         foreground=colors['blue'][1],   # Foreground colour.
@@ -733,16 +741,16 @@ widget_list = [
         background=None,                # Widget background color
         empty_group_string=' ',         # string to display when no windows are focused on current group
         fmt='{}',                       # How to format the text
-        font='sans',                    # Default font
+        font='fira code',           # Default font
         fontshadow=None,                # font shadow color, default is None(no shadow)
         fontsize=16,                    # Font size. Calculated if None.
         for_current_screen=False,       # instead of this bars screen use currently active screen
-        foreground='ffffff',            # Foreground colour
+        foreground='#ffffff',           # Foreground colour
         format='{state}{name}',         # format of the text
         markup=True,                    # Whether or not to use pango markup
         max_chars=0,                    # Maximum number of characters to display in widget.
         mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-        padding=None,                   # Padding. Calculated if None.
+        padding=20,                     # Padding. Calculated if None.
         parse_text=None,                # Function to parse and modify window names. e.g. function in config that removes excess strings from window name: def my_func(text) for string in [" - Chromium", " - Firefox"]: text = text.replace(string, "") return textthen set option parse_text=my_func
     ),
     
@@ -763,16 +771,16 @@ widget_list = [
     
     extra_widget.ALSAWidget(
         background=colors['cyan'][1], # Widget background color
-        bar_colour_high='999900',       # Colour of bar if high range
-        bar_colour_loud='990000',       # Colour of bar in loud range
-        bar_colour_mute='999999',	    # Colour of bar if muted
-        bar_colour_normal='009900',     # Colour of bar in normal range
+        bar_colour_high='#999900',      # Colour of bar if high range
+        bar_colour_loud='#990000',      # Colour of bar in loud range
+        bar_colour_mute='#999999',	    # Colour of bar if muted
+        bar_colour_normal='#009900',    # Colour of bar in normal range
         bar_width=75,                   # Width of display bar
         decorations=[],                 # Decorations for widgets
         device='Master',                # Name of ALSA device
         font='sans',                 	# Default font
         fontsize=18,                 	# Font size
-        foreground='ffffff',            # Font colour
+        foreground='#ffffff',           # Font colour
         hide_interval=5, 	            # Timeout before bar is hidden after update
         limit_high=90,                  # Max percentage for high range
         limit_loud=100, 	            # Max percentage for loud range
@@ -834,7 +842,7 @@ widget_list = [
         font='sans',                    # Default font
         fontshadow=None,                # font shadow color, default is None(no shadow)
         fontsize=18,                    # Font size. Calculated if None.
-        foreground='000000',            # Foreground colour
+        foreground='#000000',           # Foreground colour
         format="%Y-%m-%d %a %I:%M %p",  # A Python datetime format string
         markup=True,                    # Whether or not to use pango markup
         max_chars=0,                    # Maximum number of characters to display in widget.
@@ -869,7 +877,7 @@ widget_list = [
         font='inconsolata',             # Default font
         fontshadow=None,                # font shadow color, default is None(no shadow)
         fontsize=18,                    # Font size. Calculated if None.
-        foreground='ffffff',            # Foreground colour
+        foreground='#000000',           # Foreground colour
         markup=True,                    # Whether or not to use pango markup
         max_chars=0,                    # Maximum number of characters to display in widget.
         mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
