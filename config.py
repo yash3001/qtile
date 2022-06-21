@@ -11,6 +11,7 @@ from libqtile.config import EzKey as Key
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from libqtile.backend.x11 import xkeysyms
+from pyparsing import col
 from qtile_extras import widget as extra_widget
 
 
@@ -628,7 +629,7 @@ widget_list = [
         # width=None,                     # Width of the textbox.
         background=None,                # Widget background color.
         fmt='{}',                       # How to format the text.
-        font='inconsolata',             # Text font.
+        font='meslolgs',                # Text font.
         fontshadow=None,                # Font shadow color, default is None(no shadow).
         fontsize=24,                    # Font pixel size. Calculated if None.
         foreground=colors['cyan'][1],   # Foreground colour.
@@ -643,9 +644,9 @@ widget_list = [
         # width=None,                     # Width of the textbox.
         background=colors['cyan'][1],   # Widget background color.
         fmt='{}',                       # How to format the text.
-        font='inconsolata',             # Text font.
+        font='JetBrainsMono Nerd Font', # Text font.
         fontshadow=None,                # Font shadow color, default is None(no shadow).
-        fontsize=24,                    # Font pixel size. Calculated if None.
+        fontsize=16,                    # Font pixel size. Calculated if None.
         foreground='#000000',           # Foreground colour.
         markup=True,                    # Whether or not to use pango markup.
         max_chars=0,                    # Maximum number of characters to display in widget.
@@ -656,9 +657,9 @@ widget_list = [
     widget.TextBox(
         text="",                       # Text to be displayed.
         # width=None,                     # Width of the textbox.
-        background=colors['blue'][1],   # Widget background color.
+        background=colors['purple'][1], # Widget background color.
         fmt='{}',                       # How to format the text.
-        font='inconsolata',             # Text font.
+        font='meslolgs',                # Text font.
         fontshadow=None,                # Font shadow color, default is None(no shadow).
         fontsize=24,                    # Font pixel size. Calculated if None.
         foreground=colors['cyan'][1],   # Foreground colour.
@@ -668,19 +669,62 @@ widget_list = [
         padding=0,                      # Padding left and right. Calculated if None.
     ),
 
-    widget.WindowCount(
-        background=None,                # Widget background color
+    widget.CurrentLayoutIcon(
+        background=colors["purple"][1], # Widget background color
+        custom_icon_paths=[],           # List of folders where to search icons beforeusing built-in icons or icons in ~/.icons dir. This can also be used to providemissing icons for custom layouts. Defaults to empty list.
         fmt='{}',                       # How to format the text
-        font='cascadia code',           # Text font
+        font='JetBrainsMono Nerd Font', # Default font
         fontshadow=None,                # font shadow color, default is None(no shadow)
-        fontsize=18,                    # Font pixel size. Calculated if None.
+        fontsize=14,                    # Font size. Calculated if None.
+        foreground='#000000',           # Foreground colour
+        markup=True,                    # Whether or not to use pango markup
+        max_chars=0,                    # Maximum number of characters to display in widget.
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        padding=8,                      # Padding. Calculated if None.
+        scale=1,                        # Scale factor relative to the bar height. Defaults to 1
+    ),
+
+    widget.CurrentLayout(
+        background=colors["purple"][1], # Widget background color
+        fmt='{}',                       # How to format the text
+        font='JetBransMono Nerd Font',  # Default font
+        fontshadow=None,                # font shadow color, default is None(no shadow)
+        fontsize=16,                    # Font size. Calculated if None.
+        foreground='#000000',           # Foreground colour
+        markup=True,                    # Whether or not to use pango markup
+        max_chars=0,                    # Maximum number of characters to display in widget.
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        padding=3,                      # Padding. Calculated if None.
+    ),
+
+    widget.WindowCount(
+        background=colors["purple"][1], # Widget background color
+        fmt='{}',                       # How to format the text
+        font='JetBrainsMono Nerd Font', # Text font
+        fontshadow=None,                # font shadow color, default is None(no shadow)
+        fontsize=16,                    # Font pixel size. Calculated if None.
         foreground='#000000',           # Foreground colour.
         markup=True,                    # Whether or not to use pango markup
         max_chars=0,                    # Maximum number of characters to display in widget.
         mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
         padding=None,                   # Padding left and right. Calculated if None.
-        show_zero=False,                # Show window count when no windows
+        show_zero=True,                 # Show window count when no windows
         text_format='{num}',            # Format for message
+    ),
+
+    widget.TextBox(
+        text="",                       # Text to be displayed.
+        # width=None,                     # Width of the textbox.
+        background=colors['blue'][1],   # Widget background color.
+        fmt='{}',                       # How to format the text.
+        font='meslolgs',                # Text font.
+        fontshadow=None,                # Font shadow color, default is None(no shadow).
+        fontsize=24,                    # Font pixel size. Calculated if None.
+        foreground=colors['purple'][1], # Foreground colour.
+        markup=True,                    # Whether or not to use pango markup.
+        max_chars=0,                    # Maximum number of characters to display in widget.
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        padding=0,                      # Padding left and right. Calculated if None.
     ),
 
     widget.GroupBox(
@@ -691,14 +735,14 @@ widget_list = [
         center_aligned=True,            # center-aligned group box.
         disable_drag=True,              # Disable dragging and dropping of group names on widget.
         fmt='{}',                       # How to format the text.
-        font='fire code',                # Default font.
+        font='JetBrainsMono Nerd Font', # Text font.
         fontshadow=None,                # font shadow color, default is None(no shadow).
-        fontsize=26,                    # Font size. Calculated if None.
-        foreground='ffffff',            # Foreground color.
+        fontsize=17,                    # Font size. Calculated if None.
+        foreground='#ffffff',           # Foreground color.
         hide_unused=False,              # Hide groups that have no windows and that are not displayed on any screen.
-        highlight_color=['000000', '282828'], # Active group highlight color when using 'line' highlight method.
+        highlight_color=['#000000', '#282828'], # Active group highlight color when using 'line' highlight method.
         highlight_method="text",        # Method of highlighting ('border', 'block', 'text', or 'line') Uses *_border color settings.
-        inactive='000000',              # Inactive group font colour
+        inactive='#000000',             # Inactive group font colour
         invert_mouse_wheel=False,       # Whether to invert mouse wheel group movement
         margin=3,                       # Margin inside the box
         margin_x=None,                  # X Margin. Overrides 'margin' if set
@@ -706,18 +750,18 @@ widget_list = [
         markup=True,                    # Whether or not to use pango markup
         max_chars=0,                    # Maximum number of characters to display in widget.
         mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-        other_current_screen_border='282828', # Border or line colour for group on other screen when focused.
-        other_screen_border='282828',   # Border or line colour for group on other screen when unfocused.
+        other_current_screen_border='#282828', # Border or line colour for group on other screen when focused.
+        other_screen_border='#282828',   # Border or line colour for group on other screen when unfocused.
         padding=3,                      # Padding. Calculated if None.
         padding_x=None,                 # X Padding. Overrides 'padding' if set.
         padding_y=None,                 # Y Padding. Overrides 'padding' if set.
         rounded=True,                   # To round or not to round box borders
         spacing=None,                   # Spacing between groups(if set to None, will be equal to margin_x)
-        this_current_screen_border='ffffff', # Border or line colour for group on this screen when focused.
-        this_screen_border='215578',    # Border or line colour for group on this screen when unfocused.
+        this_current_screen_border='#ffffff', # Border or line colour for group on this screen when focused.
+        this_screen_border='#215578',   # Border or line colour for group on this screen when unfocused.
         urgent_alert_method='border',   # Method for alerting you of WM urgent hints (one of 'border', 'text', 'block', or 'line')
-        urgent_border='FF0000',         # Urgent border or line color
-        urgent_text='FF0000',           # Urgent group font color
+        urgent_border='#FF0000',        # Urgent border or line color
+        urgent_text='#FF0000',          # Urgent group font color
         use_mouse_wheel=True,           # Whether to use mouse wheel events
         visible_groups=None,            # Groups that will be visible. If set to None or [], all groups will be visible.Visible groups are identified by name not by their displayed label.
     ),
@@ -727,7 +771,7 @@ widget_list = [
         # width=None,                     # Width of the textbox.
         background=None,                # Widget background color.
         fmt='{}',                       # How to format the text.
-        font='meslolgs',             # Text font.
+        font='meslolgs',                # Text font.
         fontshadow=None,                # Font shadow color, default is None(no shadow).
         fontsize=24,                    # Font pixel size. Calculated if None.
         foreground=colors['blue'][1],   # Foreground colour.
@@ -741,7 +785,7 @@ widget_list = [
         background=None,                # Widget background color
         empty_group_string=' ',         # string to display when no windows are focused on current group
         fmt='{}',                       # How to format the text
-        font='fira code',           # Default font
+        font='JetBrainsMono Nerd Font', # Text font.
         fontshadow=None,                # font shadow color, default is None(no shadow)
         fontsize=16,                    # Font size. Calculated if None.
         for_current_screen=False,       # instead of this bars screen use currently active screen
@@ -759,52 +803,68 @@ widget_list = [
         # width=None,                     # Width of the textbox.
         background=None,                # Widget background color.
         fmt='{}',                       # How to format the text.
-        font='inconsolata',             # Text font.
+        font='meslolgs',                # Text font.
         fontshadow=None,                # Font shadow color, default is None(no shadow).
         fontsize=24,                    # Font pixel size. Calculated if None.
-        foreground=colors['cyan'][1],   # Foreground colour.
+        foreground=colors['orange'][1],  # Foreground colour.
         markup=True,                    # Whether or not to use pango markup.
         max_chars=0,                    # Maximum number of characters to display in widget.
         mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
         padding=0,                      # Padding left and right. Calculated if None.
     ),
-    
-    extra_widget.ALSAWidget(
-        background=colors['cyan'][1], # Widget background color
-        bar_colour_high='#999900',      # Colour of bar if high range
-        bar_colour_loud='#990000',      # Colour of bar in loud range
-        bar_colour_mute='#999999',	    # Colour of bar if muted
-        bar_colour_normal='#009900',    # Colour of bar in normal range
-        bar_width=75,                   # Width of display bar
-        decorations=[],                 # Decorations for widgets
-        device='Master',                # Name of ALSA device
-        font='sans',                 	# Default font
-        fontsize=18,                 	# Font size
-        foreground='#ffffff',           # Font colour
-        hide_interval=5, 	            # Timeout before bar is hidden after update
-        limit_high=90,                  # Max percentage for high range
-        limit_loud=100, 	            # Max percentage for loud range
-        limit_normal=70, 	            # Max percentage for normal range
-        margin=3,                       # Margin inside the box
-        margin_x=3,                     # X Margin. Overrides 'margin' if set
-        margin_y=3,                    	# Y Margin. Overrides 'margin' if set
-        mode='both',                    # Display mode: 'icon', 'bar', 'both'.
-        mouse_callbacks={}, 	        # Dict of mouse button press callback functions. Accepts functions and ``lazy`` calls.
-        padding=3,                      # Padding inside the box
-        padding_x=3,                    # X Padding. Overrides 'padding' if set
-        padding_y=3,                    # Y Padding. Overrides 'padding' if set
-        step=5,                         # Amount to increase volume by
-        text_format='{volume}%',        # String format
-        theme_path="/usr/share/icons/Paper/24x24/panel", # Path to theme icons.
-        update_interval=0,              # Interval to update widget (e.g. if changes made in other apps).
+
+
+    widget.Backlight(
+        background=colors['orange'][1], # Widget background color
+        backlight_name='intel_backlight', # ACPI name of a backlight device
+        brightness_file='brightness',   # Name of file with the current brightness in /sys/class/backlight/backlight_name
+        change_command='xbacklight -set {0}', # Execute command to change value
+        fmt=' {}',                       # How to format the text
+        font='JetBrainsMono Nerd Font', # Default font
+        fontshadow=None,                # font shadow color, default is None(no shadow)
+        fontsize=16,                    # Font size. Calculated if None.
+        foreground='#000000',           # Foreground colour
+        format='{percent:2.0%}',        # Display format
+        markup=True,                    # Whether or not to use pango markup
+        max_brightness_file='max_brightness', # Name of file with the maximum brightness in /sys/class/backlight/backlight_name
+        max_chars=0,                    # Maximum number of characters to display in widget.
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        padding=10,                     # Padding. Calculated if None.
+        step=10,                        # Percent of backlight every scroll changed
+        update_interval=0.1,            # The delay in seconds between updates
+    ),
+
+    widget.Volume(
+        background=colors["orange"][1], # Widget background color
+        cardid=None,                    # Card Id
+        channel='Master',               # Channel
+        device='default',               # Device Name
+        emoji=False,                    # Use emoji to display volume states, only if theme_path is not set.The specified font needs to contain the correct unicode characters.
+        fmt=' {}',                       # How to format the text
+        font='JetBrainsMono Nerd Font', # Default font
+        fontshadow=None,                # font shadow color, default is None(no shadow)
+        fontsize=16,                    # Font size. Calculated if None.
+        foreground='#000000',           # Foreground colour
+        get_volume_command=None,        # Command to get the current volume
+        markup=True,                    # Whether or not to use pango markup
+        max_chars=0,                    # Maximum number of characters to display in widget.
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        mute_command=None,              # Mute command
+        padding=3,                      # Padding left and right. Calculated if None.
+        step=1,                         # Volume change for up an down commands in percentage.Only used if volume_up_command and volume_down_command are not set.
+        theme_path=None,                # Path of the icons
+        update_interval=0.1,            # Update time in seconds.
+        volume_app=None,                # App to control volume
+        volume_down_command=None,       # Volume down command
+        volume_up_command=None,         # Volume up command
     ),
 
     widget.TextBox(
         text="",                       # Text to be displayed.
         # width=None,                     # Width of the textbox.
-        background=colors['cyan'][1],   # Widget background color.
+        background=colors['orange'][1], # Widget background color.
         fmt='{}',                       # How to format the text.
-        font='inconsolata',             # Text font.
+        font='meslolgs',                # Text font.
         fontshadow=None,                # Font shadow color, default is None(no shadow).
         fontsize=24,                    # Font pixel size. Calculated if None.
         foreground=colors['green'][1],  # Foreground colour.
@@ -813,20 +873,79 @@ widget_list = [
         mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
         padding=0,                      # Padding left and right. Calculated if None.
     ),
+    
+    # extra_widget.ALSAWidget(
+    #     background=colors['cyan'][1],   # Widget background color
+    #     bar_colour_high='#999900',      # Colour of bar if high range
+    #     bar_colour_loud='#990000',      # Colour of bar in loud range
+    #     bar_colour_mute='#999999',	    # Colour of bar if muted
+    #     bar_colour_normal='#009900',    # Colour of bar in normal range
+    #     bar_width=75,                   # Width of display bar
+    #     decorations=[],                 # Decorations for widgets
+    #     device='Master',                # Name of ALSA device
+    #     font='JetBrainsMono Nerd Font',           # Text font.
+    #     fontsize=18,                 	# Font size
+    #     foreground='#ffffff',           # Font colour
+    #     hide_interval=5, 	            # Timeout before bar is hidden after update
+    #     limit_high=90,                  # Max percentage for high range
+    #     limit_loud=100, 	            # Max percentage for loud range
+    #     limit_normal=70, 	            # Max percentage for normal range
+    #     margin=3,                       # Margin inside the box
+    #     margin_x=3,                     # X Margin. Overrides 'margin' if set
+    #     margin_y=3,                    	# Y Margin. Overrides 'margin' if set
+    #     mode='both',                    # Display mode: 'icon', 'bar', 'both'.
+    #     mouse_callbacks={}, 	        # Dict of mouse button press callback functions. Accepts functions and ``lazy`` calls.
+    #     padding=3,                      # Padding inside the box
+    #     padding_x=3,                    # X Padding. Overrides 'padding' if set
+    #     padding_y=3,                    # Y Padding. Overrides 'padding' if set
+    #     step=5,                         # Amount to increase volume by
+    #     text_format='{volume}%',        # String format
+    #     theme_path="/usr/share/icons/Paper/24x24/panel", # Path to theme icons.
+    #     update_interval=0.1,            # Interval to update widget (e.g. if changes made in other apps).
+    # ),
 
-    widget.Systray(
-        background=colors['green'][1],  # Widget background color
-        icon_size=20,                   # Icon width
+    widget.CapsNumLockIndicator(
+        background=colors["green"][1],  # Widget background color
+        fmt=' {}',                       # How to format the text
+        font='JetBrainsMono Nerd Font', # Default font
+        fontshadow=None,                # font shadow color, default is None(no shadow)
+        fontsize=14,                    # Font size. Calculated if None.
+        foreground='#000000',           # Foreground colour
+        markup=True,                    # Whether or not to use pango markup
+        max_chars=0,                    # Maximum number of characters to display in widget.
         mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-        padding=5,                      # Padding between icons
+        padding=None,                   # Padding. Calculated if None.
+        update_interval=0.1,            # Update Time in seconds.
     ),
+
+    # widget.TextBox(
+    #     text="",                       # Text to be displayed.
+    #     # width=None,                     # Width of the textbox.
+    #     background=colors['cyan'][1],   # Widget background color.
+    #     fmt='{}',                       # How to format the text.
+    #     font='meslolgs',                # Text font.
+    #     fontshadow=None,                # Font shadow color, default is None(no shadow).
+    #     fontsize=24,                    # Font pixel size. Calculated if None.
+    #     foreground=colors['green'][1],  # Foreground colour.
+    #     markup=True,                    # Whether or not to use pango markup.
+    #     max_chars=0,                    # Maximum number of characters to display in widget.
+    #     mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+    #     padding=0,                      # Padding left and right. Calculated if None.
+    # ),
+
+    # widget.Systray(
+    #     background=colors['green'][1],  # Widget background color
+    #     icon_size=20,                   # Icon width
+    #     mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+    #     padding=5,                      # Padding between icons
+    # ),
 
     widget.TextBox(
         text="",                       # Text to be displayed.
         # width=None,                     # Width of the textbox.
         background=colors['green'][1],  # Widget background color.
         fmt='{}',                       # How to format the text.
-        font='inconsolata',             # Text font.
+        font='meslolgs',                # Text font.
         fontshadow=None,                # Font shadow color, default is None(no shadow).
         fontsize=24,                    # Font pixel size. Calculated if None.
         foreground=colors['blue'][1],   # Foreground colour.
@@ -839,11 +958,11 @@ widget_list = [
     widget.Clock(
         background=colors['blue'][1],   # Widget background color
         fmt='{}',                       # How to format the text
-        font='sans',                    # Default font
+        font='JetBrainsMono Nerd Font',           # Text font.
         fontshadow=None,                # font shadow color, default is None(no shadow)
-        fontsize=18,                    # Font size. Calculated if None.
+        fontsize=16,                    # Font size. Calculated if None.
         foreground='#000000',           # Foreground colour
-        format="%Y-%m-%d %a %I:%M %p",  # A Python datetime format string
+        format=" %Y-%m-%d %a %I:%M %p",  # A Python datetime format string
         markup=True,                    # Whether or not to use pango markup
         max_chars=0,                    # Maximum number of characters to display in widget.
         mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
@@ -857,7 +976,7 @@ widget_list = [
         # width=None,                     # Width of the textbox.
         background=colors['blue'][1],   # Widget background color.
         fmt='{}',                       # How to format the text.
-        font='inconsolata',             # Text font.
+        font='meslolgs',                # Text font.
         fontshadow=None,                # Font shadow color, default is None(no shadow).
         fontsize=24,                    # Font pixel size. Calculated if None.
         foreground=colors['purple'][1], # Foreground colour.
@@ -870,13 +989,13 @@ widget_list = [
     widget.QuickExit(
         # widget=None,                    # Widget width
         background=colors['purple'][1], # Widget background color
-        countdown_format='[ {} seconds ]', # This text is showed when counting down.
+        countdown_format='{}', # This text is showed when counting down.
         countdown_start=10,             # Time to accept the second pushing.
-        default_text='[ PowerOff ]',    # A text displayed as a button
+        default_text='',               # A text displayed as a button
         fmt='{}',                       # How to format the text
-        font='inconsolata',             # Default font
+        font='JetBrainsMono Nerd Font',           # Text font.
         fontshadow=None,                # font shadow color, default is None(no shadow)
-        fontsize=18,                    # Font size. Calculated if None.
+        fontsize=16,                    # Font size. Calculated if None.
         foreground='#000000',           # Foreground colour
         markup=True,                    # Whether or not to use pango markup
         max_chars=0,                    # Maximum number of characters to display in widget.
@@ -890,7 +1009,7 @@ widget_list = [
         # width=None,                     # Width of the textbox.
         background=None,                # Widget background color.
         fmt='{}',                       # How to format the text.
-        font='inconsolata',             # Text font.
+        font='meslolgs',                # Text font.
         fontshadow=None,                # Font shadow color, default is None(no shadow).
         fontsize=24,                    # Font pixel size. Calculated if None.
         foreground=colors['purple'][1], # Foreground colour.
@@ -905,7 +1024,7 @@ widget_list = [
         # width=None,                     # Width of the textbox.
         background=None,                # Widget background color.
         fmt='{}',                       # How to format the text.
-        font='inconsolata',             # Text font.
+        font='meslolgs',                # Text font.
         fontshadow=None,                # Font shadow color, default is None(no shadow).
         fontsize=24,                    # Font pixel size. Calculated if None.
         foreground=None,                # Foreground colour.
