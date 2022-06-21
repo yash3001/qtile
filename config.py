@@ -601,10 +601,27 @@ widget_defaults = dict(
 extension_defaults = widget_defaults.copy()
 
 widget_list = [
-    widget.TextBox(" "),
+    widget.TextBox(
+        text="",
+        fontsize=28,
+        background="240046",
+        foreground='ffffff',
+        font='inconsolata',
+    ),
+
+    widget.TextBox(
+        text='',
+        fontsize=24,
+        padding=0,
+        margin=0,
+        background="C77DFF",
+        foreground="240046",
+        font='inconsolata',
+    ),
+
     widget.GroupBox(
-        active='ffffff',                # Active group font colour.
-        background=None,                # Widget background color
+        active='404040',                # Active group font colour.
+        background="C77DFF",            # Widget background color
         block_highlight_text_color=None,# Selected group font colour.
         borderwidth=3,                  # Current group border width.
         center_aligned=True,            # center-aligned group box.
@@ -625,14 +642,14 @@ widget_list = [
         markup=True,                    # Whether or not to use pango markup
         max_chars=0,                    # Maximum number of characters to display in widget.
         mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-        other_current_screen_border='404040', # Border or line colour for group on other screen when focused.
-        other_screen_border='404040',   # Border or line colour for group on other screen when unfocused.
+        other_current_screen_border='282828', # Border or line colour for group on other screen when focused.
+        other_screen_border='282828',   # Border or line colour for group on other screen when unfocused.
         padding=3,                      # Padding. Calculated if None.
         padding_x=None,                 # X Padding. Overrides 'padding' if set.
         padding_y=None,                 # Y Padding. Overrides 'padding' if set.
         rounded=True,                   # To round or not to round box borders
         spacing=None,                   # Spacing between groups(if set to None, will be equal to margin_x)
-        this_current_screen_border='215578', # Border or line colour for group on this screen when focused.
+        this_current_screen_border='ffffff', # Border or line colour for group on this screen when focused.
         this_screen_border='215578',    # Border or line colour for group on this screen when unfocused.
         urgent_alert_method='border',   # Method for alerting you of WM urgent hints (one of 'border', 'text', 'block', or 'line')
         urgent_border='FF0000',         # Urgent border or line color
@@ -640,16 +657,44 @@ widget_list = [
         use_mouse_wheel=True,           # Whether to use mouse wheel events
         visible_groups=None,            # Groups that will be visible. If set to None or [], all groups will be visible.Visible groups are identified by name not by their displayed label.
     ),
-    widget.Prompt(),
-    widget.WindowName(),
+
+    widget.TextBox(
+        text='',
+        fontsize=24,
+        margin=0,
+        padding=0,
+        foreground='C77DFF',
+        background='240046',
+        font='inconsolata',
+    ),
+
+    widget.Prompt(
+    ),
+
+    widget.WindowName(
+        foreground='ffffff',
+        background='240046',
+    ),
+
     widget.Chord(
         chords_colors={
             "launch": ("#ff0000", "#ffffff"),
         },
         name_transform=lambda name: name.upper(),
     ),
+    
+    widget.TextBox(
+        text='',
+        fontsize=24,
+        margin=0,
+        padding=0,
+        foreground='E0AAFF',
+        background='240046',
+        font='inconsolata',
+    ),
+    
     extra_widget.ALSAWidget(
-        background=None,                # Widget background color
+        background="E0AAFF",            # Widget background color
         bar_colour_high='999900',       # Colour of bar if high range
         bar_colour_loud='990000',       # Colour of bar in loud range
         bar_colour_mute='999999',	    # Colour of bar if muted
@@ -678,9 +723,52 @@ widget_list = [
         update_interval=0,              # Interval to update widget (e.g. if changes made in other apps).
 
     ),
-    widget.Systray(),
-    widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-    widget.QuickExit(),
+
+    widget.TextBox(
+        text='',
+        fontsize=24,
+        margin=0,
+        padding=0,
+        background='E0AAFF',
+        foreground='C77DFF',
+        font='inconsolata',
+    ),
+
+    widget.Systray(
+        background='C77DFF',
+        foreground='ffffff',
+        fonsize=24,
+    ),
+
+    widget.TextBox(
+        text='',
+        fontsize=24,
+        margin=0,
+        padding=0,
+        foreground='5A189A',
+        background='C77DFF',
+        font='inconsolata',
+    ),
+
+    widget.Clock(
+        format="%Y-%m-%d %a %I:%M %p",
+        foreground='ffffff',
+        background='5A189A',
+    ),
+
+    widget.TextBox(
+        text='',
+        fontsize=24,
+        margin=0,
+        padding=0,
+        foreground='9D4EDD',
+        background='5A189A',
+        font='inconsolata',
+    ),
+
+    widget.QuickExit(
+        background="9D4EDD",
+    ),
 ]
 
 screeen_list = [
@@ -691,6 +779,7 @@ screeen_list = [
         border_color='#000000',         # Border colour as str or list of str [N E S W].
         border_width=0,                 # Width of border as int of list of ints [N E S W].
         margin=0,                       # Space around bar as int or list of ints [N E S W].
+        padding=0,
         opacity=1,                      # Bar window opacity.
     ),),
 ]
