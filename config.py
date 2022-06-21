@@ -325,9 +325,9 @@ keys = [
 # ------------------------------------------------------
 
 groups = [
-    Group("1", label="", matches=[Match(wm_class=["Code"])]),
-    Group("2", label="", matches=[Match(wm_class=["firefox"])]),
-    Group("3", label="", matches=[Match(wm_class=["discord"])]),
+    Group("1", label="", matches=[Match(wm_class=["Code"])]),
+    Group("2", label="", matches=[Match(wm_class=["firefox"])]),
+    Group("3", label="", matches=[Match(wm_class=["discord"])]),
     Group("4", label="", matches=[Match(wm_class=["org.gnome.Nautilus"])]),
     Group("5", label="", matches=[Match(wm_class=["Spotify"])]),
     Group("6", label=""),
@@ -593,6 +593,19 @@ layouts = [
 # ---------------------- Top Bar -----------------------
 # ------------------------------------------------------
 
+colors = {
+    "black": ['#2C3E50', '#34495E'],
+    'purple': ['#8E44AD', '#9B59B6'],
+    'blue': ['#2980B9', '#3498DB'],
+    'green': ['#27AE60', '#2ECC71'],
+    'cyan': ['#16A085', '#1ABC9C'],
+    'yellow': ['#F39C12', '#F1C40F'],
+    'orange': ['#D35400', '#E67E22'],
+    'red': ['#C0392B', '#E74C3C'],
+    'white': ['#BDC3C7', '#ECF0F1'],
+    'grey': ['#7F8C8D', '#95A5A6']
+}
+
 widget_defaults = dict(
     font="sans",
     fontsize=15,
@@ -601,35 +614,78 @@ widget_defaults = dict(
 extension_defaults = widget_defaults.copy()
 
 widget_list = [
+
     widget.TextBox(
-        text="",
-        fontsize=28,
-        background="240046",
-        foreground='ffffff',
-        font='inconsolata',
+        text=" ",                       # Text to be displayed.
+        # width=None,                     # Width of the textbox.
+        background=None,                # Widget background color.
+        fmt='{}',                       # How to format the text.
+        font='sans',                    # Text font.
+        fontshadow=None,                # Font shadow color, default is None(no shadow).
+        fontsize=None,                  # Font pixel size. Calculated if None.
+        foreground='#ffffff',           # Foreground colour.
+        markup=True,                    # Whether or not to use pango markup.
+        max_chars=0,                    # Maximum number of characters to display in widget.
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        padding=None,                   # Padding left and right. Calculated if None.
     ),
 
     widget.TextBox(
-        text='',
-        fontsize=24,
-        padding=0,
-        margin=0,
-        background="C77DFF",
-        foreground="240046",
-        font='inconsolata',
+        text="",                       # Text to be displayed.
+        # width=None,                     # Width of the textbox.
+        background=None,                # Widget background color.
+        fmt='{}',                       # How to format the text.
+        font='inconsolata',             # Text font.
+        fontshadow=None,                # Font shadow color, default is None(no shadow).
+        fontsize=24,                    # Font pixel size. Calculated if None.
+        foreground=colors['cyan'][1],   # Foreground colour.
+        markup=True,                    # Whether or not to use pango markup.
+        max_chars=0,                    # Maximum number of characters to display in widget.
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        padding=0,                      # Padding left and right. Calculated if None.
+    ),
+
+    widget.TextBox(
+        text="",                       # Text to be displayed.
+        # width=None,                     # Width of the textbox.
+        background=colors['cyan'][1],   # Widget background color.
+        fmt='{}',                       # How to format the text.
+        font='inconsolata',             # Text font.
+        fontshadow=None,                # Font shadow color, default is None(no shadow).
+        fontsize=24,                    # Font pixel size. Calculated if None.
+        foreground='000000',            # Foreground colour.
+        markup=True,                    # Whether or not to use pango markup.
+        max_chars=0,                    # Maximum number of characters to display in widget.
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        padding=0,                      # Padding left and right. Calculated if None.
+    ),
+
+    widget.TextBox(
+        text="",                       # Text to be displayed.
+        # width=None,                     # Width of the textbox.
+        background=colors['blue'][1],   # Widget background color.
+        fmt='{}',                       # How to format the text.
+        font='inconsolata',             # Text font.
+        fontshadow=None,                # Font shadow color, default is None(no shadow).
+        fontsize=24,                    # Font pixel size. Calculated if None.
+        foreground=colors['cyan'][1],   # Foreground colour.
+        markup=True,                    # Whether or not to use pango markup.
+        max_chars=0,                    # Maximum number of characters to display in widget.
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        padding=0,                      # Padding left and right. Calculated if None.
     ),
 
     widget.GroupBox(
         active='404040',                # Active group font colour.
-        background="C77DFF",            # Widget background color
+        background=colors["blue"][1],   # Widget background color
         block_highlight_text_color=None,# Selected group font colour.
         borderwidth=3,                  # Current group border width.
         center_aligned=True,            # center-aligned group box.
         disable_drag=True,              # Disable dragging and dropping of group names on widget.
         fmt='{}',                       # How to format the text.
-        font='sans',                    # Default font.
+        font='inconsolata',                    # Default font.
         fontshadow=None,                # font shadow color, default is None(no shadow).
-        fontsize=20,                    # Font size. Calculated if None.
+        fontsize=24,                    # Font size. Calculated if None.
         foreground='ffffff',            # Foreground color.
         hide_unused=False,              # Hide groups that have no windows and that are not displayed on any screen.
         highlight_color=['000000', '282828'], # Active group highlight color when using 'line' highlight method.
@@ -659,42 +715,54 @@ widget_list = [
     ),
 
     widget.TextBox(
-        text='',
-        fontsize=24,
-        margin=0,
-        padding=0,
-        foreground='C77DFF',
-        background='240046',
-        font='inconsolata',
-    ),
-
-    widget.Prompt(
+        text="",                       # Text to be displayed.
+        # width=None,                     # Width of the textbox.
+        background=None,                # Widget background color.
+        fmt='{}',                       # How to format the text.
+        font='inconsolata',             # Text font.
+        fontshadow=None,                # Font shadow color, default is None(no shadow).
+        fontsize=24,                    # Font pixel size. Calculated if None.
+        foreground=colors['blue'][1],   # Foreground colour.
+        markup=True,                    # Whether or not to use pango markup.
+        max_chars=0,                    # Maximum number of characters to display in widget.
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        padding=0,                      # Padding left and right. Calculated if None.
     ),
 
     widget.WindowName(
-        foreground='ffffff',
-        background='240046',
-    ),
-
-    widget.Chord(
-        chords_colors={
-            "launch": ("#ff0000", "#ffffff"),
-        },
-        name_transform=lambda name: name.upper(),
+        background=None,                # Widget background color
+        empty_group_string=' ',         # string to display when no windows are focused on current group
+        fmt='{}',                       # How to format the text
+        font='sans',                    # Default font
+        fontshadow=None,                # font shadow color, default is None(no shadow)
+        fontsize=16,                    # Font size. Calculated if None.
+        for_current_screen=False,       # instead of this bars screen use currently active screen
+        foreground='ffffff',            # Foreground colour
+        format='{state}{name}',         # format of the text
+        markup=True,                    # Whether or not to use pango markup
+        max_chars=0,                    # Maximum number of characters to display in widget.
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        padding=None,                   # Padding. Calculated if None.
+        parse_text=None,                # Function to parse and modify window names. e.g. function in config that removes excess strings from window name: def my_func(text) for string in [" - Chromium", " - Firefox"]: text = text.replace(string, "") return textthen set option parse_text=my_func
     ),
     
     widget.TextBox(
-        text='',
-        fontsize=24,
-        margin=0,
-        padding=0,
-        foreground='E0AAFF',
-        background='240046',
-        font='inconsolata',
+        text="",                       # Text to be displayed.
+        # width=None,                     # Width of the textbox.
+        background=None,                # Widget background color.
+        fmt='{}',                       # How to format the text.
+        font='inconsolata',             # Text font.
+        fontshadow=None,                # Font shadow color, default is None(no shadow).
+        fontsize=24,                    # Font pixel size. Calculated if None.
+        foreground=colors['cyan'][1],   # Foreground colour.
+        markup=True,                    # Whether or not to use pango markup.
+        max_chars=0,                    # Maximum number of characters to display in widget.
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        padding=0,                      # Padding left and right. Calculated if None.
     ),
     
     extra_widget.ALSAWidget(
-        background="E0AAFF",            # Widget background color
+        background=colors['cyan'][1], # Widget background color
         bar_colour_high='999900',       # Colour of bar if high range
         bar_colour_loud='990000',       # Colour of bar in loud range
         bar_colour_mute='999999',	    # Colour of bar if muted
@@ -703,7 +771,7 @@ widget_list = [
         decorations=[],                 # Decorations for widgets
         device='Master',                # Name of ALSA device
         font='sans',                 	# Default font
-        fontsize=15,                 	# Font size
+        fontsize=18,                 	# Font size
         foreground='ffffff',            # Font colour
         hide_interval=5, 	            # Timeout before bar is hidden after update
         limit_high=90,                  # Max percentage for high range
@@ -721,53 +789,122 @@ widget_list = [
         text_format='{volume}%',        # String format
         theme_path="/usr/share/icons/Paper/24x24/panel", # Path to theme icons.
         update_interval=0,              # Interval to update widget (e.g. if changes made in other apps).
-
     ),
 
     widget.TextBox(
-        text='',
-        fontsize=24,
-        margin=0,
-        padding=0,
-        background='E0AAFF',
-        foreground='C77DFF',
-        font='inconsolata',
+        text="",                       # Text to be displayed.
+        # width=None,                     # Width of the textbox.
+        background=colors['cyan'][1],   # Widget background color.
+        fmt='{}',                       # How to format the text.
+        font='inconsolata',             # Text font.
+        fontshadow=None,                # Font shadow color, default is None(no shadow).
+        fontsize=24,                    # Font pixel size. Calculated if None.
+        foreground=colors['green'][1],  # Foreground colour.
+        markup=True,                    # Whether or not to use pango markup.
+        max_chars=0,                    # Maximum number of characters to display in widget.
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        padding=0,                      # Padding left and right. Calculated if None.
     ),
 
     widget.Systray(
-        background='C77DFF',
-        foreground='ffffff',
-        fonsize=24,
+        background=colors['green'][1],  # Widget background color
+        icon_size=20,                   # Icon width
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        padding=5,                      # Padding between icons
     ),
 
     widget.TextBox(
-        text='',
-        fontsize=24,
-        margin=0,
-        padding=0,
-        foreground='5A189A',
-        background='C77DFF',
-        font='inconsolata',
+        text="",                       # Text to be displayed.
+        # width=None,                     # Width of the textbox.
+        background=colors['green'][1],  # Widget background color.
+        fmt='{}',                       # How to format the text.
+        font='inconsolata',             # Text font.
+        fontshadow=None,                # Font shadow color, default is None(no shadow).
+        fontsize=24,                    # Font pixel size. Calculated if None.
+        foreground=colors['blue'][1],   # Foreground colour.
+        markup=True,                    # Whether or not to use pango markup.
+        max_chars=0,                    # Maximum number of characters to display in widget.
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        padding=0,                      # Padding left and right. Calculated if None.
     ),
 
     widget.Clock(
-        format="%Y-%m-%d %a %I:%M %p",
-        foreground='ffffff',
-        background='5A189A',
+        background=colors['blue'][1],   # Widget background color
+        fmt='{}',                       # How to format the text
+        font='sans',                    # Default font
+        fontshadow=None,                # font shadow color, default is None(no shadow)
+        fontsize=18,                    # Font size. Calculated if None.
+        foreground='000000',            # Foreground colour
+        format="%Y-%m-%d %a %I:%M %p",  # A Python datetime format string
+        markup=True,                    # Whether or not to use pango markup
+        max_chars=0,                    # Maximum number of characters to display in widget.
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        padding=None,                   # Padding. Calculated if None.
+        timezone=None,                  # The timezone to use for this clock, either as string if pytz or dateutil is installed (e.g. "US/Central" or anything in /usr/share/zoneinfo), or as tzinfo (e.g. datetime.timezone.utc). None means the system local timezone and is the default.
+        update_interval=1.0,            # Update interval for the clock
     ),
 
     widget.TextBox(
-        text='',
-        fontsize=24,
-        margin=0,
-        padding=0,
-        foreground='9D4EDD',
-        background='5A189A',
-        font='inconsolata',
+        text="",                       # Text to be displayed.
+        # width=None,                     # Width of the textbox.
+        background=colors['blue'][1],   # Widget background color.
+        fmt='{}',                       # How to format the text.
+        font='inconsolata',             # Text font.
+        fontshadow=None,                # Font shadow color, default is None(no shadow).
+        fontsize=24,                    # Font pixel size. Calculated if None.
+        foreground=colors['purple'][1], # Foreground colour.
+        markup=True,                    # Whether or not to use pango markup.
+        max_chars=0,                    # Maximum number of characters to display in widget.
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        padding=0,                      # Padding left and right. Calculated if None.
     ),
 
     widget.QuickExit(
-        background="9D4EDD",
+        # widget=None,                    # Widget width
+        background=colors['purple'][1], # Widget background color
+        countdown_format='[ {} seconds ]', # This text is showed when counting down.
+        countdown_start=10,             # Time to accept the second pushing.
+        default_text='[ PowerOff ]',    # A text displayed as a button
+        fmt='{}',                       # How to format the text
+        font='inconsolata',             # Default font
+        fontshadow=None,                # font shadow color, default is None(no shadow)
+        fontsize=18,                    # Font size. Calculated if None.
+        foreground='ffffff',            # Foreground colour
+        markup=True,                    # Whether or not to use pango markup
+        max_chars=0,                    # Maximum number of characters to display in widget.
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        padding=None,                   # Padding. Calculated if None.
+        timer_interval=1,               # A countdown interval.
+    ),
+
+    widget.TextBox(
+        text="",                       # Text to be displayed.
+        # width=None,                     # Width of the textbox.
+        background=None,                # Widget background color.
+        fmt='{}',                       # How to format the text.
+        font='inconsolata',             # Text font.
+        fontshadow=None,                # Font shadow color, default is None(no shadow).
+        fontsize=24,                    # Font pixel size. Calculated if None.
+        foreground=colors['purple'][1], # Foreground colour.
+        markup=True,                    # Whether or not to use pango markup.
+        max_chars=0,                    # Maximum number of characters to display in widget.
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        padding=0,                      # Padding left and right. Calculated if None.
+    ),
+
+    widget.TextBox(
+        text="  ",                       # Text to be displayed.
+        # width=None,                     # Width of the textbox.
+        background=None,                # Widget background color.
+        fmt='{}',                       # How to format the text.
+        font='inconsolata',             # Text font.
+        fontshadow=None,                # Font shadow color, default is None(no shadow).
+        fontsize=24,                    # Font pixel size. Calculated if None.
+        foreground=None,                # Foreground colour.
+        markup=True,                    # Whether or not to use pango markup.
+        max_chars=0,                    # Maximum number of characters to display in widget.
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        padding=0,                      # Padding left and right. Calculated if None.
     ),
 ]
 
@@ -775,7 +912,7 @@ screeen_list = [
     Screen(top=bar.Bar(
         widgets=widget_list,            # A list of widget objects.
         size=24,                        # The "thickness" of the bar, i.e. the height of a horizontal bar, or the width of a vertical bar.
-        background='#000000',           # Background colour.
+        background='#00000000',         # Background colour.
         border_color='#000000',         # Border colour as str or list of str [N E S W].
         border_width=0,                 # Width of border as int of list of ints [N E S W].
         margin=0,                       # Space around bar as int or list of ints [N E S W].
