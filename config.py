@@ -611,7 +611,7 @@ widget_list = [
 
     # widget.TextBox(
     #     text=" ",                       # Text to be displayed.
-    #     # width=None,                     # Width of the textbox.
+    #     # width=None,                   # Width of the textbox.
     #     background=None,                # Widget background color.
     #     fmt='{}',                       # How to format the text.
     #     font='sans',                    # Text font.
