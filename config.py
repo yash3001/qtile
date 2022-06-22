@@ -34,6 +34,7 @@ volume_down = os.path.join(os.path.dirname(__file__), "utils/scripts/volume_down
 volume_mute = os.path.join(os.path.dirname(__file__), "utils/scripts/volume_mute.sh")
 clipmenu = os.path.join(os.path.dirname(__file__), "utils/scripts/clipmenu.sh")
 autostart = os.path.join(os.path.dirname(__file__), "utils/scripts/autostart.sh")
+battery_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/battery-icons")
 
 colors = {
     "black": ['#2C3E50', '#34495E'],
@@ -942,6 +943,58 @@ widget_list = [
     #     mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
     #     padding=5,                      # Padding between icons
     # ),
+    
+    widget.TextBox(
+        text="",                       # Text to be displayed.
+        # width=None,                     # Width of the textbox.
+        background=colors['black'][1],  # Widget background color.
+        fmt='{}',                       # How to format the text.
+        font='meslolgs',                # Text font.
+        fontshadow=None,                # Font shadow color, default is None(no shadow).
+        fontsize=24,                    # Font pixel size. Calculated if None.
+        foreground=colors['grey'][1],   # Foreground colour.
+        markup=True,                    # Whether or not to use pango markup.
+        max_chars=0,                    # Maximum number of characters to display in widget.
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        padding=0,                      # Padding left and right. Calculated if None.
+    ),
+
+    widget.BatteryIcon(
+        background=colors['grey'][1],   # Widget background color
+        battery=1,                      # Which battery should be monitored
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        scale=1,                        # Scale factor relative to the bar height. Defaults to 1
+        theme_path=battery_icon_path,   # Path of the icons
+        update_interval=1,              # Seconds between status updates
+    ),
+
+    widget.Battery(
+        background=colors['grey'][1],   # Widget background color
+        battery=1,                      # Which battery should be monitored (battery number or name)
+        charge_char='^',                # Character to indicate the battery is charging
+        discharge_char='V',             # Character to indicate the battery is discharging
+        empty_char='x',                 # Character to indicate the battery is empty
+        fmt='{}',                       # How to format the text
+        font='JetBrainsMono Nerd Font', # Default font
+        fontshadow=None,                # font shadow color, default is None(no shadow)
+        fontsize=16,                    # Font size. Calculated if None.
+        foreground='000000',            # Foreground colour
+        format='{percent:2.0%}',        # Display format
+        full_char='=',                  # Character to indicate the battery is full
+        hide_threshold=None,            # Hide the text when there is enough energy 0 <= x < 1
+        low_background=None,            # Background color on low battery
+        low_foreground='FF0000',        # Font color on low battery
+        low_percentage=0.1,             # Indicates when to use the low_foreground color 0 < x < 1
+        markup=True,                    # Whether or not to use pango markup
+        max_chars=0,                    # Maximum number of characters to display in widget.
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        notification_timeout=10,        # Time in seconds to display notification. 0 for no expiry.
+        notify_below=None,              # Send a notification below this battery level.
+        padding=3,                      # Padding. Calculated if None.
+        show_short_text=True,           # Show "Full" or "Empty" rather than formated text
+        unknown_char='?',               # Character to indicate the battery status is unknown
+        update_interval=1,              # Seconds between status updates
+    ),
 
     widget.TextBox(
         text="",                       # Text to be displayed.
