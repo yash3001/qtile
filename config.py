@@ -326,11 +326,11 @@ keys = [
 # ------------------------------------------------------
 
 groups = [
-    Group("1", label="", matches=[Match(wm_class=["Code"])]),
-    Group("2", label="", matches=[Match(wm_class=["firefox"])]),
-    Group("3", label="", matches=[Match(wm_class=["discord"])]),
-    Group("4", label="", matches=[Match(wm_class=["org.gnome.Nautilus"])]),
-    Group("5", label="", matches=[Match(wm_class=["Spotify"])]),
+    Group("1", label=""), #matches=[Match(wm_class=["Code"])]),
+    Group("2", label=""), #matches=[Match(wm_class=["firefox"])]),
+    Group("3", label=""), #matches=[Match(wm_class=["discord"])]),
+    Group("4", label=""), #matches=[Match(wm_class=["org.gnome.Nautilus"])]),
+    Group("5", label=""), #matches=[Match(wm_class=["spotify"])]),
     Group("6", label=""),
     Group("7", label=""),
     Group("8", label=""),
