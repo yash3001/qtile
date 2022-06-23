@@ -2,7 +2,6 @@
 # ---------------------- Imports -----------------------
 # ------------------------------------------------------
 
-from faulthandler import disable
 import os
 import subprocess
 from libqtile import bar, layout, widget, hook
@@ -11,7 +10,6 @@ from libqtile.config import EzKey as Key
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from libqtile.backend.x11 import xkeysyms
-from pyparsing import col
 from qtile_extras import widget as extra_widget
 
 
@@ -34,7 +32,15 @@ volume_down = os.path.join(os.path.dirname(__file__), "utils/scripts/volume_down
 volume_mute = os.path.join(os.path.dirname(__file__), "utils/scripts/volume_mute.sh")
 clipmenu = os.path.join(os.path.dirname(__file__), "utils/scripts/clipmenu.sh")
 autostart = os.path.join(os.path.dirname(__file__), "utils/scripts/autostart.sh")
-battery_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/battery-icons")
+
+brightness_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/brightness-icons/brightness_light_bold.png")
+volume_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/volume-icons/volume_light_bold.png")
+cpu_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/cpu-icons/cpu_dark_bold.png")
+memory_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/memory-icons/memory_dark_bold.png")
+network_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/network-icons/network_light_bold.png")
+wifi_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/network-icons/wifi_light_bold.png")
+battery_icon_dir = os.path.join(os.path.dirname(__file__), "utils/icons/battery-icons")
+clock_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/clock-icons/clock_light_bold.png")
 
 colors = {
     "black": ['#2C3E50', '#34495E'],
@@ -792,7 +798,7 @@ widget_list = [
         fontshadow=None,                # font shadow color, default is None(no shadow)
         fontsize=16,                    # Font size. Calculated if None.
         for_current_screen=False,       # instead of this bars screen use currently active screen
-        foreground='#ffffff',           # Foreground colour
+        foreground='#000000',           # Foreground colour
         format='{state}{name}',         # format of the text
         markup=True,                    # Whether or not to use pango markup
         max_chars=0,                    # Maximum number of characters to display in widget.
@@ -817,13 +823,29 @@ widget_list = [
         padding=0,                      # Padding left and right. Calculated if None.
     ),
 
+    widget.Spacer(
+        length=5,                       # Length of the spacer
+        background=colors['black'][1],  # Widget background color
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+    ),
+
+    widget.Image(
+        background=colors['black'][1],  # Widget background color
+        filename=brightness_icon_path,  # Image filename. Can contain '~'
+        margin=3,                       # Margin inside the box
+        margin_x=None,                  # X Margin. Overrides 'margin' if set
+        margin_y=None,                  # Y Margin. Overrides 'margin' if set
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        rotate=0.0,                     # rotate the image in degrees counter-clockwise
+        scale=True,                     # Enable/Disable image scaling
+    ),
 
     widget.Backlight(
         background=colors['black'][1],  # Widget background color
         backlight_name='intel_backlight', # ACPI name of a backlight device
         brightness_file='brightness',   # Name of file with the current brightness in /sys/class/backlight/backlight_name
         change_command='xbacklight -set {0}', # Execute command to change value
-        fmt=' {}',                     # How to format the text
+        fmt=' {}  ',                     # How to format the text
         font='JetBrainsMono Nerd Font', # Default font
         fontshadow=None,                # font shadow color, default is None(no shadow)
         fontsize=16,                    # Font size. Calculated if None.
@@ -833,9 +855,20 @@ widget_list = [
         max_brightness_file='max_brightness', # Name of file with the maximum brightness in /sys/class/backlight/backlight_name
         max_chars=0,                    # Maximum number of characters to display in widget.
         mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-        padding=10,                     # Padding. Calculated if None.
+        padding=0,                      # Padding. Calculated if None.
         step=10,                        # Percent of backlight every scroll changed
         update_interval=0.1,            # The delay in seconds between updates
+    ),
+
+    widget.Image(
+        background=colors['black'][1],  # Widget background color
+        filename=volume_icon_path,      # Image filename. Can contain '~'
+        margin=3,                       # Margin inside the box
+        margin_x=None,                  # X Margin. Overrides 'margin' if set
+        margin_y=None,                  # Y Margin. Overrides 'margin' if set
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        rotate=0.0,                     # rotate the image in degrees counter-clockwise
+        scale=True,                     # Enable/Disable image scaling
     ),
 
     widget.Volume(
@@ -844,7 +877,7 @@ widget_list = [
         channel='Master',               # Channel
         device='default',               # Device Name
         emoji=False,                    # Use emoji to display volume states, only if theme_path is not set.The specified font needs to contain the correct unicode characters.
-        fmt=' {} ',                    # How to format the text
+        fmt=' {} ',                    # How to format the text
         font='JetBrainsMono Nerd Font', # Default font
         fontshadow=None,                # font shadow color, default is None(no shadow)
         fontsize=16,                    # Font size. Calculated if None.
@@ -908,19 +941,79 @@ widget_list = [
     #     update_interval=0.1,            # Interval to update widget (e.g. if changes made in other apps).
     # ),
 
-    widget.CapsNumLockIndicator(
-        background=colors["grey"][1],   # Widget background color
-        fmt=' {}',                     # How to format the text
-        font='JetBrainsMono Nerd Font', # Default font
+    widget.Spacer(
+        length=5,                       # Length of the spacer
+        background=colors['grey'][1],   # Widget background color
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+    ),
+
+    widget.Image(
+        background=colors['grey'][1],   # Widget background color
+        filename=cpu_icon_path,         # Image filename. Can contain '~'
+        margin=3,                       # Margin inside the box
+        margin_x=None,                  # X Margin. Overrides 'margin' if set
+        margin_y=None,                  # Y Margin. Overrides 'margin' if set
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        rotate=0.0,                     # rotate the image in degrees counter-clockwise
+        scale=True,                     # Enable/Disable image scaling
+    ),
+
+    widget.CPU(
+        background=colors['grey'][1],   # Widget background color
+        fmt='{}  ',                      # How to format the text
+        font='cascadia code',           # Default font
         fontshadow=None,                # font shadow color, default is None(no shadow)
         fontsize=16,                    # Font size. Calculated if None.
         foreground='#000000',           # Foreground colour
+        format='{load_percent}%',       # CPU display format
         markup=True,                    # Whether or not to use pango markup
         max_chars=0,                    # Maximum number of characters to display in widget.
         mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-        padding=None,                   # Padding. Calculated if None.
-        update_interval=0.1,            # Update Time in seconds.
+        padding=3,                      # Padding. Calculated if None.
+        update_interval=1.0,            # Update interval for the CPU widget
     ),
+
+    widget.Image(
+        background=colors['grey'][1],   # Widget background color
+        filename=memory_icon_path,         # Image filename. Can contain '~'
+        margin=3,                       # Margin inside the box
+        margin_x=0,                  # X Margin. Overrides 'margin' if set
+        margin_y=None,                  # Y Margin. Overrides 'margin' if set
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        rotate=0.0,                     # rotate the image in degrees counter-clockwise
+        scale=True,                     # Enable/Disable image scaling
+    ),
+
+    widget.Memory(
+        background=colors['grey'][1],   # Widget background color
+        fmt='{}',                       # How to format the text
+        font='cascadia code',           # Default font
+        fontshadow=None,                # font shadow color, default is None(no shadow)
+        fontsize=16,                    # Font size. Calculated if None.
+        foreground='#000000',           # Foreground colour
+        format='{MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}', # Formatting for field names.
+        markup=True,                    # Whether or not to use pango markup
+        max_chars=0,                    # Maximum number of characters to display in widget.
+        measure_mem='M',                # Measurement for Memory (G, M, K, B)
+        measure_swap='M',               # Measurement for Swap (G, M, K, B)
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        padding=None,                      # Padding. Calculated if None.
+        update_interval=1.0,            # Update interval for the Memory
+    ),
+
+    # widget.CapsNumLockIndicator(
+    #     background=colors["grey"][1],   # Widget background color
+    #     fmt=' {}',                     # How to format the text
+    #     font='JetBrainsMono Nerd Font', # Default font
+    #     fontshadow=None,                # font shadow color, default is None(no shadow)
+    #     fontsize=16,                    # Font size. Calculated if None.
+    #     foreground='#000000',           # Foreground colour
+    #     markup=True,                    # Whether or not to use pango markup
+    #     max_chars=0,                    # Maximum number of characters to display in widget.
+    #     mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+    #     padding=None,                   # Padding. Calculated if None.
+    #     update_interval=0.1,            # Update Time in seconds.
+    # ),
 
     # widget.TextBox(
     #     text="",                       # Text to be displayed.
@@ -943,7 +1036,57 @@ widget_list = [
     #     mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
     #     padding=5,                      # Padding between icons
     # ),
-    
+
+    widget.TextBox(
+        text="",                       # Text to be displayed.
+        # width=None,                     # Width of the textbox.
+        background=colors['grey'][1],   # Widget background color.
+        fmt='{}',                       # How to format the text.
+        font='meslolgs',                # Text font.
+        fontshadow=None,                # Font shadow color, default is None(no shadow).
+        fontsize=24,                    # Font pixel size. Calculated if None.
+        foreground=colors['black'][1],  # Foreground colour.
+        markup=True,                    # Whether or not to use pango markup.
+        max_chars=0,                    # Maximum number of characters to display in widget.
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        padding=0,                      # Padding left and right. Calculated if None.
+    ),
+
+    widget.Spacer(
+        length=5,                       # Length of the spacer
+        background=colors['black'][1],  # Widget background color
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+    ),
+
+    widget.Image(
+        background=colors['black'][1],  # Widget background color
+        filename=network_icon_path,     # Image filename. Can contain '~'
+        margin=3,                       # Margin inside the box
+        margin_x=None,                  # X Margin. Overrides 'margin' if set
+        margin_y=None,                  # Y Margin. Overrides 'margin' if set
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        rotate=0.0,                     # rotate the image in degrees counter-clockwise
+        scale=True,                     # Enable/Disable image scaling
+    ),
+
+    widget.Net(
+        background=colors['black'][1],  # Widget background color
+        fmt='{}',                       # How to format the text
+        font='cascadia code',           # Default font
+        fontshadow=None,                # font shadow color, default is None(no shadow)
+        fontsize=16,                    # Font size. Calculated if None.
+        foreground='ffffff',            # Foreground colour
+        format='{down} ↓ {up} ↑ ',      # Display format of down/upload/total speed of given interfaces
+        interface="wlp3s0",             # List of interfaces or single NIC as string to monitor, None to display all active NICs combined
+        markup=False,                   # Whether or not to use pango markup
+        max_chars=0,                    # Maximum number of characters to display in widget.
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        padding=None,                   # Padding. Calculated if None.
+        prefix=None,                    # Use a specific prefix for the unit of the speed.
+        update_interval=1,              # The update interval.
+        use_bits=False,                 # Use bits instead of bytes per second?
+    ),
+
     widget.TextBox(
         text="",                       # Text to be displayed.
         # width=None,                     # Width of the textbox.
@@ -959,12 +1102,18 @@ widget_list = [
         padding=0,                      # Padding left and right. Calculated if None.
     ),
 
+    widget.Spacer(
+        length=5,                       # Length of the spacer
+        background=colors['grey'][1],   # Widget background color
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+    ),
+
     widget.BatteryIcon(
         background=colors['grey'][1],   # Widget background color
         battery=1,                      # Which battery should be monitored
         mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
         scale=1,                        # Scale factor relative to the bar height. Defaults to 1
-        theme_path=battery_icon_path,   # Path of the icons
+        theme_path=battery_icon_dir,   # Path of the icons
         update_interval=1,              # Seconds between status updates
     ),
 
@@ -990,7 +1139,7 @@ widget_list = [
         mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
         notification_timeout=10,        # Time in seconds to display notification. 0 for no expiry.
         notify_below=None,              # Send a notification below this battery level.
-        padding=3,                      # Padding. Calculated if None.
+        padding=None,                   # Padding. Calculated if None.
         show_short_text=True,           # Show "Full" or "Empty" rather than formated text
         unknown_char='?',               # Character to indicate the battery status is unknown
         update_interval=1,              # Seconds between status updates
@@ -1011,6 +1160,23 @@ widget_list = [
         padding=0,                      # Padding left and right. Calculated if None.
     ),
 
+    widget.Spacer(
+        length=5,                       # Length of the spacer
+        background=colors['black'][1],  # Widget background color
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+    ),
+
+    widget.Image(
+        background=colors['black'][1],  # Widget background color
+        filename=clock_icon_path,       # Image filename. Can contain '~'
+        margin=3,                       # Margin inside the box
+        margin_x=None,                  # X Margin. Overrides 'margin' if set
+        margin_y=None,                  # Y Margin. Overrides 'margin' if set
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        rotate=0.0,                     # rotate the image in degrees counter-clockwise
+        scale=True,                     # Enable/Disable image scaling
+    ),
+
     widget.Clock(
         background=colors['black'][1],  # Widget background color
         fmt='{}',                       # How to format the text
@@ -1018,7 +1184,7 @@ widget_list = [
         fontshadow=None,                # font shadow color, default is None(no shadow)
         fontsize=16,                    # Font size. Calculated if None.
         foreground='#ffffff',           # Foreground colour
-        format=" %Y-%m-%d %a %I:%M %p",# A Python datetime format string
+        format="%Y-%m-%d %a %I:%M %p",# A Python datetime format string
         markup=True,                    # Whether or not to use pango markup
         max_chars=0,                    # Maximum number of characters to display in widget.
         mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.

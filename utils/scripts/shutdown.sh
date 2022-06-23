@@ -4,9 +4,9 @@ choice=$(echo -e "Logout\nShutdown\nRestart" | dmenu -c -h 40 -l 3)
 
 if [[ ($choice == "Logout") ]]
 then
-    ans=$(echo -e "No\nYes" | dmenu -c -h 40 -p "Do you want to logout")
+    ans=$(echo -e "no\nyes" | dmenu -c -h 40 -p "Do you want to logout?")
     
-    if [[ ($ans == "Yes") ]]
+    if [[ ($ans == "yes") ]]
     then
         wm=$(wmctrl -m | awk 'NR==1{print $2, $3, $4, $5}')
         wm=$(sed 's/[ ]*$//' <<<"$wm")
@@ -16,9 +16,10 @@ fi
 
 if [[ ($choice == "Shutdown") ]]
 then
-    ans=$(echo -e "No\nYes" | dmenu -c -h 40 -p "Do you want to shutdown")
+    # ans=$(echo -e "No\nYes" | dmenu -c -h 40 -p "Do you want to shutdown")
+    ans=$(echo -e "no\nyes" | dmenu -c -h 40 -p "Do you want to go?")
     
-    if [[ ($ans == "Yes") ]]
+    if [[ ($ans == "yes") ]]
     then
         poweroff
     fi
@@ -26,9 +27,9 @@ fi
 
 if [[ ($choice == "Restart") ]]
 then
-    ans=$(echo -e "No\nYes" | dmenu -c -h 40 -p "Do you want to reboot")
+    ans=$(echo -e "no\nyes" | dmenu -c -h 40 -p "Do you want to reboot?")
     
-    if [[ ($ans == "Yes") ]]
+    if [[ ($ans == "yes") ]]
     then
         reboot
     fi
