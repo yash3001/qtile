@@ -699,18 +699,18 @@ widget_list = [
         scale=0.75,                     # Scale factor relative to the bar height. Defaults to 1
     ),
 
-    widget.CurrentLayout(
-        background=colors["grey"][1],   # Widget background color
-        fmt='{}',                       # How to format the text
-        font='JetBransMono Nerd Font',  # Default font
-        fontshadow=None,                # font shadow color, default is None(no shadow)
-        fontsize=16,                    # Font size. Calculated if None.
-        foreground='#000000',           # Foreground colour
-        markup=True,                    # Whether or not to use pango markup
-        max_chars=0,                    # Maximum number of characters to display in widget.
-        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-        padding=3,                      # Padding. Calculated if None.
-    ),
+    # widget.CurrentLayout(
+    #     background=colors["grey"][1],   # Widget background color
+    #     fmt='{}',                       # How to format the text
+    #     font='JetBransMono Nerd Font',  # Default font
+    #     fontshadow=None,                # font shadow color, default is None(no shadow)
+    #     fontsize=16,                    # Font size. Calculated if None.
+    #     foreground='#000000',           # Foreground colour
+    #     markup=True,                    # Whether or not to use pango markup
+    #     max_chars=0,                    # Maximum number of characters to display in widget.
+    #     mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+    #     padding=3,                      # Padding. Calculated if None.
+    # ),
 
     widget.WindowCount(
         background=colors["grey"][1],   # Widget background color
@@ -809,7 +809,7 @@ widget_list = [
         foreground='#ffffff',           # Foreground colour
         format='{state}{name}',         # format of the text
         markup=True,                    # Whether or not to use pango markup
-        max_chars=50,                    # Maximum number of characters to display in widget.
+        max_chars=40,                   # Maximum number of characters to display in widget.
         mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
         padding=20,                     # Padding. Calculated if None.
         parse_text=None,                # Function to parse and modify window names. e.g. function in config that removes excess strings from window name: def my_func(text) for string in [" - Chromium", " - Firefox"]: text = text.replace(string, "") return textthen set option parse_text=my_func
@@ -853,7 +853,7 @@ widget_list = [
         backlight_name='intel_backlight', # ACPI name of a backlight device
         brightness_file='brightness',   # Name of file with the current brightness in /sys/class/backlight/backlight_name
         change_command='xbacklight -set {0}', # Execute command to change value
-        fmt='{}  ',                    # How to format the text
+        fmt='{}  ',                     # How to format the text
         font='JetBrainsMono Nerd Font', # Default font
         fontshadow=None,                # font shadow color, default is None(no shadow)
         fontsize=16,                    # Font size. Calculated if None.
@@ -888,7 +888,7 @@ widget_list = [
         channel='Master',               # Channel
         device='default',               # Device Name
         emoji=False,                    # Use emoji to display volume states, only if theme_path is not set.The specified font needs to contain the correct unicode characters.
-        fmt='{} ',                     # How to format the text
+        fmt='{} ',                      # How to format the text
         font='JetBrainsMono Nerd Font', # Default font
         fontshadow=None,                # font shadow color, default is None(no shadow)
         fontsize=16,                    # Font size. Calculated if None.
@@ -998,7 +998,10 @@ widget_list = [
         margin=3,                       # Margin inside the box
         margin_x=None,                  # X Margin. Overrides 'margin' if set
         margin_y=None,                  # Y Margin. Overrides 'margin' if set
-        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+            "Button1": lazy.spawn("terminator -e 'bpytop'"),
+            "Button3": lazy.spawn("terminator -e 'bpytop'"),
+        },
         rotate=0.0,                     # rotate the image in degrees counter-clockwise
         scale=True,                     # Enable/Disable image scaling
     ),
@@ -1013,7 +1016,10 @@ widget_list = [
         format='{load_percent}%',       # CPU display format
         markup=True,                    # Whether or not to use pango markup
         max_chars=0,                    # Maximum number of characters to display in widget.
-        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+            "Button1": lazy.spawn("terminator -e 'bpytop'"),
+            "Button3": lazy.spawn("terminator -e 'bpytop'"),
+        },
         padding=3,                      # Padding. Calculated if None.
         update_interval=1.0,            # Update interval for the CPU widget
     ),
@@ -1024,7 +1030,10 @@ widget_list = [
         margin=3,                       # Margin inside the box
         margin_x=0,                     # X Margin. Overrides 'margin' if set
         margin_y=None,                  # Y Margin. Overrides 'margin' if set
-        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+            "Button1": lazy.spawn("terminator -e 'bpytop'"),
+            "Button3": lazy.spawn("terminator -e 'bpytop'"),
+        },
         rotate=0.0,                     # rotate the image in degrees counter-clockwise
         scale=True,                     # Enable/Disable image scaling
     ),
@@ -1041,7 +1050,10 @@ widget_list = [
         max_chars=0,                    # Maximum number of characters to display in widget.
         measure_mem='M',                # Measurement for Memory (G, M, K, B)
         measure_swap='M',               # Measurement for Swap (G, M, K, B)
-        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+            "Button1": lazy.spawn("terminator -e 'bpytop'"),
+            "Button3": lazy.spawn("terminator -e 'bpytop'"),
+        },
         padding=None,                   # Padding. Calculated if None.
         update_interval=1.0,            # Update interval for the Memory
     ),
@@ -1127,7 +1139,9 @@ widget_list = [
         interface="wlp3s0",             # List of interfaces or single NIC as string to monitor, None to display all active NICs combined
         markup=False,                   # Whether or not to use pango markup
         max_chars=0,                    # Maximum number of characters to display in widget.
-        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+            "Button1": lazy.spawn(wifi_prompt),
+        },
         padding=None,                   # Padding. Calculated if None.
         prefix=None,                    # Use a specific prefix for the unit of the speed.
         update_interval=1,              # The update interval.
