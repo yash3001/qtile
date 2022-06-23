@@ -22,7 +22,9 @@ from qtile_extras import widget as extra_widget
 mod = "mod4"
 terminal = guess_terminal()
 
-shutdown = os.path.join(os.path.dirname(__file__), "utils/scripts/shutdown.sh")
+shutdown_menu = os.path.join(os.path.dirname(__file__), "utils/scripts/shutdown.sh")
+poweroff_prompt = os.path.join(os.path.dirname(__file__), "utils/scripts/poweroff.sh")
+suspend_prompt = os.path.join(os.path.dirname(__file__), "utils/scripts/suspend.sh")
 screenshot = os.path.join(os.path.dirname(__file__), "utils/scripts/screenshot.sh")
 rectangular_screenshot = os.path.join(os.path.dirname(__file__), "utils/scripts/rectangular_screenshot.sh")
 brightness_up = os.path.join(os.path.dirname(__file__), "utils/scripts/brightness_up.sh")
@@ -42,6 +44,8 @@ network_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/network
 wifi_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/network-icons/wifi_light_bold.png")
 battery_icon_dir = os.path.join(os.path.dirname(__file__), "utils/icons/battery-icons")
 clock_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/clock-icons/clock_light_bold.png")
+poweroff_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/poweroff-icons/poweroff_dark_bold.png")
+logout_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/logout-icons/logout_dark_bold.png")
 
 colors = {
     "black": ['#2C3E50', '#34495E'],
@@ -1209,22 +1213,62 @@ widget_list = [
         padding=0,                      # Padding left and right. Calculated if None.
     ),
 
-    widget.QuickExit(
-        # widget=None,                    # Widget width
+    # widget.QuickExit(
+    #     # widget=None,                    # Widget width
+    #     background=colors['grey'][1],   # Widget background color
+    #     countdown_format='{}',          # This text is showed when counting down.
+    #     countdown_start=10,             # Time to accept the second pushing.
+    #     default_text='',               # A text displayed as a button
+    #     fmt='{}',                       # How to format the text
+    #     font='JetBrainsMono Nerd Font', # Text font.
+    #     fontshadow=None,                # font shadow color, default is None(no shadow)
+    #     fontsize=16,                    # Font size. Calculated if None.
+    #     foreground='#000000',           # Foreground colour
+    #     markup=True,                    # Whether or not to use pango markup
+    #     max_chars=0,                    # Maximum number of characters to display in widget.
+    #     mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+    #     padding=None,                   # Padding. Calculated if None.
+    #     timer_interval=1,               # A countdown interval.
+    # ),
+
+    widget.Image(
         background=colors['grey'][1],   # Widget background color
-        countdown_format='{}',          # This text is showed when counting down.
-        countdown_start=10,             # Time to accept the second pushing.
-        default_text='',               # A text displayed as a button
-        fmt='{}',                       # How to format the text
-        font='JetBrainsMono Nerd Font', # Text font.
-        fontshadow=None,                # font shadow color, default is None(no shadow)
-        fontsize=16,                    # Font size. Calculated if None.
-        foreground='#000000',           # Foreground colour
-        markup=True,                    # Whether or not to use pango markup
-        max_chars=0,                    # Maximum number of characters to display in widget.
+        filename=logout_icon_path,      # Image filename. Can contain '~'
+        margin=3,                       # Margin inside the box
+        margin_x=None,                  # X Margin. Overrides 'margin' if set
+        margin_y=None,                  # Y Margin. Overrides 'margin' if set
+        mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+            "Button1": lazy.spawn("i3lock-fancy"),
+            "Button3": lazy.spawn("i3lock-fancy"),
+        },
+        rotate=0.0,                     # rotate the image in degrees counter-clockwise
+        scale=True,                     # Enable/Disable image scaling
+    ),
+
+    widget.Spacer(
+        length=5,                       # Length of the spacer
+        background=colors['grey'][1],   # Widget background color
         mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-        padding=None,                   # Padding. Calculated if None.
-        timer_interval=1,               # A countdown interval.
+    ),
+
+    widget.Image(
+        background=colors['grey'][1],   # Widget background color
+        filename=poweroff_icon_path,    # Image filename. Can contain '~'
+        margin=3,                       # Margin inside the box
+        margin_x=None,                  # X Margin. Overrides 'margin' if set
+        margin_y=None,                  # Y Margin. Overrides 'margin' if set
+        mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+            "Button1": lazy.spawn(poweroff_prompt),
+            "Button3": lazy.spawn(suspend_prompt),
+        },             
+        rotate=0.0,                     # rotate the image in degrees counter-clockwise
+        scale=True,                     # Enable/Disable image scaling
+    ),
+
+    widget.Spacer(
+       length=5,                       # Length of the spacer
+       background=colors['grey'][1],   # Widget background color
+       mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
     ),
 
     # widget.TextBox(
