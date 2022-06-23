@@ -278,7 +278,7 @@ keys = [
     ),
     Key(
         "M-A-x",
-        lazy.spawn("dmenu_run -h 40 -c -l 10"),
+        lazy.spawn("dmenu_run -h 40 -c -l 10 -p 'Apps:'"),
         desc="Launch Dmenu"
     ),
     Key(
