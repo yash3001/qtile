@@ -320,6 +320,12 @@ keys = [
         lazy.shutdown(),
         desc="Shutdown Qtile"
     ),
+
+    Key(
+        "M-b",
+        lazy.hide_show_bar(),
+        desc="Toogle bar visibility"
+    ),
     
     # Spawn cmd launcher
     Key(
