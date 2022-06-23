@@ -23,8 +23,9 @@ mod = "mod4"
 terminal = guess_terminal()
 
 shutdown_menu = os.path.join(os.path.dirname(__file__), "utils/scripts/shutdown.sh")
-poweroff_prompt = os.path.join(os.path.dirname(__file__), "utils/scripts/poweroff.sh")
-suspend_prompt = os.path.join(os.path.dirname(__file__), "utils/scripts/suspend.sh")
+logout_prompt = os.path.join(os.path.dirname(__file__), "utils/scripts/logout_prompt.sh")
+poweroff_prompt = os.path.join(os.path.dirname(__file__), "utils/scripts/poweroff_prompt.sh")
+suspend_prompt = os.path.join(os.path.dirname(__file__), "utils/scripts/suspend_prompt.sh")
 screenshot = os.path.join(os.path.dirname(__file__), "utils/scripts/screenshot.sh")
 rectangular_screenshot = os.path.join(os.path.dirname(__file__), "utils/scripts/rectangular_screenshot.sh")
 brightness_up = os.path.join(os.path.dirname(__file__), "utils/scripts/brightness_up.sh")
@@ -42,7 +43,7 @@ cpu_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/cpu-icons/c
 memory_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/memory-icons/memory_dark_bold.png")
 network_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/network-icons/network_light_bold.png")
 wifi_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/network-icons/wifi_light_bold.png")
-battery_icon_dir = os.path.join(os.path.dirname(__file__), "utils/icons/battery-icons")
+battery_icon_dir = os.path.join(os.path.dirname(__file__), "utils/icons/battery-icons/dark")
 clock_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/clock-icons/clock_light_bold.png")
 poweroff_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/poweroff-icons/poweroff_dark_bold.png")
 logout_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/logout-icons/logout_dark_bold.png")
@@ -261,7 +262,7 @@ keys = [
     ),
     Key(
         "M-S-s",
-        lazy.spawn(shutdown),
+        lazy.spawn(shutdown_menu),
         desc="Launch shutdown menu"
     ),
     
@@ -871,7 +872,9 @@ widget_list = [
         margin=3,                       # Margin inside the box
         margin_x=None,                  # X Margin. Overrides 'margin' if set
         margin_y=None,                  # Y Margin. Overrides 'margin' if set
-        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+            "Button1":lazy.spawn('amixer -qD pulse set Master 1+ toggle'),
+        },
         rotate=0.0,                     # rotate the image in degrees counter-clockwise
         scale=True,                     # Enable/Disable image scaling
     ),
@@ -1081,7 +1084,7 @@ widget_list = [
         fontshadow=None,                # font shadow color, default is None(no shadow)
         fontsize=16,                    # Font size. Calculated if None.
         foreground='ffffff',            # Foreground colour
-        format='{down} ↓ {up} ↑ ',      # Display format of down/upload/total speed of given interfaces
+        format='{down} ↓ {up} ↑',      # Display format of down/upload/total speed of given interfaces
         interface="wlp3s0",             # List of interfaces or single NIC as string to monitor, None to display all active NICs combined
         markup=False,                   # Whether or not to use pango markup
         max_chars=0,                    # Maximum number of characters to display in widget.
@@ -1144,10 +1147,16 @@ widget_list = [
         mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
         notification_timeout=10,        # Time in seconds to display notification. 0 for no expiry.
         notify_below=None,              # Send a notification below this battery level.
-        padding=None,                   # Padding. Calculated if None.
+        padding=0,                      # Padding. Calculated if None.
         show_short_text=True,           # Show "Full" or "Empty" rather than formated text
         unknown_char='?',               # Character to indicate the battery status is unknown
         update_interval=1,              # Seconds between status updates
+    ),
+
+    widget.Spacer(
+        length=5,                       # Length of the spacer
+        background=colors['grey'][1],   # Widget background color
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
     ),
 
     widget.TextBox(
@@ -1238,7 +1247,7 @@ widget_list = [
         margin_x=None,                  # X Margin. Overrides 'margin' if set
         margin_y=None,                  # Y Margin. Overrides 'margin' if set
         mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-            "Button1": lazy.spawn("i3lock-fancy"),
+            "Button1": lazy.spawn(logout_prompt),
             "Button3": lazy.spawn("i3lock-fancy"),
         },
         rotate=0.0,                     # rotate the image in degrees counter-clockwise
