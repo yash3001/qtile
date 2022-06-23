@@ -89,21 +89,25 @@ keys = [
     Key(
         "M-h",
         lazy.layout.left(),
+        lazy.layout.down().when(layout='max'),
         desc="Move focus to left"
     ),
     Key(
         "M-<Left>",
         lazy.layout.left(),
+        lazy.layout.down().when(layout='max'),
         desc="Move focus to left"
     ),
     Key(
         "M-l",
         lazy.layout.right(),
+        lazy.layout.up().when(layout='max'),
         desc="Move focus to right"
     ),
     Key(
         "M-<Right>",
         lazy.layout.right(),
+        lazy.layout.up().when(layout='max'),
         desc="Move focus to right"
     ),
     Key(
