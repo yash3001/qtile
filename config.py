@@ -807,7 +807,7 @@ widget_list = [
         foreground='#ffffff',           # Foreground colour
         format='{state}{name}',         # format of the text
         markup=True,                    # Whether or not to use pango markup
-        max_chars=0,                    # Maximum number of characters to display in widget.
+        max_chars=50,                    # Maximum number of characters to display in widget.
         mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
         padding=20,                     # Padding. Calculated if None.
         parse_text=None,                # Function to parse and modify window names. e.g. function in config that removes excess strings from window name: def my_func(text) for string in [" - Chromium", " - Firefox"]: text = text.replace(string, "") return textthen set option parse_text=my_func
@@ -1072,7 +1072,9 @@ widget_list = [
         margin=3,                       # Margin inside the box
         margin_x=None,                  # X Margin. Overrides 'margin' if set
         margin_y=None,                  # Y Margin. Overrides 'margin' if set
-        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+            "Button1": lazy.spawn('/home/yash/.config/qtile/utils/scripts/network_manager_dmenu'),
+        },
         rotate=0.0,                     # rotate the image in degrees counter-clockwise
         scale=True,                     # Enable/Disable image scaling
     ),

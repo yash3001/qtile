@@ -4,7 +4,7 @@ choice=$(echo -e "Logout\nShutdown\nRestart" | dmenu -c -h 40 -l 3)
 
 if [[ ($choice == "Logout") ]]
 then
-    ans=$(echo -e "no\nyes" | dmenu -c -h 40 -p "Do you want to logout?")
+    ans=$(echo -e "no\nyes" | dmenu -c -h 40 -l 2 -p "Do you want to logout?")
     
     if [[ ($ans == "yes") ]]
     then
@@ -17,7 +17,7 @@ fi
 if [[ ($choice == "Shutdown") ]]
 then
     # ans=$(echo -e "No\nYes" | dmenu -c -h 40 -p "Do you want to shutdown")
-    ans=$(echo -e "no\nyes" | dmenu -c -h 40 -p "Do you want to go?")
+    ans=$(echo -e "no\nyes" | dmenu -c -h 40 -l 2 -p "Do you want to go?")
     
     if [[ ($ans == "yes") ]]
     then
@@ -27,7 +27,7 @@ fi
 
 if [[ ($choice == "Restart") ]]
 then
-    ans=$(echo -e "no\nyes" | dmenu -c -h 40 -p "Do you want to reboot?")
+    ans=$(echo -e "no\nyes" | dmenu -c -h 40 -l 2 -p "Do you want to reboot?")
     
     if [[ ($ans == "yes") ]]
     then
