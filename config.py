@@ -336,8 +336,13 @@ keys = [
 
     # Scripts that i wrote
     Key(
-        "M-S-p",
+        "<Print>",
         lazy.spawn(screenshot),
+        desc="Take Fullscreen Screenshot"
+    ),
+    Key(
+        "M-S-p",
+        lazy.spawn(rectangular_screenshot),
         desc="Take Fullscreen Screenshot"
     ),
     Key(
@@ -1457,6 +1462,10 @@ def start_once():
     subprocess.call(autostart)
 
 
+@hook.subscribe.layout_change
+def layout_change(cur_layout, cur_group):
+    for i in range(len(groups)):
+        groups[i].layout = cur_layout    
 
 # ------------------------------------------------------
 # ------------------------ Misc ------------------------
