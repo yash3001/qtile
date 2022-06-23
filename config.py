@@ -50,8 +50,21 @@ clock_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/clock-ico
 poweroff_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/poweroff-icons/poweroff_dark_bold.png")
 logout_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/logout-icons/logout_dark_bold.png")
 
+# colors = {
+#     "black": ['#2C3E50', '#34495E'],
+#     'purple': ['#8E44AD', '#9B59B6'],
+#     'blue': ['#2980B9', '#3498DB'],
+#     'green': ['#27AE60', '#2ECC71'],
+#     'cyan': ['#16A085', '#1ABC9C'],
+#     'yellow': ['#F39C12', '#F1C40F'],
+#     'orange': ['#D35400', '#E67E22'],
+#     'red': ['#C0392B', '#E74C3C'],
+#     'white': ['#BDC3C7', '#ECF0F1'],
+#     'grey': ['#7F8C8D', '#95A5A6']
+# }
+
 colors = {
-    "black": ['#2C3E50', '#34495E'],
+    "black": ['#2C3E50', '#264653'],
     'purple': ['#8E44AD', '#9B59B6'],
     'blue': ['#2980B9', '#3498DB'],
     'green': ['#27AE60', '#2ECC71'],
@@ -60,7 +73,7 @@ colors = {
     'orange': ['#D35400', '#E67E22'],
     'red': ['#C0392B', '#E74C3C'],
     'white': ['#BDC3C7', '#ECF0F1'],
-    'grey': ['#7F8C8D', '#95A5A6']
+    'grey': ['#2A9D8F', '#56c3b7']
 }
 
 
@@ -1021,7 +1034,7 @@ widget_list = [
             "Button3": lazy.spawn("terminator -e 'bpytop'"),
         },
         padding=3,                      # Padding. Calculated if None.
-        update_interval=1.0,            # Update interval for the CPU widget
+        update_interval=1,              # Update interval for the CPU widget
     ),
 
     widget.Image(
@@ -1135,7 +1148,7 @@ widget_list = [
         fontshadow=None,                # font shadow color, default is None(no shadow)
         fontsize=16,                    # Font size. Calculated if None.
         foreground='ffffff',            # Foreground colour
-        format='{down} ↓ {up} ↑',       # Display format of down/upload/total speed of given interfaces
+        format='{down}/s ↓ {up}/s ↑',       # Display format of down/upload/total speed of given interfaces
         interface="wlp3s0",             # List of interfaces or single NIC as string to monitor, None to display all active NICs combined
         markup=False,                   # Whether or not to use pango markup
         max_chars=0,                    # Maximum number of characters to display in widget.
@@ -1290,7 +1303,7 @@ widget_list = [
     widget.Image(
         background=colors['grey'][1],   # Widget background color
         filename=logout_icon_path,      # Image filename. Can contain '~'
-        margin=3,                       # Margin inside the box
+        margin=4,                       # Margin inside the box
         margin_x=None,                  # X Margin. Overrides 'margin' if set
         margin_y=None,                  # Y Margin. Overrides 'margin' if set
         mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
@@ -1302,7 +1315,7 @@ widget_list = [
     ),
 
     widget.Spacer(
-        length=5,                       # Length of the spacer
+        length=3,                       # Length of the spacer
         background=colors['grey'][1],   # Widget background color
         mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
     ),
@@ -1310,7 +1323,7 @@ widget_list = [
     widget.Image(
         background=colors['grey'][1],   # Widget background color
         filename=poweroff_icon_path,    # Image filename. Can contain '~'
-        margin=3,                       # Margin inside the box
+        margin=4,                       # Margin inside the box
         margin_x=None,                  # X Margin. Overrides 'margin' if set
         margin_y=None,                  # Y Margin. Overrides 'margin' if set
         mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
