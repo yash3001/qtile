@@ -399,18 +399,18 @@ for i in range(len(groups)):
                 desc="Switch to group {}".format(groups[i].name),
             ),
 
-            # mod4 + shift + index of group = switch to & move focused window to group
+            # mod4 + shift + index of group = move focused window to group
             Key(
                 "M-S-" + str(ind),
-                lazy.window.togroup(groups[i].name, switch_group=True),
-                desc="Switch to & move focused window to group {}".format(groups[i].name),
-            ),
-
-            # mod1 + alt + shift + index of group = move focused window to group
-            Key(
-                "M-S-A-" + str(ind), 
                 lazy.window.togroup(groups[i].name),
                 desc="move focused window to group {}".format(groups[i].name)
+            ),
+
+            # mod1 + alt + shift + index of group = go and move focused window to group
+            Key(
+                "M-S-A-" + str(ind), 
+                lazy.window.togroup(groups[i].name, switch_group=True),
+                desc="Switch to & move focused window to group {}".format(groups[i].name),
             ),
         ]
     )
@@ -432,8 +432,8 @@ layouts = [
         fair=False,                     # Add new windows to the column with least windows.
         grow_amount=10,                 # Amount by which to grow a window/column.
         insert_position=0,              # Position relative to the current window where new ones are inserted (0 means right above the current window, 1 means right after).
-        margin=[5,5,5,5],               # Margin of the layout (int or list of ints [N E S W]).
-        margin_on_single=[5,5,5,5],     # Margin when only one window. (int or list of ints [N E S W]).
+        margin=[6,6,6,6],               # Margin of the layout (int or list of ints [N E S W]).
+        margin_on_single=[6,6,6,6],     # Margin when only one window. (int or list of ints [N E S W]).
         num_columns=2,                  # Preferred number of columns.
         split=True,                     # New columns presentation mode.
         wrap_focus_columns=False,       # Wrap the screen when moving focus across columns.
@@ -504,7 +504,7 @@ layouts = [
     #     max_ratio=0.75,                 # The percent of the screen-space the master pane should occupy at maximum.
     #     min_ratio=0.25,                 # The percent of the screen-space the master pane should occupy at minimum.
     #     min_secondary_size=85,          # Minimum size in pixel for a secondary pane window.
-    #     new_client_position='after_current' # Place new windows: after_current - after the active window. before_current - before the active window, top - at the top of the stack, bottom - at the bottom of the stack.
+    #     new_client_position='after_current', # Place new windows: after_current - after the active window. before_current - before the active window, top - at the top of the stack, bottom - at the bottom of the stack.
     #     ratio=0.5,                      # The percent of the screen-space the master pane should occupy by default.
     #     single_border_width=None,       # Border width for single window.
     #     single_margin=None,             # Margin size for single window.
