@@ -26,6 +26,7 @@ shutdown_menu = os.path.join(os.path.dirname(__file__), "utils/scripts/shutdown.
 logout_prompt = os.path.join(os.path.dirname(__file__), "utils/scripts/logout_prompt.sh")
 poweroff_prompt = os.path.join(os.path.dirname(__file__), "utils/scripts/poweroff_prompt.sh")
 suspend_prompt = os.path.join(os.path.dirname(__file__), "utils/scripts/suspend_prompt.sh")
+wifi_prompt = os.path.join(os.path.dirname(__file__), "utils/scripts/network_manager_dmenu.py")
 screenshot = os.path.join(os.path.dirname(__file__), "utils/scripts/screenshot.sh")
 rectangular_screenshot = os.path.join(os.path.dirname(__file__), "utils/scripts/rectangular_screenshot.sh")
 brightness_up = os.path.join(os.path.dirname(__file__), "utils/scripts/brightness_up.sh")
@@ -39,6 +40,7 @@ autostart = os.path.join(os.path.dirname(__file__), "utils/scripts/autostart.sh"
 layout_icon_dir = os.path.join(os.path.dirname(__file__), "utils/icons/layout-icons/dark")
 brightness_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/brightness-icons/brightness_light_bold.png")
 volume_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/volume-icons/volume_light_bold.png")
+bluetooth_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/bluetooth-icons/bluetooth_light_bold.png")
 cpu_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/cpu-icons/cpu_dark_bold.png")
 memory_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/memory-icons/memory_dark_bold.png")
 network_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/network-icons/network_light_bold.png")
@@ -874,6 +876,7 @@ widget_list = [
         margin_y=None,                  # Y Margin. Overrides 'margin' if set
         mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
             "Button1":lazy.spawn('amixer -qD pulse set Master 1+ toggle'),
+            "Button3":lazy.spawn('amixer -qD pulse set Master 1+ toggle'),
         },
         rotate=0.0,                     # rotate the image in degrees counter-clockwise
         scale=True,                     # Enable/Disable image scaling
@@ -893,7 +896,10 @@ widget_list = [
         get_volume_command=None,        # Command to get the current volume
         markup=True,                    # Whether or not to use pango markup
         max_chars=0,                    # Maximum number of characters to display in widget.
-        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+            "Button1":lazy.spawn('amixer -qD pulse set Master 1+ toggle'),
+            "Button3":lazy.spawn('amixer -qD pulse set Master 1+ toggle'),
+        },
         mute_command=None,              # Mute command
         padding=3,                      # Padding left and right. Calculated if None.
         step=1,                         # Volume change for up an down commands in percentage.Only used if volume_up_command and volume_down_command are not set.
@@ -903,6 +909,38 @@ widget_list = [
         volume_down_command=None,       # Volume down command
         volume_up_command=None,         # Volume up command
     ),
+
+    widget.Image(
+        background=colors['black'][1],  # Widget background color
+        filename=bluetooth_icon_path,   # Image filename. Can contain '~'
+        margin=3,                       # Margin inside the box
+        margin_x=None,                  # X Margin. Overrides 'margin' if set
+        margin_y=None,                  # Y Margin. Overrides 'margin' if set
+        mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+            "Button1": lazy.spawn("blueberry"),
+            "Button2": lazy.spawn("blueberry"),
+        },
+        rotate=0.0,                     # rotate the image in degrees counter-clockwise
+        scale=True,                     # Enable/Disable image scaling
+    ),
+
+    widget.Bluetooth(
+        background=colors['black'][1],    # Widget background color
+        fmt='{}',                       # How to format the text
+        font='cascadia code',                    # Default font
+        fontshadow=None,                # font shadow color, default is None(no shadow)
+        fontsize=16,                  # Font size. Calculated if None.
+        foreground='ffffff',            # Foreground colour
+        hci='/dev_2C_BE_EB_02_C2_9A',     # hci0 device path, can be found with d-feet or similar dbus explorer.
+        markup=True,                    # Whether or not to use pango markup
+        max_chars=0,                    # Maximum number of characters to display in widget.
+        mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+            "Button1": lazy.spawn("blueberry"),
+            "Button2": lazy.spawn("blueberry"),
+        },
+        padding=None,                   # Padding. Calculated if None.
+    ),
+
 
     widget.TextBox(
         text="",                       # Text to be displayed.
@@ -1073,7 +1111,7 @@ widget_list = [
         margin_x=None,                  # X Margin. Overrides 'margin' if set
         margin_y=None,                  # Y Margin. Overrides 'margin' if set
         mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-            "Button1": lazy.spawn('/home/yash/.config/qtile/utils/scripts/network_manager_dmenu'),
+            "Button1": lazy.spawn(wifi_prompt),
         },
         rotate=0.0,                     # rotate the image in degrees counter-clockwise
         scale=True,                     # Enable/Disable image scaling
