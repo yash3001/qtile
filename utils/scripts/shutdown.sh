@@ -1,6 +1,6 @@
 #!/usr/bin/zsh
 
-choice=$(echo -e "Logout\nShutdown\nRestart" | dmenu -c -h 40 -l 3)
+choice=$(echo -e "Logout\nShutdown\nRestart" | dmenu -c -h 40 -l 3 -p "Menu:")
 
 if [[ ($choice == "Logout") ]]
 then
