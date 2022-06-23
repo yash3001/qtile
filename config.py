@@ -853,7 +853,7 @@ widget_list = [
         backlight_name='intel_backlight', # ACPI name of a backlight device
         brightness_file='brightness',   # Name of file with the current brightness in /sys/class/backlight/backlight_name
         change_command='xbacklight -set {0}', # Execute command to change value
-        fmt=' {}  ',                    # How to format the text
+        fmt='{}  ',                    # How to format the text
         font='JetBrainsMono Nerd Font', # Default font
         fontshadow=None,                # font shadow color, default is None(no shadow)
         fontsize=16,                    # Font size. Calculated if None.
@@ -863,7 +863,7 @@ widget_list = [
         max_brightness_file='max_brightness', # Name of file with the maximum brightness in /sys/class/backlight/backlight_name
         max_chars=0,                    # Maximum number of characters to display in widget.
         mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-        padding=0,                      # Padding. Calculated if None.
+        padding=3,                      # Padding. Calculated if None.
         step=10,                        # Percent of backlight every scroll changed
         update_interval=0.1,            # The delay in seconds between updates
     ),
@@ -888,7 +888,7 @@ widget_list = [
         channel='Master',               # Channel
         device='default',               # Device Name
         emoji=False,                    # Use emoji to display volume states, only if theme_path is not set.The specified font needs to contain the correct unicode characters.
-        fmt=' {} ',                     # How to format the text
+        fmt='{} ',                     # How to format the text
         font='JetBrainsMono Nerd Font', # Default font
         fontshadow=None,                # font shadow color, default is None(no shadow)
         fontsize=16,                    # Font size. Calculated if None.
@@ -925,22 +925,21 @@ widget_list = [
     ),
 
     widget.Bluetooth(
-        background=colors['black'][1],    # Widget background color
-        fmt='{}',                       # How to format the text
-        font='cascadia code',                    # Default font
+        background=colors['black'][1],  # Widget background color
+        fmt='{} ',                      # How to format the text
+        font='cascadia code',           # Default font
         fontshadow=None,                # font shadow color, default is None(no shadow)
-        fontsize=16,                  # Font size. Calculated if None.
+        fontsize=16,                    # Font size. Calculated if None.
         foreground='ffffff',            # Foreground colour
-        hci='/dev_2C_BE_EB_02_C2_9A',     # hci0 device path, can be found with d-feet or similar dbus explorer.
+        hci='/dev_2C_BE_EB_02_C2_9A',   # hci0 device path, can be found with d-feet or similar dbus explorer.
         markup=True,                    # Whether or not to use pango markup
         max_chars=0,                    # Maximum number of characters to display in widget.
         mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
             "Button1": lazy.spawn("blueberry"),
             "Button2": lazy.spawn("blueberry"),
         },
-        padding=None,                   # Padding. Calculated if None.
+        padding=3,                      # Padding. Calculated if None.
     ),
-
 
     widget.TextBox(
         text="",                       # Text to be displayed.
