@@ -692,8 +692,8 @@ widget_list = [
         margin_x=0,                     # X Margin. Overrides 'margin' if set
         margin_y=None,                  # Y Margin. Overrides 'margin' if set
         mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-            "Button1": lazy.spawn("terminator -e 'yay -Syu'"),
-            "Button3": lazy.spawn("terminator -e 'yay -Syu'"),
+            "Button1": lazy.spawn('firefox --new-window "https://wiki.archlinux.org/" '),
+            "Button3": lazy.spawn('firefox --new-window "https://cp-algorithms.web.app/"'),
         },
         rotate=0.0,                     # rotate the image in degrees counter-clockwise
         scale=True,                     # Enable/Disable image scaling
@@ -964,7 +964,7 @@ widget_list = [
         foreground='ffffff',            # Foreground colour
         hci='/dev_2C_BE_EB_02_C2_9A',   # hci0 device path, can be found with d-feet or similar dbus explorer.
         markup=True,                    # Whether or not to use pango markup
-        max_chars=0,                    # Maximum number of characters to display in widget.
+        max_chars=5,                    # Maximum number of characters to display in widget.
         mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
             "Button1": lazy.spawn("blueberry"),
             "Button2": lazy.spawn("blueberry"),
