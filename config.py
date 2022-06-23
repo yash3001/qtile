@@ -33,6 +33,7 @@ volume_mute = os.path.join(os.path.dirname(__file__), "utils/scripts/volume_mute
 clipmenu = os.path.join(os.path.dirname(__file__), "utils/scripts/clipmenu.sh")
 autostart = os.path.join(os.path.dirname(__file__), "utils/scripts/autostart.sh")
 
+layout_icon_dir = os.path.join(os.path.dirname(__file__), "utils/icons/layout-icons/dark")
 brightness_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/brightness-icons/brightness_light_bold.png")
 volume_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/volume-icons/volume_light_bold.png")
 cpu_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/cpu-icons/cpu_dark_bold.png")
@@ -678,7 +679,7 @@ widget_list = [
 
     widget.CurrentLayoutIcon(
         background=colors["grey"][1],   # Widget background color
-        custom_icon_paths=[],           # List of folders where to search icons beforeusing built-in icons or icons in ~/.icons dir. This can also be used to providemissing icons for custom layouts. Defaults to empty list.
+        custom_icon_paths=[layout_icon_dir], # List of folders where to search icons beforeusing built-in icons or icons in ~/.icons dir. This can also be used to providemissing icons for custom layouts. Defaults to empty list.
         fmt='{}',                       # How to format the text
         font='JetBrainsMono Nerd Font', # Default font
         fontshadow=None,                # font shadow color, default is None(no shadow)
@@ -687,8 +688,8 @@ widget_list = [
         markup=True,                    # Whether or not to use pango markup
         max_chars=0,                    # Maximum number of characters to display in widget.
         mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-        padding=8,                      # Padding. Calculated if None.
-        scale=1,                        # Scale factor relative to the bar height. Defaults to 1
+        padding=8,                   # Padding. Calculated if None.
+        scale=0.75,                        # Scale factor relative to the bar height. Defaults to 1
     ),
 
     widget.CurrentLayout(
@@ -798,7 +799,7 @@ widget_list = [
         fontshadow=None,                # font shadow color, default is None(no shadow)
         fontsize=16,                    # Font size. Calculated if None.
         for_current_screen=False,       # instead of this bars screen use currently active screen
-        foreground='#000000',           # Foreground colour
+        foreground='#ffffff',           # Foreground colour
         format='{state}{name}',         # format of the text
         markup=True,                    # Whether or not to use pango markup
         max_chars=0,                    # Maximum number of characters to display in widget.
