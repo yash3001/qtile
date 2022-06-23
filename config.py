@@ -1128,7 +1128,7 @@ widget_list = [
         fontshadow=None,                # font shadow color, default is None(no shadow)
         fontsize=16,                    # Font size. Calculated if None.
         foreground='000000',            # Foreground colour
-        format='{percent:2.0%}',        # Display format
+        format='{percent:2.0%} {hour:d}:{min:02d}', # Display format
         full_char='=',                  # Character to indicate the battery is full
         hide_threshold=None,            # Hide the text when there is enough energy 0 <= x < 1
         low_background=None,            # Background color on low battery
