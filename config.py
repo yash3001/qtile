@@ -37,12 +37,14 @@ volume_mute = os.path.join(os.path.dirname(__file__), "utils/scripts/volume_mute
 clipmenu = os.path.join(os.path.dirname(__file__), "utils/scripts/clipmenu.sh")
 autostart = os.path.join(os.path.dirname(__file__), "utils/scripts/autostart.sh")
 
+arch_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/arch-icons/arch_light.png")
 layout_icon_dir = os.path.join(os.path.dirname(__file__), "utils/icons/layout-icons/dark")
 brightness_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/brightness-icons/brightness_light_bold.png")
 volume_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/volume-icons/volume_light_bold.png")
 bluetooth_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/bluetooth-icons/bluetooth_light_bold.png")
 cpu_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/cpu-icons/cpu_dark_bold.png")
 memory_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/memory-icons/memory_dark_bold.png")
+temperature_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/temperature-icons/terperature_dark_bold.png")
 network_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/network-icons/network_light_bold.png")
 wifi_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/network-icons/wifi_light_bold.png")
 battery_icon_dir = os.path.join(os.path.dirname(__file__), "utils/icons/battery-icons/dark")
@@ -667,20 +669,26 @@ widget_list = [
     #     padding=0,                      # Padding left and right. Calculated if None.
     # ),
 
-    widget.TextBox(
-        text=" ",                      # Text to be displayed.
-        # width=None,                     # Width of the textbox.
-        background=colors['black'][1],  # Widget background color.
-        fmt='{}',                       # How to format the text.
-        font='JetBrainsMono Nerd Font', # Text font.
-        fontshadow=None,                # Font shadow color, default is None(no shadow).
-        fontsize=16,                    # Font pixel size. Calculated if None.
-        foreground='#ffffff',           # Foreground colour.
-        markup=True,                    # Whether or not to use pango markup.
-        max_chars=0,                    # Maximum number of characters to display in widget.
+    widget.Spacer(
+        length=5,                       # Length of the spacer
+        background=colors['black'][1],  # Widget background color
         mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-        padding=0,                      # Padding left and right. Calculated if None.
     ),
+
+    widget.Image(
+        background=colors['black'][1],  # Widget background color
+        filename=arch_icon_path,        # Image filename. Can contain '~'
+        margin=3,                       # Margin inside the box
+        margin_x=0,                     # X Margin. Overrides 'margin' if set
+        margin_y=None,                  # Y Margin. Overrides 'margin' if set
+        mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+            "Button1": lazy.spawn("terminator -e 'yay -Syu'"),
+            "Button3": lazy.spawn("terminator -e 'yay -Syu'"),
+        },
+        rotate=0.0,                     # rotate the image in degrees counter-clockwise
+        scale=True,                     # Enable/Disable image scaling
+    ),
+
 
     widget.TextBox(
         text="",                       # Text to be displayed.
@@ -725,20 +733,20 @@ widget_list = [
     #     padding=3,                      # Padding. Calculated if None.
     # ),
 
-    widget.WindowCount(
-        background=colors["grey"][1],   # Widget background color
-        fmt='{}',                       # How to format the text
-        font='JetBrainsMono Nerd Font', # Text font
-        fontshadow=None,                # font shadow color, default is None(no shadow)
-        fontsize=16,                    # Font pixel size. Calculated if None.
-        foreground='#000000',           # Foreground colour.
-        markup=True,                    # Whether or not to use pango markup
-        max_chars=0,                    # Maximum number of characters to display in widget.
-        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-        padding=None,                   # Padding left and right. Calculated if None.
-        show_zero=True,                 # Show window count when no windows
-        text_format='{num}',            # Format for message
-    ),
+    # widget.WindowCount(
+    #     background=colors["grey"][1],   # Widget background color
+    #     fmt='{}',                       # How to format the text
+    #     font='JetBrainsMono Nerd Font', # Text font
+    #     fontshadow=None,                # font shadow color, default is None(no shadow)
+    #     fontsize=16,                    # Font pixel size. Calculated if None.
+    #     foreground='#000000',           # Foreground colour.
+    #     markup=True,                    # Whether or not to use pango markup
+    #     max_chars=0,                    # Maximum number of characters to display in widget.
+    #     mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+    #     padding=None,                   # Padding left and right. Calculated if None.
+    #     show_zero=True,                 # Show window count when no windows
+    #     text_format='{num}',            # Format for message
+    # ),
 
     widget.TextBox(
         text="",                       # Text to be displayed.
@@ -1148,7 +1156,7 @@ widget_list = [
         fontshadow=None,                # font shadow color, default is None(no shadow)
         fontsize=16,                    # Font size. Calculated if None.
         foreground='ffffff',            # Foreground colour
-        format='{down}/s ↓ {up}/s ↑',       # Display format of down/upload/total speed of given interfaces
+        format='{down}/s ↓ {up}/s ↑',   # Display format of down/upload/total speed of given interfaces
         interface="wlp3s0",             # List of interfaces or single NIC as string to monitor, None to display all active NICs combined
         markup=False,                   # Whether or not to use pango markup
         max_chars=0,                    # Maximum number of characters to display in widget.
@@ -1197,7 +1205,7 @@ widget_list = [
         charge_char='^',                # Character to indicate the battery is charging
         discharge_char='V',             # Character to indicate the battery is discharging
         empty_char='x',                 # Character to indicate the battery is empty
-        fmt='{}',                       # How to format the text
+        fmt='{} ',                      # How to format the text
         font='JetBrainsMono Nerd Font', # Default font
         fontshadow=None,                # font shadow color, default is None(no shadow)
         fontsize=16,                    # Font size. Calculated if None.
@@ -1217,6 +1225,36 @@ widget_list = [
         show_short_text=True,           # Show "Full" or "Empty" rather than formated text
         unknown_char='?',               # Character to indicate the battery status is unknown
         update_interval=1,              # Seconds between status updates
+    ),
+
+    widget.Image(
+        background=colors['grey'][1],   # Widget background color
+        filename=temperature_icon_path, # Image filename. Can contain '~'
+        margin=3,                       # Margin inside the box
+        margin_x=0,                     # X Margin. Overrides 'margin' if set
+        margin_y=None,                  # Y Margin. Overrides 'margin' if set
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        rotate=0.0,                     # rotate the image in degrees counter-clockwise
+        scale=True,                     # Enable/Disable image scaling
+    ),
+    
+    widget.ThermalSensor(
+        background=colors['grey'][1],   # Widget background color
+        fmt='{}',                       # How to format the text
+        font='cascadia code',           # Default font
+        fontshadow=None,                # font shadow color, default is None(no shadow)
+        fontsize=16,                    # Font size. Calculated if None.
+        foreground='#000000',           # Foreground colour
+        foreground_alert='#ff0000',     # Foreground colour alert
+        markup=True,                    # Whether or not to use pango markup
+        max_chars=0,                    # Maximum number of characters to display in widget.
+        metric=True,                    # True to use metric/C, False to use imperial/F
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        padding=None,                   # Padding. Calculated if None.
+        show_tag=False,                 # Show tag sensor
+        tag_sensor=None,                # Tag of the temperature sensor. For example: "temp1" or "Core 0"
+        threshold=70,                   # If the current temperature value is above, then change to foreground_alert colour
+        update_interval=1,              # Update interval in seconds
     ),
 
     widget.TextBox(
