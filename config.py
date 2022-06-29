@@ -847,7 +847,7 @@ widget_list = [
         foreground='#ffffff',           # Foreground colour
         format='{state}{name}',         # format of the text
         markup=True,                    # Whether or not to use pango markup
-        max_chars=40,                   # Maximum number of characters to display in widget.
+        max_chars=30,                   # Maximum number of characters to display in widget.
         mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
         padding=20,                     # Padding. Calculated if None.
         parse_text=None,                # Function to parse and modify window names. e.g. function in config that removes excess strings from window name: def my_func(text) for string in [" - Chromium", " - Firefox"]: text = text.replace(string, "") return textthen set option parse_text=my_func
@@ -867,6 +867,12 @@ widget_list = [
         max_chars=0,                    # Maximum number of characters to display in widget.
         mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
         padding=0,                      # Padding left and right. Calculated if None.
+    ),
+
+    widget.Spacer(
+        length=3,                       # Length of the spacer
+        background=colors['grey'][1],   # Widget background color
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
     ),
 
     widget.Image(
@@ -891,10 +897,16 @@ widget_list = [
         markup=True,                    # Whether or not to use pango markup
         max_chars=0,                    # Maximum number of characters to display in widget.
         mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-        padding=None,                   # Padding. Calculated if None.
+        padding=3,                      # Padding. Calculated if None.
         update_interval=60,             # Update interval in seconds, if none, the widget updates whenever it's done.
     ),
     
+    widget.Spacer(
+        length=5,                       # Length of the spacer
+        background=colors['grey'][1],   # Widget background color
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+    ),
+
     widget.TextBox(
         text="",                       # Text to be displayed.
         # width=None,                     # Width of the textbox.
@@ -955,8 +967,8 @@ widget_list = [
         margin_x=None,                  # X Margin. Overrides 'margin' if set
         margin_y=None,                  # Y Margin. Overrides 'margin' if set
         mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-            "Button1":lazy.spawn('amixer -qD pulse set Master 1+ toggle'),
-            "Button3":lazy.spawn('amixer -qD pulse set Master 1+ toggle'),
+            "Button1":lazy.spawn(volume_mute),
+            "Button3":lazy.spawn(volume_mute),
         },
         rotate=0.0,                     # rotate the image in degrees counter-clockwise
         scale=True,                     # Enable/Disable image scaling
@@ -977,8 +989,8 @@ widget_list = [
         markup=True,                    # Whether or not to use pango markup
         max_chars=0,                    # Maximum number of characters to display in widget.
         mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-            "Button1":lazy.spawn('amixer -qD pulse set Master 1+ toggle'),
-            "Button3":lazy.spawn('amixer -qD pulse set Master 1+ toggle'),
+            "Button1":lazy.spawn(volume_mute),
+            "Button3":lazy.spawn(volume_mute),
         },
         mute_command=None,              # Mute command
         padding=3,                      # Padding left and right. Calculated if None.
@@ -1079,8 +1091,8 @@ widget_list = [
         margin_x=None,                  # X Margin. Overrides 'margin' if set
         margin_y=None,                  # Y Margin. Overrides 'margin' if set
         mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-            "Button1": lazy.spawn("terminator -e 'bpytop'"),
-            "Button3": lazy.spawn("terminator -e 'bpytop'"),
+            "Button1": lazy.spawn(f"{terminal} -e 'bpytop'"),
+            "Button3": lazy.spawn(f"{terminal} -e 'bpytop'"),
         },
         rotate=0.0,                     # rotate the image in degrees counter-clockwise
         scale=True,                     # Enable/Disable image scaling
@@ -1097,8 +1109,8 @@ widget_list = [
         markup=True,                    # Whether or not to use pango markup
         max_chars=0,                    # Maximum number of characters to display in widget.
         mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-            "Button1": lazy.spawn("terminator -e 'bpytop'"),
-            "Button3": lazy.spawn("terminator -e 'bpytop'"),
+            "Button1": lazy.spawn(f"{terminal} -e 'bpytop'"),
+            "Button3": lazy.spawn(f"{terminal} -e 'bpytop'"),
         },
         padding=3,                      # Padding. Calculated if None.
         update_interval=1,              # Update interval for the CPU widget
@@ -1111,8 +1123,8 @@ widget_list = [
         margin_x=0,                     # X Margin. Overrides 'margin' if set
         margin_y=None,                  # Y Margin. Overrides 'margin' if set
         mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-            "Button1": lazy.spawn("terminator -e 'bpytop'"),
-            "Button3": lazy.spawn("terminator -e 'bpytop'"),
+            "Button1": lazy.spawn(f"{terminal} -e 'bpytop'"),
+            "Button3": lazy.spawn(f"{terminal} -e 'bpytop'"),
         },
         rotate=0.0,                     # rotate the image in degrees counter-clockwise
         scale=True,                     # Enable/Disable image scaling
@@ -1131,8 +1143,8 @@ widget_list = [
         measure_mem='M',                # Measurement for Memory (G, M, K, B)
         measure_swap='M',               # Measurement for Swap (G, M, K, B)
         mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-            "Button1": lazy.spawn("terminator -e 'bpytop'"),
-            "Button3": lazy.spawn("terminator -e 'bpytop'"),
+            "Button1": lazy.spawn(f"{terminal} -e 'bpytop'"),
+            "Button3": lazy.spawn(f"{terminal} -e 'bpytop'"),
         },
         padding=None,                   # Padding. Calculated if None.
         update_interval=1.0,            # Update interval for the Memory
