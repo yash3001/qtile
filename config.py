@@ -21,6 +21,7 @@ from qtile_extras import widget as extra_widget
 
 mod = "mod4"
 terminal = guess_terminal()
+browser = "firefox"
 
 shutdown_menu = os.path.join(os.path.dirname(__file__), "utils/scripts/shutdown.sh")
 logout_prompt = os.path.join(os.path.dirname(__file__), "utils/scripts/logout_prompt.sh")
@@ -250,8 +251,8 @@ keys = [
     ),
     Key(
         "M-A-b",
-        lazy.spawn("firefox"),
-        desc="Launch Firefox"
+        lazy.spawn(f"{browser}"),
+        desc="Launch Browser"
     ),
     Key(
         "M-A-v",
@@ -699,8 +700,8 @@ widget_list = [
         margin_x=0,                     # X Margin. Overrides 'margin' if set
         margin_y=None,                  # Y Margin. Overrides 'margin' if set
         mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-            "Button1": lazy.spawn('firefox --new-window "https://wiki.archlinux.org/" '),
-            "Button3": lazy.spawn('firefox --new-window "https://cp-algorithms.web.app/"'),
+            "Button1": lazy.spawn(f'{browser} --new-window "https://wiki.archlinux.org/" '),
+            "Button3": lazy.spawn(f'{browser} --new-window "https://cp-algorithms.web.app/"'),
         },
         rotate=0.0,                     # rotate the image in degrees counter-clockwise
         scale=True,                     # Enable/Disable image scaling
@@ -881,7 +882,10 @@ widget_list = [
         margin=3,                       # Margin inside the box
         margin_x=None,                  # X Margin. Overrides 'margin' if set
         margin_y=None,                  # Y Margin. Overrides 'margin' if set
-        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+            "Button1": lazy.spawn(f'{terminal} -e "sudo pacman -Syu"'),
+            "Button3": lazy.spawn(f'{terminal} -e "yay -Syu"'),
+        },
         rotate=0.0,                     # rotate the image in degrees counter-clockwise
         scale=True,                     # Enable/Disable image scaling
     ),
@@ -896,7 +900,10 @@ widget_list = [
         func=lambda: subprocess.check_output(checkupdates).decode('utf-8'), # Poll Function
         markup=True,                    # Whether or not to use pango markup
         max_chars=0,                    # Maximum number of characters to display in widget.
-        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+            "Button1": lazy.spawn(f'{terminal} -e "sudo pacman -Syu"'),
+            "Button3": lazy.spawn(f'{terminal} -e "yay -Syu"'),
+        },
         padding=3,                      # Padding. Calculated if None.
         update_interval=60,             # Update interval in seconds, if none, the widget updates whenever it's done.
     ),
@@ -967,8 +974,8 @@ widget_list = [
         margin_x=None,                  # X Margin. Overrides 'margin' if set
         margin_y=None,                  # Y Margin. Overrides 'margin' if set
         mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-            "Button1":lazy.spawn(volume_mute),
-            "Button3":lazy.spawn(volume_mute),
+            "Button1": lazy.spawn(volume_mute),
+            "Button3": lazy.spawn(volume_mute),
         },
         rotate=0.0,                     # rotate the image in degrees counter-clockwise
         scale=True,                     # Enable/Disable image scaling
@@ -989,8 +996,8 @@ widget_list = [
         markup=True,                    # Whether or not to use pango markup
         max_chars=0,                    # Maximum number of characters to display in widget.
         mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-            "Button1":lazy.spawn(volume_mute),
-            "Button3":lazy.spawn(volume_mute),
+            "Button1": lazy.spawn(volume_mute),
+            "Button3": lazy.spawn(volume_mute),
         },
         mute_command=None,              # Mute command
         padding=3,                      # Padding left and right. Calculated if None.
