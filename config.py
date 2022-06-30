@@ -452,8 +452,8 @@ layouts = [
         fair=False,                     # Add new windows to the column with least windows.
         grow_amount=10,                 # Amount by which to grow a window/column.
         insert_position=0,              # Position relative to the current window where new ones are inserted (0 means right above the current window, 1 means right after).
-        margin=[6,6,6,6],               # Margin of the layout (int or list of ints [N E S W]).
-        margin_on_single=[6,6,6,6],     # Margin when only one window. (int or list of ints [N E S W]).
+        margin=10,                      # Margin of the layout (int or list of ints [N E S W]).
+        margin_on_single=10,            # Margin when only one window. (int or list of ints [N E S W]).
         num_columns=2,                  # Preferred number of columns.
         split=True,                     # New columns presentation mode.
         wrap_focus_columns=False,       # Wrap the screen when moving focus across columns.
@@ -1489,17 +1489,19 @@ widget_list = [
     # ),
 ]
 
+my_bar = bar.Bar(
+    widgets=widget_list,            # A list of widget objects.
+    size=24,                        # The "thickness" of the bar, i.e. the height of a horizontal bar, or the width of a vertical bar.
+    background='#00000000',         # Background colour.
+    border_color='#000000',         # Border colour as str or list of str [N E S W].
+    border_width=0,                 # Width of border as int of list of ints [N E S W].
+    margin=0,                       # Space around bar as int or list of ints [N E S W].
+    padding=0,
+    opacity=1,                      # Bar window opacity.
+)
+
 screeen_list = [
-    Screen(top=bar.Bar(
-        widgets=widget_list,            # A list of widget objects.
-        size=24,                        # The "thickness" of the bar, i.e. the height of a horizontal bar, or the width of a vertical bar.
-        background='#00000000',         # Background colour.
-        border_color='#000000',         # Border colour as str or list of str [N E S W].
-        border_width=0,                 # Width of border as int of list of ints [N E S W].
-        margin=0,                       # Space around bar as int or list of ints [N E S W].
-        padding=0,
-        opacity=1,                      # Bar window opacity.
-    ),),
+    Screen(top=my_bar),
 ]
 
 screens = screeen_list
@@ -1525,7 +1527,6 @@ mouse = [
 @hook.subscribe.startup_once
 def start_once():
     subprocess.call(autostart)
-
 
 @hook.subscribe.layout_change
 def layout_change(cur_layout, cur_group):
