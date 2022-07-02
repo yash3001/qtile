@@ -41,6 +41,7 @@ checkupdates = os.path.join(os.path.dirname(__file__), "utils/scripts/check_upda
 
 arch_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/arch-icons/arch_light.png")
 layout_icon_dir = os.path.join(os.path.dirname(__file__), "utils/icons/layout-icons/dark")
+window_count_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/window-count-icons/window_count_dark_bold.png")
 updates_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/update-icons/update_dark_bold.png")
 brightness_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/brightness-icons/brightness_light_bold.png")
 volume_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/volume-icons/volume_light_bold.png")
@@ -707,6 +708,11 @@ widget_list = [
         scale=True,                     # Enable/Disable image scaling
     ),
 
+    widget.Spacer(
+        length=5,                       # Length of the spacer
+        background=colors['black'][1],  # Widget background color
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+    ),
 
     widget.TextBox(
         text="",                       # Text to be displayed.
@@ -749,21 +755,6 @@ widget_list = [
     #     max_chars=0,                    # Maximum number of characters to display in widget.
     #     mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
     #     padding=3,                      # Padding. Calculated if None.
-    # ),
-
-    # widget.WindowCount(
-    #     background=colors["grey"][1],   # Widget background color
-    #     fmt='{}',                       # How to format the text
-    #     font='JetBrainsMono Nerd Font', # Text font
-    #     fontshadow=None,                # font shadow color, default is None(no shadow)
-    #     fontsize=16,                    # Font pixel size. Calculated if None.
-    #     foreground='#000000',           # Foreground colour.
-    #     markup=True,                    # Whether or not to use pango markup
-    #     max_chars=0,                    # Maximum number of characters to display in widget.
-    #     mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-    #     padding=None,                   # Padding left and right. Calculated if None.
-    #     show_zero=True,                 # Show window count when no windows
-    #     text_format='{num}',            # Format for message
     # ),
 
     widget.TextBox(
@@ -876,6 +867,32 @@ widget_list = [
         length=3,                       # Length of the spacer
         background=colors['grey'][1],   # Widget background color
         mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+    ),
+
+    widget.Image(
+        background=colors['grey'][1],   # Widget background color
+        filename=window_count_icon_path,# Image filename. Can contain '~'
+        margin=3,                       # Margin inside the box
+        margin_x=None,                  # X Margin. Overrides 'margin' if set
+        margin_y=None,                  # Y Margin. Overrides 'margin' if set
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        rotate=0.0,                     # rotate the image in degrees counter-clockwise
+        scale=True,                     # Enable/Disable image scaling
+    ),
+
+    widget.WindowCount(
+        background=colors["grey"][1],   # Widget background color
+        fmt='{} ',                       # How to format the text
+        font='JetBrainsMono Nerd Font', # Text font
+        fontshadow=None,                # font shadow color, default is None(no shadow)
+        fontsize=16,                    # Font pixel size. Calculated if None.
+        foreground='#000000',           # Foreground colour.
+        markup=True,                    # Whether or not to use pango markup
+        max_chars=0,                    # Maximum number of characters to display in widget.
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        padding=3,                      # Padding left and right. Calculated if None.
+        show_zero=True,                 # Show window count when no windows
+        text_format='{num}',            # Format for message
     ),
 
     widget.Image(
