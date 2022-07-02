@@ -27,6 +27,7 @@ shutdown_menu = os.path.join(os.path.dirname(__file__), "utils/scripts/shutdown.
 logout_prompt = os.path.join(os.path.dirname(__file__), "utils/scripts/logout_prompt.sh")
 poweroff_prompt = os.path.join(os.path.dirname(__file__), "utils/scripts/poweroff_prompt.sh")
 suspend_prompt = os.path.join(os.path.dirname(__file__), "utils/scripts/suspend_prompt.sh")
+bluetooth_prompt = os.path.join(os.path.dirname(__file__), "utils/scripts/dmenu_bluetooth.sh")
 wifi_prompt = os.path.join(os.path.dirname(__file__), "utils/scripts/network_manager_dmenu.py")
 screenshot = os.path.join(os.path.dirname(__file__), "utils/scripts/screenshot.sh")
 rectangular_screenshot = os.path.join(os.path.dirname(__file__), "utils/scripts/rectangular_screenshot.sh")
@@ -1035,8 +1036,8 @@ widget_list = [
         margin_x=None,                  # X Margin. Overrides 'margin' if set
         margin_y=None,                  # Y Margin. Overrides 'margin' if set
         mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-            "Button1": lazy.spawn("blueberry"),
-            "Button2": lazy.spawn("blueberry"),
+            "Button1": lazy.spawn(bluetooth_prompt),
+            "Button3": lazy.spawn("blueberry"),
         },
         rotate=0.0,                     # rotate the image in degrees counter-clockwise
         scale=True,                     # Enable/Disable image scaling
@@ -1053,8 +1054,8 @@ widget_list = [
         markup=True,                    # Whether or not to use pango markup
         max_chars=5,                    # Maximum number of characters to display in widget.
         mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-            "Button1": lazy.spawn("blueberry"),
-            "Button2": lazy.spawn("blueberry"),
+            "Button1": lazy.spawn(bluetooth_prompt),
+            "Button3": lazy.spawn("blueberry"),
         },
         padding=3,                      # Padding. Calculated if None.
     ),
