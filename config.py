@@ -188,24 +188,28 @@ keys = [
         "A-C-h",
         lazy.layout.grow_left(),
         lazy.layout.decrease_ratio(),
+        lazy.layout.shrink_main(),              # MonadTall
         desc="Grow window to the left"
     ),
     Key(
         "A-C-<Left>",
         lazy.layout.grow_left(),
         lazy.layout.decrease_ratio(),
+        lazy.layout.shrink_main(),              # MonadTall
         desc="Grow window to the left"
     ),
     Key(
         "A-C-l",
         lazy.layout.grow_right(),
         lazy.layout.increase_ratio(),
+        lazy.layout.grow_main(),            # MonadTall
         desc="Grow window to the right"
     ),
     Key(
         "A-C-<Right>",
         lazy.layout.grow_right(),
         lazy.layout.increase_ratio(),
+        lazy.layout.grow_main(),            # MonadTall
         desc="Grow window to the right"
     ),
     Key(
@@ -515,22 +519,22 @@ layouts = [
     #     margin=0,                       # Margin of the layout (int or list of ints [N E S W]).
     # ),
 
-    # layout.MonadTall(
-    #     align=0,                        # Which side master plane will be placed (one of MonadTall._left or MonadTall._right).
-    #     border_focus='#ff0000',         # Border colour(s) for the focused window.
-    #     border_normal='#000000',        # Border colour(s) for un-focused windows.
-    #     border_width=2,                 # Border width.
-    #     change_ratio=0.05,              # Resize ratio.
-    #     change_size=20,                 # Resize change in pixels.
-    #     margin=0,                       # Margin of the layout.
-    #     max_ratio=0.75,                 # The percent of the screen-space the master pane should occupy at maximum.
-    #     min_ratio=0.25,                 # The percent of the screen-space the master pane should occupy at minimum.
-    #     min_secondary_size=85,          # Minimum size in pixel for a secondary pane window.
-    #     new_client_position='after_current', # Place new windows: after_current - after the active window. before_current - before the active window, top - at the top of the stack, bottom - at the bottom of the stack.
-    #     ratio=0.5,                      # The percent of the screen-space the master pane should occupy by default.
-    #     single_border_width=None,       # Border width for single window.
-    #     single_margin=None,             # Margin size for single window.
-    # ),
+    layout.MonadTall(
+        align=0,                        # Which side master plane will be placed (one of MonadTall._left or MonadTall._right).
+        border_focus=colors["grey"][1], # Border colour(s) for the focused window.
+        border_normal=colors["black"][1], # Border colour(s) for un-focused windows.
+        border_width=2,                 # Border width.
+        change_ratio=0.05,              # Resize ratio.
+        change_size=20,                 # Resize change in pixels.
+        margin=10,                      # Margin of the layout.
+        max_ratio=0.75,                 # The percent of the screen-space the master pane should occupy at maximum.
+        min_ratio=0.25,                 # The percent of the screen-space the master pane should occupy at minimum.
+        min_secondary_size=85,          # Minimum size in pixel for a secondary pane window.
+        new_client_position='bottom',   # Place new windows: after_current - after the active window. before_current - before the active window, top - at the top of the stack, bottom - at the bottom of the stack.
+        ratio=0.5,                      # The percent of the screen-space the master pane should occupy by default.
+        single_border_width=None,       # Border width for single window.
+        single_margin=None,             # Margin size for single window.
+    ),
 
     # layout.MonadWide(
     #     align=0,                        # Which side master plane will be placed (one of MonadTall._left or MonadTall._right).
