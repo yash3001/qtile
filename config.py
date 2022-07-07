@@ -441,16 +441,16 @@ keys = [
 # ------------------------------------------------------
 
 groups = [
-    Group("1", label=""), #matches=[Match(wm_class=["Code"])]),
-    Group("2", label=""), #matches=[Match(wm_class=["firefox"])]),
-    Group("3", label=""), #matches=[Match(wm_class=["discord"])]),
-    Group("4", label=""), #matches=[Match(wm_class=["org.gnome.Nautilus"])]),
-    Group("5", label=""), #matches=[Match(wm_class=["spotify"])]),
-    Group("6", label=""),
-    Group("7", label=""),
-    Group("8", label=""),
-    Group("9", label=""),
-    Group("10", label="")
+    Group("1", label="", matches=[Match(wm_class=["Code"])]),
+    Group("2", label="", matches=[Match(wm_class=["firefox"])]),
+    Group("3", label="", matches=[Match(wm_class=[""])]),
+    Group("4", label="", matches=[Match(wm_class=[""])]),
+    Group("5", label="", matches=[Match(wm_class=["org.gnome.Nautilus"])]),
+    Group("6", label="", matches=[Match(wm_class=[""])]),
+    Group("7", label="", matches=[Match(wm_class=[""])]),
+    Group("8", label="", matches=[Match(wm_class=[""])]),
+    Group("9", label="", matches=[Match(wm_class=[""])]),
+    Group("10", label="", matches=[Match(wm_class=[""])]),
 ]
 
 # allow mod4+1 through mod4+0 to bind to groups;
