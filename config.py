@@ -4,14 +4,13 @@
 
 import os
 import subprocess
-from libqtile import bar, layout, widget, hook
+from libqtile import qtile, bar, layout, widget, hook
 from libqtile.config import Click, Drag, Group, Match, Screen
 from libqtile.config import EzKey as Key
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from libqtile.backend.x11 import xkeysyms
 from qtile_extras import widget as extra_widget
-
 
 
 
@@ -84,6 +83,16 @@ colors = {
 }
 
 
+def toogle_max():
+    # layout_id = bar.screen.group.current_layout
+    # layout_name = bar.screen.group.layouts[layout_id].name
+    # if layout_name == "max":
+        lazy.to_layout_index(1);
+    # else:f
+        # lazy.to_layout_index(1);
+
+class Setting:
+    ind = 2
 
 # ------------------------------------------------------
 # -------------------- Key Bindings --------------------
@@ -188,61 +197,64 @@ keys = [
         "A-C-h",
         lazy.layout.grow_left(),
         lazy.layout.decrease_ratio(),
-        lazy.layout.shrink_main(),              # MonadTall
+        lazy.layout.shrink_main(),
         desc="Grow window to the left"
     ),
     Key(
         "A-C-<Left>",
         lazy.layout.grow_left(),
         lazy.layout.decrease_ratio(),
-        lazy.layout.shrink_main(),              # MonadTall
+        lazy.layout.shrink_main(),
         desc="Grow window to the left"
     ),
     Key(
         "A-C-l",
         lazy.layout.grow_right(),
         lazy.layout.increase_ratio(),
-        lazy.layout.grow_main(),            # MonadTall
+        lazy.layout.grow_main(),
         desc="Grow window to the right"
     ),
     Key(
         "A-C-<Right>",
         lazy.layout.grow_right(),
         lazy.layout.increase_ratio(),
-        lazy.layout.grow_main(),            # MonadTall
+        lazy.layout.grow_main(),
         desc="Grow window to the right"
     ),
     Key(
         "A-C-j",
         lazy.layout.grow_down(),
         lazy.layout.increase_ratio(),
+        lazy.layout.shrink(),
         desc="Grow window down"
     ),
     Key(
         "A-C-<Down>",
         lazy.layout.grow_down(),
         lazy.layout.increase_ratio(),
+        lazy.layout.shrink(),
         desc="Grow window down"
     ),
     Key(
         "A-C-k",
         lazy.layout.grow_up(),
         lazy.layout.decrease_ratio(),
+        lazy.layout.grow(),
         desc="Grow window up"
     ),
     Key(
         "A-C-<Up>",
         lazy.layout.grow_up(),
         lazy.layout.decrease_ratio(),
+        lazy.layout.grow(),
         desc="Grow window up"
     ),
     Key(
         "A-C-<Return>",
         lazy.layout.normalize(),
+        lazy.layout.reset(),
         desc="Reset all window sizes"
     ),
-    
-
     Key(
         "M-S-<Return>",
         lazy.layout.toggle_split(),
@@ -298,6 +310,11 @@ keys = [
     
     
     # Toggle between different layouts
+    Key(
+        "M-f",
+        lazy.to_layout_index(Setting.ind),
+        desc="Toggle max"
+    ),
     Key(
         "M-<space>",
         lazy.next_layout(),
@@ -467,6 +484,23 @@ layouts = [
         wrap_focus_stacks=False         # Wrap the screen when moving focus across stacked.
     ),
 
+    layout.MonadTall(
+        align=0,                        # Which side master plane will be placed (one of MonadTall._left or MonadTall._right).
+        border_focus=colors["grey"][1], # Border colour(s) for the focused window.
+        border_normal=colors["black"][1], # Border colour(s) for un-focused windows.
+        border_width=2,                 # Border width.
+        change_ratio=0.02,              # Resize ratio.
+        change_size=20,                 # Resize change in pixels.
+        margin=15,                      # Margin of the layout.
+        max_ratio=0.9,                  # The percent of the screen-space the master pane should occupy at maximum.
+        min_ratio=0.1,                  # The percent of the screen-space the master pane should occupy at minimum.
+        min_secondary_size=50,           # Minimum size in pixel for a secondary pane window.
+        new_client_position='bottom',   # Place new windows: after_current - after the active window. before_current - before the active window, top - at the top of the stack, bottom - at the bottom of the stack.
+        ratio=0.5,                      # The percent of the screen-space the master pane should occupy by default.
+        single_border_width=None,       # Border width for single window.
+        single_margin=None,             # Margin size for single window.
+    ),
+
     layout.Max(),
 
     # layout.Tile(
@@ -518,23 +552,6 @@ layouts = [
     #     columns=2,                      # Number of columns.
     #     margin=0,                       # Margin of the layout (int or list of ints [N E S W]).
     # ),
-
-    layout.MonadTall(
-        align=0,                        # Which side master plane will be placed (one of MonadTall._left or MonadTall._right).
-        border_focus=colors["grey"][1], # Border colour(s) for the focused window.
-        border_normal=colors["black"][1], # Border colour(s) for un-focused windows.
-        border_width=2,                 # Border width.
-        change_ratio=0.05,              # Resize ratio.
-        change_size=20,                 # Resize change in pixels.
-        margin=10,                      # Margin of the layout.
-        max_ratio=0.75,                 # The percent of the screen-space the master pane should occupy at maximum.
-        min_ratio=0.25,                 # The percent of the screen-space the master pane should occupy at minimum.
-        min_secondary_size=85,          # Minimum size in pixel for a secondary pane window.
-        new_client_position='bottom',   # Place new windows: after_current - after the active window. before_current - before the active window, top - at the top of the stack, bottom - at the bottom of the stack.
-        ratio=0.5,                      # The percent of the screen-space the master pane should occupy by default.
-        single_border_width=None,       # Border width for single window.
-        single_margin=None,             # Margin size for single window.
-    ),
 
     # layout.MonadWide(
     #     align=0,                        # Which side master plane will be placed (one of MonadTall._left or MonadTall._right).
@@ -1549,11 +1566,6 @@ mouse = [
 @hook.subscribe.startup_once
 def start_once():
     subprocess.call(autostart)
-
-@hook.subscribe.layout_change
-def layout_change(cur_layout, cur_group):
-    for i in range(len(groups)):
-        groups[i].layout = cur_layout    
 
 # ------------------------------------------------------
 # ------------------------ Misc ------------------------
