@@ -83,16 +83,26 @@ colors = {
 }
 
 
-def toogle_max():
-    # layout_id = bar.screen.group.current_layout
-    # layout_name = bar.screen.group.layouts[layout_id].name
-    # if layout_name == "max":
-        lazy.to_layout_index(1);
-    # else:f
-        # lazy.to_layout_index(1);
 
-class Setting:
-    ind = 2
+# ------------------------------------------------------
+# ------------------ Custom Functions ------------------
+# ------------------------------------------------------
+
+def toogle_max(qtile):
+    max_ind = 0;
+    tile_ind = 2;
+    for ind in range(len(layouts)):
+        if layouts[ind].name == "max":
+            max_ind = ind
+        if layouts[ind].name == "monadtall":
+            tile_ind = ind
+
+    if qtile.current_layout.name == "max":
+        qtile.cmd_to_layout_index(tile_ind)
+    else:
+        qtile.cmd_to_layout_index(max_ind)
+
+
 
 # ------------------------------------------------------
 # -------------------- Key Bindings --------------------
@@ -311,14 +321,14 @@ keys = [
     
     # Toggle between different layouts
     Key(
-        "M-f",
-        lazy.to_layout_index(Setting.ind),
-        desc="Toggle max"
-    ),
-    Key(
         "M-<space>",
         lazy.next_layout(),
         desc="Toggle between layouts"
+    ),
+    Key(
+        "M-f",
+        lazy.function(toogle_max),
+        desc="Toggle max layout"
     ),
 
     # Toggle between recent groups
@@ -465,6 +475,23 @@ for i in range(len(groups)):
 # ------------------------------------------------------
 
 layouts = [
+    layout.MonadTall(
+        align=0,                        # Which side master plane will be placed (one of MonadTall._left or MonadTall._right).
+        border_focus=colors["grey"][1], # Border colour(s) for the focused window.
+        border_normal=colors["black"][1], # Border colour(s) for un-focused windows.
+        border_width=2,                 # Border width.
+        change_ratio=0.02,              # Resize ratio.
+        change_size=20,                 # Resize change in pixels.
+        margin=15,                      # Margin of the layout.
+        max_ratio=0.9,                  # The percent of the screen-space the master pane should occupy at maximum.
+        min_ratio=0.1,                  # The percent of the screen-space the master pane should occupy at minimum.
+        min_secondary_size=50,          # Minimum size in pixel for a secondary pane window.
+        new_client_position='top',      # Place new windows: after_current - after the active window. before_current - before the active window, top - at the top of the stack, bottom - at the bottom of the stack.
+        ratio=0.5,                      # The percent of the screen-space the master pane should occupy by default.
+        single_border_width=None,       # Border width for single window.
+        single_margin=None,             # Margin size for single window.
+    ),
+
     layout.Columns(
         border_focus=colors['grey'][1], # Border colour(s) for the focused window.
         border_focus_stack=colors['grey'][1], # Border colour(s) for the focused window in stacked columns.
@@ -482,23 +509,6 @@ layouts = [
         wrap_focus_columns=False,       # Wrap the screen when moving focus across columns.
         wrap_focus_rows=False,          # Wrap the screen when moving focus across rows.
         wrap_focus_stacks=False         # Wrap the screen when moving focus across stacked.
-    ),
-
-    layout.MonadTall(
-        align=0,                        # Which side master plane will be placed (one of MonadTall._left or MonadTall._right).
-        border_focus=colors["grey"][1], # Border colour(s) for the focused window.
-        border_normal=colors["black"][1], # Border colour(s) for un-focused windows.
-        border_width=2,                 # Border width.
-        change_ratio=0.02,              # Resize ratio.
-        change_size=20,                 # Resize change in pixels.
-        margin=15,                      # Margin of the layout.
-        max_ratio=0.9,                  # The percent of the screen-space the master pane should occupy at maximum.
-        min_ratio=0.1,                  # The percent of the screen-space the master pane should occupy at minimum.
-        min_secondary_size=50,           # Minimum size in pixel for a secondary pane window.
-        new_client_position='bottom',   # Place new windows: after_current - after the active window. before_current - before the active window, top - at the top of the stack, bottom - at the bottom of the stack.
-        ratio=0.5,                      # The percent of the screen-space the master pane should occupy by default.
-        single_border_width=None,       # Border width for single window.
-        single_margin=None,             # Margin size for single window.
     ),
 
     layout.Max(),
