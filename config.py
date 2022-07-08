@@ -19,8 +19,8 @@ from qtile_extras import widget as extra_widget
 # ------------------------------------------------------
 
 mod = "mod4"
-# terminal = guess_terminal()
-terminal = "terminator"
+terminal = guess_terminal()
+# terminal = "terminator"
 browser = "firefox"
 main_layout = "monadtall"
 main_layout_alt = "columns"
@@ -283,11 +283,6 @@ keys = [
         lazy.layout.reset(),
         desc="Reset all window sizes"
     ),
-    Key(
-        "M-S-<Return>",
-        lazy.layout.toggle_split(),
-        desc="Toggle between split and unsplit sides of stack"
-    ),
 
     # Launching Applications
     Key(
@@ -475,7 +470,7 @@ scratchpads = ScratchPad(
     dropdowns=[                         # List of DropDowns
         DropDown(
             name="terminal",            # Name of dropdown
-            cmd="terminator -u",        # Command to launch
+            cmd="alacritty",            # Command to launch
             height=0.8,                 # Height of window as fraction of current screen.
             match=None,                 # Use a config.Match to identify the spawned window and move it to the scratchpad, instead of relying on the window's PID. This works around some programs that may not be caught by the window's PID if it does not match the PID of the spawned process.
             on_focus_lost_hide=True,    # Shall the window be hidden if focus is lost? If so, the DropDown is hidden if window focus or the group is changed.
@@ -488,7 +483,7 @@ scratchpads = ScratchPad(
 
         DropDown(
             name="debug",              # Name of dropdown
-            cmd=f"terminator -u -e 'tail -f {debug_file}'", # Command to launch
+            cmd=f"alacritty -e 'tail' -f {debug_file}", # Command to launch
             height=0.8,                 # Height of window as fraction of current screen.
             match=None,                 # Use a config.Match to identify the spawned window and move it to the scratchpad, instead of relying on the window's PID. This works around some programs that may not be caught by the window's PID if it does not match the PID of the spawned process.
             on_focus_lost_hide=True,    # Shall the window be hidden if focus is lost? If so, the DropDown is hidden if window focus or the group is changed.
