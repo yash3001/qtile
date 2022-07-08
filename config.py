@@ -40,6 +40,7 @@ volume_mute = os.path.join(os.path.dirname(__file__), "utils/scripts/volume_mute
 clipmenu = os.path.join(os.path.dirname(__file__), "utils/scripts/clipmenu.sh")
 autostart = os.path.join(os.path.dirname(__file__), "utils/scripts/autostart.sh")
 checkupdates = os.path.join(os.path.dirname(__file__), "utils/scripts/check_updates")
+debug_file = os.path.join(os.path.expanduser("~"), ".local/share/qtile/qtile.log")
 
 arch_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/arch-icons/arch_light.png")
 layout_icon_dir = os.path.join(os.path.dirname(__file__), "utils/icons/layout-icons/dark")
@@ -439,6 +440,11 @@ keys = [
         lazy.group['scratchpad'].dropdown_toggle('terminal'),
         desc="Toggle Terminal Scratchpad"
     ),
+    Key(
+        "M-d",
+        lazy.group['scratchpad'].dropdown_toggle('debug'),
+        desc="Toggle Debug Scratchpad"
+    ),
 
 ]
 
@@ -454,13 +460,26 @@ scratchpads = ScratchPad(
         DropDown(
             name="terminal",            # Name of dropdown
             cmd="terminator -u",        # Command to launch
-            height=0.4,                 # Height of window as fraction of current screen.
+            height=0.8,                 # Height of window as fraction of current screen.
             match=None,                 # Use a config.Match to identify the spawned window and move it to the scratchpad, instead of relying on the window's PID. This works around some programs that may not be caught by the window's PID if it does not match the PID of the spawned process.
             on_focus_lost_hide=True,    # Shall the window be hidden if focus is lost? If so, the DropDown is hidden if window focus or the group is changed.
-            opacity=0.9,                # Opacity of window as fraction. Zero is opaque.
+            opacity=1,                  # Opacity of window as fraction. Zero is opaque.
             warp_pointer=True,          # Shall pointer warp to center of window on activation? This has only effect if any of the on_focus_lost_xxx configurations is True
-            width=0.8,                  # Width of window as fraction of current screen width
-            x=0.1,                      # X position of window as fraction of current screen width. 0 is the left most position.
+            width=0.998,                # Width of window as fraction of current screen width
+            x=0.0,                      # X position of window as fraction of current screen width. 0 is the left most position.
+            y=0.0,                      # Y position of window as fraction of current screen height. 0 is the top most position. To show the window at bottom, you have to configure a value < 1 and an appropriate height.
+        ),
+
+        DropDown(
+            name="debug",            # Name of dropdown
+            cmd=f"terminator -u -e 'tail -f {debug_file}'", # Command to launch
+            height=0.8,                 # Height of window as fraction of current screen.
+            match=None,                 # Use a config.Match to identify the spawned window and move it to the scratchpad, instead of relying on the window's PID. This works around some programs that may not be caught by the window's PID if it does not match the PID of the spawned process.
+            on_focus_lost_hide=True,    # Shall the window be hidden if focus is lost? If so, the DropDown is hidden if window focus or the group is changed.
+            opacity=1,                  # Opacity of window as fraction. Zero is opaque.
+            warp_pointer=True,          # Shall pointer warp to center of window on activation? This has only effect if any of the on_focus_lost_xxx configurations is True
+            width=0.998,                # Width of window as fraction of current screen width
+            x=0.0,                      # X position of window as fraction of current screen width. 0 is the left most position.
             y=0.0,                      # Y position of window as fraction of current screen height. 0 is the top most position. To show the window at bottom, you have to configure a value < 1 and an appropriate height.
         )
     ],
