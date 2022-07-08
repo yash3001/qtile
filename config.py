@@ -5,7 +5,7 @@
 import os
 import subprocess
 from libqtile import qtile, bar, layout, widget, hook
-from libqtile.config import Click, Drag, Group, Match, Screen
+from libqtile.config import Click, Drag, Group, Match, Screen, ScratchPad, DropDown
 from libqtile.config import EzKey as Key
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
@@ -432,6 +432,14 @@ keys = [
         lazy.spawn(volume_mute),
         desc="Toogle Mute Volume"
     ),
+
+    # Scratchpad
+    Key(
+        "M-s",
+        lazy.group['scratchpad'].dropdown_toggle('terminal'),
+        desc="Toggle Terminal Scratchpad"
+    ),
+
 ]
 
 
@@ -440,7 +448,29 @@ keys = [
 # ----------------------- Groups -----------------------
 # ------------------------------------------------------
 
+scratchpads = ScratchPad(
+    name="scratchpad",                  # Name of the group
+    dropdowns=[                         # List of DropDowns
+        DropDown(
+            name="terminal",                 # Name of dropdown
+            cmd="terminator -u",        # Command to launch
+            height=0.4,                 # Height of window as fraction of current screen.
+            match=None,                 # Use a config.Match to identify the spawned window and move it to the scratchpad, instead of relying on the window's PID. This works around some programs that may not be caught by the window's PID if it does not match the PID of the spawned process.
+            on_focus_lost_hide=True,    # Shall the window be hidden if focus is lost? If so, the DropDown is hidden if window focus or the group is changed.
+            opacity=0.9,                # Opacity of window as fraction. Zero is opaque.
+            warp_pointer=True,          # Shall pointer warp to center of window on activation? This has only effect if any of the on_focus_lost_xxx configurations is True
+            width=0.8,                  # Width of window as fraction of current screen width
+            x=0.1,                      # X position of window as fraction of current screen width. 0 is the left most position.
+            y=0.0,                      # Y position of window as fraction of current screen height. 0 is the top most position. To show the window at bottom, you have to configure a value < 1 and an appropriate height.
+        )
+    ],
+    position=9223372036854775807,       # Position of the scratchpad. Negative values are interpreted as fractions of the screen height. 0 is the top most position.
+    label="",                           # The display name of the ScratchPad group. Defaults to the empty string such that the group is hidden in GroupList widget
+    single=False,                       # Only one of the window among the specified dropdowns will be visible at a time.
+)
+
 groups = [
+    scratchpads,
     Group("1", label="", matches=[Match(wm_class=["Code"])]),
     Group("2", label="", matches=[Match(wm_class=["firefox"])]),
     Group("3", label="", matches=[Match(wm_class=[""])]),
@@ -459,8 +489,8 @@ groups = [
 # from libqtile.dgroups import simple_key_binder
 # dgroups_key_binder = simple_key_binder("mod3")
 
-for i in range(len(groups)):
-    ind = i+1
+for i in range(1, len(groups)):
+    ind = i
     if ind == 10:
         ind = 0
 
@@ -507,14 +537,14 @@ layouts = [
         max_ratio=0.9,                  # The percent of the screen-space the master pane should occupy at maximum.
         min_ratio=0.1,                  # The percent of the screen-space the master pane should occupy at minimum.
         min_secondary_size=50,          # Minimum size in pixel for a secondary pane window.
-        new_client_position='top',      # Place new windows: after_current - after the active window. before_current - before the active window, top - at the top of the stack, bottom - at the bottom of the stack.
+        new_client_position='after',    # Place new windows: after_current - after the active window. before_current - before the active window, top - at the top of the stack, bottom - at the bottom of the stack.
         ratio=0.5,                      # The percent of the screen-space the master pane should occupy by default.
         single_border_width=None,       # Border width for single window.
         single_margin=None,             # Margin size for single window.
     ),
 
     layout.Columns(
-        border_focus=colors['grey'][1], # Border colour(s) for the focused window.
+        border_focus=colors["grey"][1], # Border colour(s) for the focused window.
         border_focus_stack=colors['grey'][1], # Border colour(s) for the focused window in stacked columns.
         border_normal=colors['black'][1], # Border colour(s) for un-focused windows.
         border_normal_stack=colors['black'][1], # Border colour(s) for un-focused windows in stacked columns.
@@ -537,7 +567,7 @@ layouts = [
     layout.Tile(
         add_after_last=False,           # Add new clients after all the others. If this is True, it overrides add_on_top.
         add_on_top=True,                # Add new clients before all the others, potentially pushing other windows into slave stack.
-        border_focus='#0000ff',         # Border colour(s) for the focused window.
+        border_focus=colors["grey"][1], # Border colour(s) for the focused window.
         border_normal='#000000',        # Border colour(s) for the unfocused window.
         border_on_single=True,          # Whether to draw border if there is only one window.
         border_width=1,                 # Border width.
@@ -555,7 +585,7 @@ layouts = [
 
     layout.Stack(
         autosplit=False,                # Auto split all new stacks.
-        border_focus='#0000ff',         # Border colour(s) for the focused window.
+        border_focus=colors["grey"][1], # Border colour(s) for the focused window.
         border_normal='#000000',        # Border colour(s) for un-focused windows.
         border_width=1,                 # Border width.
         fair=False,                     # Add new windows to the stacks in a round robin way.
@@ -564,7 +594,7 @@ layouts = [
     ),
 
     layout.Bsp(
-        border_focus='#881111',         # Border colour(s) for the focused window.
+        border_focus=colors["grey"][1], # Border colour(s) for the focused window.
         border_normal='#220000',        # Border colour(s) for un-focused windows.
         border_on_single=False,         # Draw border when there is only one window.
         border_width=2,                 # Border width.
@@ -577,7 +607,7 @@ layouts = [
     ),
 
     layout.Matrix(
-        border_focus='#0000ff',         # Border colour(s) for the focused window.
+        border_focus=colors["grey"][1], # Border colour(s) for the focused window.
         border_normal='#000000',        # Border colour(s) for un-focused windows.
         border_width=1,                 # Border width.
         columns=2,                      # Number of columns.
@@ -586,7 +616,7 @@ layouts = [
 
     layout.MonadWide(
         align=0,                        # Which side master plane will be placed (one of MonadTall._left or MonadTall._right).
-        border_focus='#ff0000',         # Border colour(s) for the focused window.
+        border_focus=colors["grey"][1], # Border colour(s) for the focused window.
         border_normal='#000000',        # Border colour(s) for un-focused windows.
         border_width=2,                 # Border width.
         change_ratio=0.05,              # Resize ratio.
@@ -602,7 +632,7 @@ layouts = [
     ),
 
     layout.RatioTile(
-        border_focus='#0000ff',         # Border colour(s) for the focused window.
+        border_focus=colors["grey"][1], # Border colour(s) for the focused window.
         border_normal='#000000',        # Border colour(s) for un-focused windows.
         border_width=1,                 # Border width.
         fancy=False,                    # Use a different method to calculate window sizes.
@@ -643,7 +673,7 @@ layouts = [
     ),
 
     layout.VerticalTile(
-        border_focus='#FF0000',         # Border color(s) for the focused window.
+        border_focus=colors["grey"][1], # Border color(s) for the focused window.
         border_normal='#FFFFFF',        # Border color(s) for un-focused windows.
         border_width=1,                 # Border width.
         margin=0,                       # Border margin (int or list of ints [N E S W]).
@@ -658,7 +688,7 @@ layouts = [
     ),
 
     layout.Floating(
-        border_focus='#0000ff',         # Border colour(s) for the focused window.
+        border_focus=colors["grey"][1], # Border colour(s) for the focused window.
         border_normal='#000000',        # Border colour(s) for un-focused windows.
         border_width=1,                 # Border width.
         fullscreen_border_width=0,      # Border width for fullscreen.
@@ -667,7 +697,7 @@ layouts = [
 
     layout.MonadThreeCol(
         align=0,                        # Which side master plane will be placed (one of MonadTall._left or MonadTall._right).
-        border_focus='#ff0000',         # Border colour(s) for the focused window.
+        border_focus=colors["grey"][1], # Border colour(s) for the focused window.
         border_normal='#000000',        # Border colour(s) for un-focused windows.
         border_width=2,                 # Border width.
         change_ratio=0.05,              # Resize ratio.
@@ -690,7 +720,7 @@ layouts = [
     ),
 
     layout.Spiral(
-        border_focus='#0000ff',         # Border colour(s) for the focused window.
+        border_focus=colors["grey"][1], # Border colour(s) for the focused window.
         border_normal='#000000',        # Border colour(s) for un-focused windows.
         border_width=1,                 # Border width.
         clockwise=True,                 # Direction of spiral
