@@ -436,14 +436,24 @@ keys = [
 
     # Scratchpad
     Key(
-        "M-s",
+        "A-t",
         lazy.group['scratchpad'].dropdown_toggle('terminal'),
         desc="Toggle Terminal Scratchpad"
     ),
     Key(
-        "M-d",
+        "A-d",
         lazy.group['scratchpad'].dropdown_toggle('debug'),
         desc="Toggle Debug Scratchpad"
+    ),
+    Key(
+        "A-b",
+        lazy.group['scratchpad'].dropdown_toggle('browser'),
+        desc="Toggle Browser Scratchpad"
+    ),
+    Key(
+        "A-m",
+        lazy.group['scratchpad'].dropdown_toggle('music'),
+        desc="Toggle Music Scratchpad"
     ),
 
 ]
@@ -471,7 +481,7 @@ scratchpads = ScratchPad(
         ),
 
         DropDown(
-            name="debug",            # Name of dropdown
+            name="debug",              # Name of dropdown
             cmd=f"terminator -u -e 'tail -f {debug_file}'", # Command to launch
             height=0.8,                 # Height of window as fraction of current screen.
             match=None,                 # Use a config.Match to identify the spawned window and move it to the scratchpad, instead of relying on the window's PID. This works around some programs that may not be caught by the window's PID if it does not match the PID of the spawned process.
@@ -481,7 +491,33 @@ scratchpads = ScratchPad(
             width=0.998,                # Width of window as fraction of current screen width
             x=0.0,                      # X position of window as fraction of current screen width. 0 is the left most position.
             y=0.0,                      # Y position of window as fraction of current screen height. 0 is the top most position. To show the window at bottom, you have to configure a value < 1 and an appropriate height.
-        )
+        ),
+
+        DropDown(
+            name="browser",             # Name of dropdown
+            cmd="firefox -P 'ScratchPad'", # Command to launch
+            height=0.8,                 # Height of window as fraction of current screen.
+            match=None,                 # Use a config.Match to identify the spawned window and move it to the scratchpad, instead of relying on the window's PID. This works around some programs that may not be caught by the window's PID if it does not match the PID of the spawned process.
+            on_focus_lost_hide=True,    # Shall the window be hidden if focus is lost? If so, the DropDown is hidden if window focus or the group is changed.
+            opacity=1,                  # Opacity of window as fraction. Zero is opaque.
+            warp_pointer=True,          # Shall pointer warp to center of window on activation? This has only effect if any of the on_focus_lost_xxx configurations is True
+            width=0.998,                # Width of window as fraction of current screen width
+            x=0.0,                      # X position of window as fraction of current screen width. 0 is the left most position.
+            y=0.0,                      # Y position of window as fraction of current screen height. 0 is the top most position. To show the window at bottom, you have to configure a value < 1 and an appropriate height.
+        ),
+
+        DropDown(
+            name="music",               # Name of dropdown
+            cmd="terminator -e 'cmus'", # Command to launch
+            height=0.8,                 # Height of window as fraction of current screen.
+            match=None,                 # Use a config.Match to identify the spawned window and move it to the scratchpad, instead of relying on the window's PID. This works around some programs that may not be caught by the window's PID if it does not match the PID of the spawned process.
+            on_focus_lost_hide=True,    # Shall the window be hidden if focus is lost? If so, the DropDown is hidden if window focus or the group is changed.
+            opacity=1,                  # Opacity of window as fraction. Zero is opaque.
+            warp_pointer=True,          # Shall pointer warp to center of window on activation? This has only effect if any of the on_focus_lost_xxx configurations is True
+            width=0.998,                # Width of window as fraction of current screen width
+            x=0.0,                      # X position of window as fraction of current screen width. 0 is the left most position.
+            y=0.0,                      # Y position of window as fraction of current screen height. 0 is the top most position. To show the window at bottom, you have to configure a value < 1 and an appropriate height.
+        ),
     ],
     position=9223372036854775807,       # Position of the scratchpad. Negative values are interpreted as fractions of the screen height. 0 is the top most position.
     label="",                           # The display name of the ScratchPad group. Defaults to the empty string such that the group is hidden in GroupList widget
