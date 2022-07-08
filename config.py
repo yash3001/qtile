@@ -452,7 +452,7 @@ scratchpads = ScratchPad(
     name="scratchpad",                  # Name of the group
     dropdowns=[                         # List of DropDowns
         DropDown(
-            name="terminal",                 # Name of dropdown
+            name="terminal",            # Name of dropdown
             cmd="terminator -u",        # Command to launch
             height=0.4,                 # Height of window as fraction of current screen.
             match=None,                 # Use a config.Match to identify the spawned window and move it to the scratchpad, instead of relying on the window's PID. This works around some programs that may not be caught by the window's PID if it does not match the PID of the spawned process.
@@ -570,7 +570,7 @@ layouts = [
         border_focus=colors["grey"][1], # Border colour(s) for the focused window.
         border_normal='#000000',        # Border colour(s) for the unfocused window.
         border_on_single=True,          # Whether to draw border if there is only one window.
-        border_width=1,                 # Border width.
+        border_width=2,                 # Border width.
         expand=True,                    # Expand the master windows to the full screen width if no slaves are present.
         margin=[5,5,5,5],               # Margin of the layout (int or list of ints [N E S W])
         margin_on_single=True,          # Whether to draw margin if there is only one window.
@@ -587,7 +587,7 @@ layouts = [
         autosplit=False,                # Auto split all new stacks.
         border_focus=colors["grey"][1], # Border colour(s) for the focused window.
         border_normal='#000000',        # Border colour(s) for un-focused windows.
-        border_width=1,                 # Border width.
+        border_width=2,                 # Border width.
         fair=False,                     # Add new windows to the stacks in a round robin way.
         margin=0,                       # Margin of the layout (int or list of ints [N E S W]).
         num_stacks=2,                   # Number of stacks.
@@ -609,7 +609,7 @@ layouts = [
     layout.Matrix(
         border_focus=colors["grey"][1], # Border colour(s) for the focused window.
         border_normal='#000000',        # Border colour(s) for un-focused windows.
-        border_width=1,                 # Border width.
+        border_width=2,                 # Border width.
         columns=2,                      # Number of columns.
         margin=0,                       # Margin of the layout (int or list of ints [N E S W]).
     ),
@@ -634,7 +634,7 @@ layouts = [
     layout.RatioTile(
         border_focus=colors["grey"][1], # Border colour(s) for the focused window.
         border_normal='#000000',        # Border colour(s) for un-focused windows.
-        border_width=1,                 # Border width.
+        border_width=2,                 # Border width.
         fancy=False,                    # Use a different method to calculate window sizes.
         margin=0,                       # Margin of the layout (int or list of ints [N E S W]).
         ratio=1.618,                    # Ratio of the tiles.
@@ -675,7 +675,7 @@ layouts = [
     layout.VerticalTile(
         border_focus=colors["grey"][1], # Border color(s) for the focused window.
         border_normal='#FFFFFF',        # Border color(s) for un-focused windows.
-        border_width=1,                 # Border width.
+        border_width=2,                 # Border width.
         margin=0,                       # Border margin (int or list of ints [N E S W]).
     ),
 
@@ -690,7 +690,7 @@ layouts = [
     layout.Floating(
         border_focus=colors["grey"][1], # Border colour(s) for the focused window.
         border_normal='#000000',        # Border colour(s) for un-focused windows.
-        border_width=1,                 # Border width.
+        border_width=2,                 # Border width.
         fullscreen_border_width=0,      # Border width for fullscreen.
         max_border_width=0,             # Border width for maximize.
     ),
@@ -722,7 +722,7 @@ layouts = [
     layout.Spiral(
         border_focus=colors["grey"][1], # Border colour(s) for the focused window.
         border_normal='#000000',        # Border colour(s) for un-focused windows.
-        border_width=1,                 # Border width.
+        border_width=2,                 # Border width.
         clockwise=True,                 # Direction of spiral
         main_pane='left',               # Location of biggest window 'top', 'bottom', 'left', 'right'
         main_pane_ratio=None,           # Ratio for biggest window or 'None' to use same ratio for all windows.
@@ -1637,6 +1637,11 @@ follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
 floating_layout = layout.Floating(
+    border_focus=colors["grey"][1], # Border colour(s) for the focused window.
+    border_normal='#000000',        # Border colour(s) for un-focused windows.
+    border_width=2,                 # Border width.
+    fullscreen_border_width=0,      # Border width for fullscreen.
+    max_border_width=0,             # Border width for maximize.
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
