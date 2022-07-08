@@ -366,6 +366,11 @@ keys = [
         lazy.window.kill(),
         desc="Kill focused window"
     ),
+    Key(
+        "A-q",
+        lazy.window.kill(),
+        desc="Kill focused window"
+    ),
     
     # Reload/Shutdown Qtile
     Key(
@@ -623,11 +628,11 @@ layouts = [
         add_after_last=False,           # Add new clients after all the others. If this is True, it overrides add_on_top.
         add_on_top=True,                # Add new clients before all the others, potentially pushing other windows into slave stack.
         border_focus=colors["grey"][1], # Border colour(s) for the focused window.
-        border_normal='#000000',        # Border colour(s) for the unfocused window.
+        border_normal=colors['black'][1], # Border colour(s) for the unfocused window.
         border_on_single=True,          # Whether to draw border if there is only one window.
         border_width=2,                 # Border width.
         expand=True,                    # Expand the master windows to the full screen width if no slaves are present.
-        margin=[5,5,5,5],               # Margin of the layout (int or list of ints [N E S W])
+        margin=[15,15,15,15],           # Margin of the layout (int or list of ints [N E S W])
         margin_on_single=True,          # Whether to draw margin if there is only one window.
         master_length=1,                # Amount of windows displayed in the master stack. Surplus windows will be moved to the slave stack.
         master_match=None,              # A Match object defining which window(s) should be kept masters (single or a list of Match-objects).
@@ -641,7 +646,7 @@ layouts = [
     layout.Stack(
         autosplit=False,                # Auto split all new stacks.
         border_focus=colors["grey"][1], # Border colour(s) for the focused window.
-        border_normal='#000000',        # Border colour(s) for un-focused windows.
+        border_normal=colors['black'][1], # Border colour(s) for un-focused windows.
         border_width=2,                 # Border width.
         fair=False,                     # Add new windows to the stacks in a round robin way.
         margin=0,                       # Margin of the layout (int or list of ints [N E S W]).
@@ -650,7 +655,7 @@ layouts = [
 
     layout.Bsp(
         border_focus=colors["grey"][1], # Border colour(s) for the focused window.
-        border_normal='#220000',        # Border colour(s) for un-focused windows.
+        border_normal=colors['black'][1], # Border colour(s) for un-focused windows.
         border_on_single=False,         # Draw border when there is only one window.
         border_width=2,                 # Border width.
         fair=True,                      # New clients are inserted in the shortest branch.
@@ -663,7 +668,7 @@ layouts = [
 
     layout.Matrix(
         border_focus=colors["grey"][1], # Border colour(s) for the focused window.
-        border_normal='#000000',        # Border colour(s) for un-focused windows.
+        border_normal=colors['black'][1],        # Border colour(s) for un-focused windows.
         border_width=2,                 # Border width.
         columns=2,                      # Number of columns.
         margin=0,                       # Margin of the layout (int or list of ints [N E S W]).
@@ -672,7 +677,7 @@ layouts = [
     layout.MonadWide(
         align=0,                        # Which side master plane will be placed (one of MonadTall._left or MonadTall._right).
         border_focus=colors["grey"][1], # Border colour(s) for the focused window.
-        border_normal='#000000',        # Border colour(s) for un-focused windows.
+        border_normal=colors['black'][1],        # Border colour(s) for un-focused windows.
         border_width=2,                 # Border width.
         change_ratio=0.05,              # Resize ratio.
         change_size=20,                 # Resize change in pixels.
@@ -688,7 +693,7 @@ layouts = [
 
     layout.RatioTile(
         border_focus=colors["grey"][1], # Border colour(s) for the focused window.
-        border_normal='#000000',        # Border colour(s) for un-focused windows.
+        border_normal=colors['black'][1],        # Border colour(s) for un-focused windows.
         border_width=2,                 # Border width.
         fancy=False,                    # Use a different method to calculate window sizes.
         margin=0,                       # Margin of the layout (int or list of ints [N E S W]).
@@ -729,7 +734,7 @@ layouts = [
 
     layout.VerticalTile(
         border_focus=colors["grey"][1], # Border color(s) for the focused window.
-        border_normal='#FFFFFF',        # Border color(s) for un-focused windows.
+        border_normal=colors['black'][1], # Border color(s) for un-focused windows.
         border_width=2,                 # Border width.
         margin=0,                       # Border margin (int or list of ints [N E S W]).
     ),
@@ -744,7 +749,7 @@ layouts = [
 
     layout.Floating(
         border_focus=colors["grey"][1], # Border colour(s) for the focused window.
-        border_normal='#000000',        # Border colour(s) for un-focused windows.
+        border_normal=colors['black'][1],        # Border colour(s) for un-focused windows.
         border_width=2,                 # Border width.
         fullscreen_border_width=0,      # Border width for fullscreen.
         max_border_width=0,             # Border width for maximize.
@@ -753,7 +758,7 @@ layouts = [
     layout.MonadThreeCol(
         align=0,                        # Which side master plane will be placed (one of MonadTall._left or MonadTall._right).
         border_focus=colors["grey"][1], # Border colour(s) for the focused window.
-        border_normal='#000000',        # Border colour(s) for un-focused windows.
+        border_normal=colors['black'][1],        # Border colour(s) for un-focused windows.
         border_width=2,                 # Border width.
         change_ratio=0.05,              # Resize ratio.
         change_size=20,                 # Resize change in pixels.
@@ -776,7 +781,7 @@ layouts = [
 
     layout.Spiral(
         border_focus=colors["grey"][1], # Border colour(s) for the focused window.
-        border_normal='#000000',        # Border colour(s) for un-focused windows.
+        border_normal=colors['black'][1],        # Border colour(s) for un-focused windows.
         border_width=2,                 # Border width.
         clockwise=True,                 # Direction of spiral
         main_pane='left',               # Location of biggest window 'top', 'bottom', 'left', 'right'
@@ -1693,7 +1698,7 @@ bring_front_click = False
 cursor_warp = False
 floating_layout = layout.Floating(
     border_focus=colors["grey"][1], # Border colour(s) for the focused window.
-    border_normal='#000000',        # Border colour(s) for un-focused windows.
+    border_normal=colors['black'][1],        # Border colour(s) for un-focused windows.
     border_width=2,                 # Border width.
     fullscreen_border_width=0,      # Border width for fullscreen.
     max_border_width=0,             # Border width for maximize.
