@@ -19,7 +19,8 @@ from qtile_extras import widget as extra_widget
 # ------------------------------------------------------
 
 mod = "mod4"
-terminal = guess_terminal()
+# terminal = guess_terminal()
+terminal = "terminator"
 browser = "firefox"
 main_layout = "monadtall"
 main_layout_alt = "columns"
