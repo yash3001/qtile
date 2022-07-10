@@ -334,9 +334,14 @@ keys = [
     
     # Change layouts
     Key(
-        "M-<space>",
+        "A-C-<space>",
         lazy.next_layout(),
         desc="Toggle between layouts"
+    ),
+    Key(
+        "M-<space>",
+        lazy.function(toogle_max),
+        desc="Toggle max layout"
     ),
     Key(
         "M-f",
