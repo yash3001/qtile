@@ -5,8 +5,9 @@
 import os
 import subprocess
 from libqtile import qtile, bar, layout, widget, hook
-from libqtile.config import Click, Drag, Group, Match, Screen, ScratchPad, DropDown
+from libqtile.config import Click, Drag, Group, Match, Screen, ScratchPad, DropDown, KeyChord
 from libqtile.config import EzKey as Key
+from libqtile.config import Key as Key2
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from libqtile.backend.x11 import xkeysyms
@@ -330,7 +331,6 @@ keys = [
         lazy.spawn(shutdown_menu),
         desc="Launch shutdown menu"
     ),
-    
     
     # Change layouts
     Key(
@@ -718,7 +718,7 @@ layouts = [
     layout.TreeTab(
         active_bg='000080',             # Background color of active tab.
         active_fg='ffffff',             # Foreground color of active tab.
-        bg_color='000000',              # Background color of tabs.
+        bg_color='000000',              # Background color of tabs.Key
         border_width=2,                 # Width of the border.
         font='sans',                    # Font.
         fontshadow=None,                # font shadow color, default is None (no shadow).
