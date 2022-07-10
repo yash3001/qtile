@@ -509,7 +509,7 @@ scratchpads = ScratchPad(
 
         DropDown(
             name="music",               # Name of dropdown
-            cmd="terminator -e 'cmus'", # Command to launch
+            cmd="alacritty -e 'cmus'",  # Command to launch
             height=0.8,                 # Height of window as fraction of current screen.
             match=None,                 # Use a config.Match to identify the spawned window and move it to the scratchpad, instead of relying on the window's PID. This works around some programs that may not be caught by the window's PID if it does not match the PID of the spawned process.
             on_focus_lost_hide=True,    # Shall the window be hidden if focus is lost? If so, the DropDown is hidden if window focus or the group is changed.
