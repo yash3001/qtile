@@ -478,6 +478,16 @@ keys = [
                 desc="Launch Browser"
             ),
             Key(
+                "y",
+                lazy.spawn(f"{browser} --new-window 'https://www.youtube.com/'"),
+                desc="Launch Youtube"
+            ),
+            Key(
+                "w",
+                lazy.spawn(f"{browser} --new-window 'https://web.whatsapp.com/'"),
+                desc="Launch WhatsApp"
+            ),
+            Key(
                 "v",
                 lazy.spawn("code"),
                 desc="Launch VsCode"
@@ -495,7 +505,7 @@ keys = [
             Key(
                 "e",
                 lazy.spawn(f"code {qtile_path}"),
-                desc="Launch Spotify"
+                desc="Launch Qtile Config File"
             ),
             Key(
                 "l",
@@ -1083,6 +1093,30 @@ widget_list = [
         length=3,                       # Length of the spacer
         background=colors['grey'][1],   # Widget background color
         mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+    ),
+
+    widget.Chord(
+        background=colors['grey'][1],   # Widget background color
+        chords_colors={                 # colors per chord in form of tuple {'chord_name': ('bg', 'fg')}. Where a chord name is not in the dictionary, the default background and foreground values will be used.
+            'Launch': (colors['grey'][1], "#ff0000"), 
+        },
+        fmt='{} ',                       # To format the string returned by the widget. For example, if the clock widget returns '08:46' we can do fmt='time {}' do print 'time 08:46' on the widget. To format the individual strings like hour and minutes use the format paramater of the widget (if it has one)
+        font='JetBrainsMono Nerd Font', # Default font
+        fontshadow=None,                # font shadow color, default is None(no shadow)
+        fontsize=16,                    # Font size. Calculated if None.
+        foreground='#000000',           # Foreground colour
+        markup=True,                    # Whether or not to use pango markup
+        max_chars=0,                    # Maximum number of characters to display in widget.
+        mouse_callbacks={},             # Dict of mouse button press callback functions. Accepts functions and lazy calls.
+        name_transform=lambda str: str, # preprocessor for chord name it is pure function string -> string
+        padding=3,                      # Padding. Calculated if None.
+        scroll=False,                   # Whether text should be scrolled. When True, you must set the widget's width.
+        scroll_clear=False,             # Whether text should scroll completely away (True) or stop when the end of the text is shown (False)
+        scroll_delay=2,                 # Number of seconds to pause before starting scrolling and restarting/clearing text at end
+        scroll_hide=False,              # Whether the widget should hide when scrolling has finished
+        scroll_interval=0.1,            # Time in seconds before next scrolling step
+        scroll_repeat=True,             # Whether text should restart scrolling once the text has ended
+        scroll_step=1,                  # Number of pixels to scroll with each step
     ),
 
     widget.Image(
