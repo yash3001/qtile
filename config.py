@@ -26,6 +26,7 @@ browser = "firefox"
 main_layout = "monadtall"
 main_layout_alt = "columns"
 
+qtile_path = os.path.dirname(__file__)
 shutdown_menu = os.path.join(os.path.dirname(__file__), "utils/scripts/shutdown.sh")
 logout_prompt = os.path.join(os.path.dirname(__file__), "utils/scripts/logout_prompt.sh")
 poweroff_prompt = os.path.join(os.path.dirname(__file__), "utils/scripts/poweroff_prompt.sh")
@@ -460,6 +461,64 @@ keys = [
         "A-m",
         lazy.group['scratchpad'].dropdown_toggle('music'),
         desc="Toggle Music Scratchpad"
+    ),
+
+    # Keychords
+    KeyChord(
+        [mod], 'a', 
+        [
+            Key(
+                "t",
+                lazy.spawn(terminal),
+                desc="Launch terminal"
+            ),
+            Key(
+                "b",
+                lazy.spawn(f"{browser}"),
+                desc="Launch Browser"
+            ),
+            Key(
+                "v",
+                lazy.spawn("code"),
+                desc="Launch VsCode"
+            ),
+            Key(
+                "d",
+                lazy.spawn("discord"),
+                desc="Launch Discord"
+            ),
+            Key(
+                "s",
+                lazy.spawn("spotify"),
+                desc="Launch Spotify"
+            ),
+            Key(
+                "e",
+                lazy.spawn(f"code {qtile_path}"),
+                desc="Launch Spotify"
+            ),
+            Key(
+                "l",
+                lazy.spawn("i3lock-fancy"),
+                desc="Launch i3lock-fancy"
+            ),
+            Key(
+                "c",
+                lazy.spawn(clipmenu),
+                desc="Launch clipmenu"
+            ),
+            Key(
+                "x",
+                lazy.spawn("dmenu_run -h 40 -c -l 10 -p 'Apps:'"),
+                desc="Launch Dmenu"
+            ),
+            Key(
+                "s",
+                lazy.spawn(shutdown_menu),
+                desc="Launch shutdown menu"
+            ),
+        ],
+        mode="Launch",
     ),
 
 ]
