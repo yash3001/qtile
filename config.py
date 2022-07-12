@@ -606,6 +606,32 @@ scratchpads = ScratchPad(
             x=0.0,                      # X position of window as fraction of current screen width. 0 is the left most position.
             y=0.0,                      # Y position of window as fraction of current screen height. 0 is the top most position. To show the window at bottom, you have to configure a value < 1 and an appropriate height.
         ),
+
+        DropDown(
+            name="pacupdate",           # Name of dropdown
+            cmd="alacritty -e 'sudo' 'pacman' '-Syu'",# Command to launch
+            height=0.8,                 # Height of window as fraction of current screen.
+            match=None,                 # Use a config.Match to identify the spawned window and move it to the scratchpad, instead of relying on the window's PID. This works around some programs that may not be caught by the window's PID if it does not match the PID of the spawned process.
+            on_focus_lost_hide=True,    # Shall the window be hidden if focus is lost? If so, the DropDown is hidden if window focus or the group is changed.
+            opacity=1,                  # Opacity of window as fraction. Zero is opaque.
+            warp_pointer=True,          # Shall pointer warp to center of window on activation? This has only effect if any of the on_focus_lost_xxx configurations is True
+            width=0.998,                # Width of window as fraction of current screen width
+            x=0.0,                      # X position of window as fraction of current screen width. 0 is the left most position.
+            y=0.0,                      # Y position of window as fraction of current screen height. 0 is the top most position. To show the window at bottom, you have to configure a value < 1 and an appropriate height.
+        ),
+
+        DropDown(
+            name="aurupdate",           # Name of dropdown
+            cmd="alacritty -e 'yay' '-Syu'",# Command to launch
+            height=0.8,                 # Height of window as fraction of current screen.
+            match=None,                 # Use a config.Match to identify the spawned window and move it to the scratchpad, instead of relying on the window's PID. This works around some programs that may not be caught by the window's PID if it does not match the PID of the spawned process.
+            on_focus_lost_hide=True,    # Shall the window be hidden if focus is lost? If so, the DropDown is hidden if window focus or the group is changed.
+            opacity=1,                  # Opacity of window as fraction. Zero is opaque.
+            warp_pointer=True,          # Shall pointer warp to center of window on activation? This has only effect if any of the on_focus_lost_xxx configurations is True
+            width=0.998,                # Width of window as fraction of current screen width
+            x=0.0,                      # X position of window as fraction of current screen width. 0 is the left most position.
+            y=0.0,                      # Y position of window as fraction of current screen height. 0 is the top most position. To show the window at bottom, you have to configure a value < 1 and an appropriate height.
+        ),
     ],
     position=9223372036854775807,       # Position of the scratchpad. Negative values are interpreted as fractions of the screen height. 0 is the top most position.
     label="",                           # The display name of the ScratchPad group. Defaults to the empty string such that the group is hidden in GroupList widget
@@ -1152,8 +1178,8 @@ widget_list = [
         margin_x=None,                  # X Margin. Overrides 'margin' if set
         margin_y=None,                  # Y Margin. Overrides 'margin' if set
         mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-            "Button1": lazy.spawn(f'{terminal} -e "sudo pacman -Syu"'),
-            "Button3": lazy.spawn(f'{terminal} -e "yay -Syu"'),
+            "Button1": lazy.group['scratchpad'].dropdown_toggle('pacupdate'),
+            "Button3": lazy.group['scratchpad'].dropdown_toggle('aurupdate'),
         },
         rotate=0.0,                     # rotate the image in degrees counter-clockwise
         scale=True,                     # Enable/Disable image scaling
@@ -1170,8 +1196,8 @@ widget_list = [
         markup=True,                    # Whether or not to use pango markup
         max_chars=0,                    # Maximum number of characters to display in widget.
         mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-            "Button1": lazy.spawn(f'{terminal} -e "sudo pacman -Syu"'),
-            "Button3": lazy.spawn(f'{terminal} -e "yay -Syu"'),
+            "Button1": lazy.group['scratchpad'].dropdown_toggle('pacupdate'),
+            "Button3": lazy.group['scratchpad'].dropdown_toggle('aurupdate'),
         },
         padding=3,                      # Padding. Calculated if None.
         update_interval=60,             # Update interval in seconds, if none, the widget updates whenever it's done.
