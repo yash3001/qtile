@@ -10,7 +10,7 @@ from libqtile.config import EzKey as Key
 from libqtile.config import Key as Key2
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
-from libqtile.backend.x11 import xkeysyms
+from libqtile.backend.x11.xkeysyms import keysyms as keysym
 from qtile_extras import widget as extra_widget
 
 
@@ -127,6 +127,13 @@ def toogle_tile(qtile):
 # ------------------------------------------------------
 # -------------------- Key Bindings --------------------
 # ------------------------------------------------------
+
+Key.modifier_keys = {
+   'M': 'mod4',
+   'A': 'mod1',
+   'S': 'shift',
+   'C': 'control',
+}
 
 keys = [
     # Switch between windows (Move Focus)
@@ -531,6 +538,37 @@ keys = [
         mode="Launch",
     ),
 
+    KeyChord(
+        [mod], 's', 
+        [
+            Key(
+                "<KP_Up>",
+                lazy.spawn(volume_up),
+                desc="Increase Volume"
+            ),
+            Key(
+                "<KP_Down>",
+                lazy.spawn(volume_down),
+                desc="Decrease Volume"
+            ),
+            Key(
+                "<KP_Begin>",
+                lazy.spawn(volume_mute),
+                desc="Toggle Mute"
+            ),
+            Key(
+                "<KP_Left>",
+                lazy.spawn(brightness_down),
+                desc="Decrease Brightness"
+            ),
+            Key(
+                "<KP_Right>",
+                lazy.spawn(brightness_up),
+                desc="Increase Brightness"
+            ),
+        ],
+        mode="System",
+    ),   
 ]
 
 
@@ -1125,8 +1163,9 @@ widget_list = [
         background=colors['grey'][1],   # Widget background color
         chords_colors={                 # colors per chord in form of tuple {'chord_name': ('bg', 'fg')}. Where a chord name is not in the dictionary, the default background and foreground values will be used.
             'Launch': (colors['grey'][1], "#ff0000"), 
+            'System': (colors['grey'][1], "#0000ff"), 
         },
-        fmt='{} ',                       # To format the string returned by the widget. For example, if the clock widget returns '08:46' we can do fmt='time {}' do print 'time 08:46' on the widget. To format the individual strings like hour and minutes use the format paramater of the widget (if it has one)
+        fmt='{} ',                   # To format the string returned by the widget. For example, if the clock widget returns '08:46' we can do fmt='time {}' do print 'time 08:46' on the widget. To format the individual strings like hour and minutes use the format paramater of the widget (if it has one)
         font='JetBrainsMono Nerd Font', # Default font
         fontshadow=None,                # font shadow color, default is None(no shadow)
         fontsize=16,                    # Font size. Calculated if None.
@@ -1134,7 +1173,7 @@ widget_list = [
         markup=True,                    # Whether or not to use pango markup
         max_chars=0,                    # Maximum number of characters to display in widget.
         mouse_callbacks={},             # Dict of mouse button press callback functions. Accepts functions and lazy calls.
-        name_transform=lambda str: str, # preprocessor for chord name it is pure function string -> string
+        name_transform=lambda str: f"🚀 {str}" if str == "Launch" else (f"⚙ {str}" if str == "System" else str), # preprocessor for chord name it is pure function string -> string
         padding=3,                      # Padding. Calculated if None.
         scroll=False,                   # Whether text should be scrolled. When True, you must set the widget's width.
         scroll_clear=False,             # Whether text should scroll completely away (True) or stop when the end of the text is shown (False)
