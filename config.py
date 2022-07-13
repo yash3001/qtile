@@ -42,7 +42,7 @@ volume_down = os.path.join(os.path.dirname(__file__), "utils/scripts/volume_down
 volume_mute = os.path.join(os.path.dirname(__file__), "utils/scripts/volume_mute.sh")
 clipmenu = os.path.join(os.path.dirname(__file__), "utils/scripts/clipmenu.sh")
 autostart = os.path.join(os.path.dirname(__file__), "utils/scripts/autostart.sh")
-checkupdates = os.path.join(os.path.dirname(__file__), "utils/scripts/check_updates")
+checkupdates = os.path.join(os.path.dirname(__file__), "utils/scripts/check_updates.sh")
 debug_file = os.path.join(os.path.expanduser("~"), ".local/share/qtile/qtile.log")
 
 arch_icon_path = os.path.join(os.path.dirname(__file__), "utils/icons/arch-icons/arch_light.png")
