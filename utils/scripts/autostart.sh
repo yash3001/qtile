@@ -3,6 +3,11 @@
 # Compositor
 compton --config ~/.config/compton/compton.conf &
 
+# Conky
+killall conky &> /dev/null
+conky -c ~/.config/qtile/apps/conky/time.lua &
+conky -c ~/.config/qtile/apps/conky/sysinfo.lua &
+
 # Start lxsession for theme
 lxsession &
 
