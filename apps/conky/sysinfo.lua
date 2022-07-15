@@ -5,7 +5,7 @@ conky.config = {
     no_buffers = true,
     double_buffer = true,
     cpu_avg_samples = 2,
-    net_avg_samples = 1,
+    net_avg_samples = 2,
 	diskio_avg_samples = 10,
 
     alignment = 'top_right',
