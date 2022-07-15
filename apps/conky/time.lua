@@ -14,7 +14,7 @@ conky.config = {
 
     minimum_height = 180,
     minimum_width = 5,
-    maximum_width = 700,
+    -- maximum_width = 700,
 
     draw_shades = false,
     draw_outline = false,
