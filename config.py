@@ -588,7 +588,7 @@ scratchpads = ScratchPad(
             on_focus_lost_hide=True,    # Shall the window be hidden if focus is lost? If so, the DropDown is hidden if window focus or the group is changed.
             opacity=1,                  # Opacity of window as fraction. Zero is opaque.
             warp_pointer=True,          # Shall pointer warp to center of window on activation? This has only effect if any of the on_focus_lost_xxx configurations is True
-            width=0.998,                # Width of window as fraction of current screen width
+            width=0.995,                # Width of window as fraction of current screen width
             x=0.0,                      # X position of window as fraction of current screen width. 0 is the left most position.
             y=0.0,                      # Y position of window as fraction of current screen height. 0 is the top most position. To show the window at bottom, you have to configure a value < 1 and an appropriate height.
         ),
@@ -601,7 +601,7 @@ scratchpads = ScratchPad(
             on_focus_lost_hide=True,    # Shall the window be hidden if focus is lost? If so, the DropDown is hidden if window focus or the group is changed.
             opacity=1,                  # Opacity of window as fraction. Zero is opaque.
             warp_pointer=True,          # Shall pointer warp to center of window on activation? This has only effect if any of the on_focus_lost_xxx configurations is True
-            width=0.998,                # Width of window as fraction of current screen width
+            width=0.995,                # Width of window as fraction of current screen width
             x=0.0,                      # X position of window as fraction of current screen width. 0 is the left most position.
             y=0.0,                      # Y position of window as fraction of current screen height. 0 is the top most position. To show the window at bottom, you have to configure a value < 1 and an appropriate height.
         ),
@@ -614,7 +614,7 @@ scratchpads = ScratchPad(
             on_focus_lost_hide=True,    # Shall the window be hidden if focus is lost? If so, the DropDown is hidden if window focus or the group is changed.
             opacity=1,                  # Opacity of window as fraction. Zero is opaque.
             warp_pointer=True,          # Shall pointer warp to center of window on activation? This has only effect if any of the on_focus_lost_xxx configurations is True
-            width=0.998,                # Width of window as fraction of current screen width
+            width=0.995,                # Width of window as fraction of current screen width
             x=0.0,                      # X position of window as fraction of current screen width. 0 is the left most position.
             y=0.0,                      # Y position of window as fraction of current screen height. 0 is the top most position. To show the window at bottom, you have to configure a value < 1 and an appropriate height.
         ),
@@ -627,7 +627,7 @@ scratchpads = ScratchPad(
             on_focus_lost_hide=True,    # Shall the window be hidden if focus is lost? If so, the DropDown is hidden if window focus or the group is changed.
             opacity=1,                  # Opacity of window as fraction. Zero is opaque.
             warp_pointer=True,          # Shall pointer warp to center of window on activation? This has only effect if any of the on_focus_lost_xxx configurations is True
-            width=0.998,                # Width of window as fraction of current screen width
+            width=0.995,                # Width of window as fraction of current screen width
             x=0.0,                      # X position of window as fraction of current screen width. 0 is the left most position.
             y=0.0,                      # Y position of window as fraction of current screen height. 0 is the top most position. To show the window at bottom, you have to configure a value < 1 and an appropriate height.
         ),
@@ -640,7 +640,7 @@ scratchpads = ScratchPad(
             on_focus_lost_hide=True,    # Shall the window be hidden if focus is lost? If so, the DropDown is hidden if window focus or the group is changed.
             opacity=1,                  # Opacity of window as fraction. Zero is opaque.
             warp_pointer=True,          # Shall pointer warp to center of window on activation? This has only effect if any of the on_focus_lost_xxx configurations is True
-            width=0.998,                # Width of window as fraction of current screen width
+            width=0.995,                # Width of window as fraction of current screen width
             x=0.0,                      # X position of window as fraction of current screen width. 0 is the left most position.
             y=0.0,                      # Y position of window as fraction of current screen height. 0 is the top most position. To show the window at bottom, you have to configure a value < 1 and an appropriate height.
         ),
@@ -653,7 +653,7 @@ scratchpads = ScratchPad(
             on_focus_lost_hide=True,    # Shall the window be hidden if focus is lost? If so, the DropDown is hidden if window focus or the group is changed.
             opacity=1,                  # Opacity of window as fraction. Zero is opaque.
             warp_pointer=True,          # Shall pointer warp to center of window on activation? This has only effect if any of the on_focus_lost_xxx configurations is True
-            width=0.998,                # Width of window as fraction of current screen width
+            width=0.995,                # Width of window as fraction of current screen width
             x=0.0,                      # X position of window as fraction of current screen width. 0 is the left most position.
             y=0.0,                      # Y position of window as fraction of current screen height. 0 is the top most position. To show the window at bottom, you have to configure a value < 1 and an appropriate height.
         ),
@@ -666,7 +666,7 @@ scratchpads = ScratchPad(
             on_focus_lost_hide=True,    # Shall the window be hidden if focus is lost? If so, the DropDown is hidden if window focus or the group is changed.
             opacity=1,                  # Opacity of window as fraction. Zero is opaque.
             warp_pointer=True,          # Shall pointer warp to center of window on activation? This has only effect if any of the on_focus_lost_xxx configurations is True
-            width=0.998,                # Width of window as fraction of current screen width
+            width=0.995,                # Width of window as fraction of current screen width
             x=0.0,                      # X position of window as fraction of current screen width. 0 is the left most position.
             y=0.0,                      # Y position of window as fraction of current screen height. 0 is the top most position. To show the window at bottom, you have to configure a value < 1 and an appropriate height.
         ),
