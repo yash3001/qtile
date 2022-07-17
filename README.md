@@ -1,7 +1,5 @@
 # My qtile config
 
-![qtile](images/qtile.gif)
-
 # Screenshots of the Desktop
 
 ## 1) Tiles
