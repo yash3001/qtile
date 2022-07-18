@@ -687,7 +687,7 @@ groups = [
     Group("7", label=""),# matches=[Match(wm_class=[""])]),
     Group("8", label=""),# matches=[Match(wm_class=[""])]),
     Group("9", label=""),# matches=[Match(wm_class=[""])]),
-    Group("10", label=""),# matches=[Match(wm_class=[""])]),
+    Group("10", label=""),# matches=[Match(wm_class=[""])]),
 ]
 
 # allow mod4+1 through mod4+0 to bind to groups;
