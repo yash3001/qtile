@@ -991,7 +991,8 @@ widget_list = [
         margin_x=0,                     # X Margin. Overrides 'margin' if set
         margin_y=None,                  # Y Margin. Overrides 'margin' if set
         mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
-            "Button1": lazy.spawn(f'{browser} --new-window "https://wiki.archlinux.org/" '),
+            # "Button1": lazy.spawn(f'{browser} --new-window "https://wiki.archlinux.org/" '),
+            "Button1": lazy.spawn("dmenu_run -h 40 -c -l 10 -p 'Apps:'"),
             "Button3": lazy.spawn(f'{browser} --new-window "https://cp-algorithms.web.app/"'),
         },
         rotate=0.0,                     # rotate the image in degrees counter-clockwise
@@ -1190,7 +1191,10 @@ widget_list = [
         margin=3,                       # Margin inside the box
         margin_x=None,                  # X Margin. Overrides 'margin' if set
         margin_y=None,                  # Y Margin. Overrides 'margin' if set
-        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+            "Button1": lazy.function(toogle_max),
+            "Button3": lazy.function(toogle_tile),
+        },
         rotate=0.0,                     # rotate the image in degrees counter-clockwise
         scale=True,                     # Enable/Disable image scaling
     ),
@@ -1204,7 +1208,10 @@ widget_list = [
         foreground='#000000',           # Foreground colour.
         markup=True,                    # Whether or not to use pango markup
         max_chars=0,                    # Maximum number of characters to display in widget.
-        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+            "Button1": lazy.function(toogle_max),
+            "Button3": lazy.function(toogle_tile),
+        },
         padding=3,                      # Padding left and right. Calculated if None.
         show_zero=True,                 # Show window count when no windows
         text_format='{num}',            # Format for message
