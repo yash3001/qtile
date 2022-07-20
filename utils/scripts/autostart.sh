@@ -8,9 +8,6 @@ killall conky &> /dev/null
 conky -c ~/.config/qtile/apps/conky/time.lua &
 conky -c ~/.config/qtile/apps/conky/sysinfo.lua &
 
-# Start lxsession for theme
-lxsession &
-
 # Set Wallpaper
 nitrogen --restore &
 
