@@ -981,7 +981,10 @@ widget_list = [
     widget.Spacer(
         length=5,                       # Length of the spacer
         background=colors['black'][1],  # Widget background color
-        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+            "Button1": lazy.spawn("dmenu_run -h 40 -c -l 10 -p 'Apps:'"),
+            "Button3": lazy.spawn(f'{browser} --new-window "https://cp-algorithms.web.app/"'),
+        },
     ),
 
     widget.Image(
