@@ -670,6 +670,19 @@ scratchpads = ScratchPad(
             x=0.0,                      # X position of window as fraction of current screen width. 0 is the left most position.
             y=0.0,                      # Y position of window as fraction of current screen height. 0 is the top most position. To show the window at bottom, you have to configure a value < 1 and an appropriate height.
         ),
+
+        DropDown(
+            name="battery",             # Name of dropdown
+            cmd='alacritty -e zsh -c "upower -i /org/freedesktop/UPower/devices/battery_BAT1 && read"',# Command to launch
+            height=0.8,                 # Height of window as fraction of current screen.
+            match=None,                 # Use a config.Match to identify the spawned window and move it to the scratchpad, instead of relying on the window's PID. This works around some programs that may not be caught by the window's PID if it does not match the PID of the spawned process.
+            on_focus_lost_hide=True,    # Shall the window be hidden if focus is lost? If so, the DropDown is hidden if window focus or the group is changed.
+            opacity=1,                  # Opacity of window as fraction. Zero is opaque.
+            warp_pointer=True,          # Shall pointer warp to center of window on activation? This has only effect if any of the on_focus_lost_xxx configurations is True
+            width=0.995,                # Width of window as fraction of current screen width
+            x=0.0,                      # X position of window as fraction of current screen width. 0 is the left most position.
+            y=0.0,                      # Y position of window as fraction of current screen height. 0 is the top most position. To show the window at bottom, you have to configure a value < 1 and an appropriate height.
+        ),
     ],
     position=9223372036854775807,       # Position of the scratchpad. Negative values are interpreted as fractions of the screen height. 0 is the top most position.
     label="",                           # The display name of the ScratchPad group. Defaults to the empty string such that the group is hidden in GroupList widget
@@ -1615,7 +1628,10 @@ widget_list = [
     widget.BatteryIcon(
         background=colors['grey'][1],   # Widget background color
         battery=1,                      # Which battery should be monitored
-        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+            "Button1": lazy.group['scratchpad'].dropdown_toggle('battery'),
+            "Button3": lazy.group['scratchpad'].dropdown_toggle('battery'),
+        },
         scale=1,                        # Scale factor relative to the bar height. Defaults to 1
         theme_path=battery_icon_dir,    # Path of the icons
         update_interval=1,              # Seconds between status updates
@@ -1640,7 +1656,10 @@ widget_list = [
         low_percentage=0.1,             # Indicates when to use the low_foreground color 0 < x < 1
         markup=True,                    # Whether or not to use pango markup
         max_chars=0,                    # Maximum number of characters to display in widget.
-        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+            "Button1": lazy.group['scratchpad'].dropdown_toggle('battery'),
+            "Button3": lazy.group['scratchpad'].dropdown_toggle('battery'),
+        },
         notification_timeout=10,        # Time in seconds to display notification. 0 for no expiry.
         notify_below=None,              # Send a notification below this battery level.
         padding=None,                   # Padding. Calculated if None.
