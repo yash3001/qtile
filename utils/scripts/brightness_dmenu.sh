@@ -18,4 +18,9 @@ do
     then
         break
     fi
+
+    if [[ ($choice == "") ]]
+    then
+        break
+    fi
 done
