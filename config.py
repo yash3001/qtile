@@ -37,6 +37,7 @@ screenshot = os.path.join(os.path.dirname(__file__), "utils/scripts/screenshot.s
 rectangular_screenshot = os.path.join(os.path.dirname(__file__), "utils/scripts/rectangular_screenshot.sh")
 brightness_up = os.path.join(os.path.dirname(__file__), "utils/scripts/brightness_up.sh")
 brightness_down = os.path.join(os.path.dirname(__file__), "utils/scripts/brightness_down.sh")
+brightness_dmenu = os.path.join(os.path.dirname(__file__), "utils/scripts/brightness_dmenu.sh")
 volume_up = os.path.join(os.path.dirname(__file__), "utils/scripts/volume_up.sh")
 volume_down = os.path.join(os.path.dirname(__file__), "utils/scripts/volume_down.sh")
 volume_mute = os.path.join(os.path.dirname(__file__), "utils/scripts/volume_mute.sh")
@@ -1318,7 +1319,10 @@ widget_list = [
         markup=True,                    # Whether or not to use pango markup
         max_brightness_file='max_brightness', # Name of file with the maximum brightness in /sys/class/backlight/backlight_name
         max_chars=0,                    # Maximum number of characters to display in widget.
-        mouse_callbacks={},             # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+        mouse_callbacks={               # Dict of mouse button press callback functions. Acceps functions and lazy calls.
+            "Button1": lazy.spawn(brightness_dmenu),
+            "Button3": lazy.spawn(brightness_dmenu),
+        },
         padding=3,                      # Padding. Calculated if None.
         step=10,                        # Percent of backlight every scroll changed
         update_interval=0.1,            # The delay in seconds between updates
